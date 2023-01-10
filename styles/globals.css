@@ -70,12 +70,29 @@
 
     /* Light Mode colors */
      --clr-main-purple:#635FC7;
+     --clr-black:#000112;
+     --clr-medium-gray:#828FA3;
     /* BreakPoints */
     --tablet-breakpoint:550px;
     --laptop-breakpoint:1100px;
     --desktop-breakpoint:1500px;
 
+    --padding_top:16px;
+
   }
+
+  button{
+    --text-color:white;
+    --background-btn:silver;
+    border-radius:24px;
+    color:var(--text-color);
+    background:var(--background-btn) ;
+    font-size:var(--heading-M);
+    padding:10px 60px;
+    border:none;
+  }
+
+  
 
 
 

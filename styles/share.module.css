@@ -1,5 +1,40 @@
 
-.authHeader{
-    background:var(--clr-main-purple);
-    height:320px;
+.form_field{
+    display:flex;
+    flex-direction: column;
 }
+.capitalize{
+    text-transform: capitalize;
+  }
+
+  .label{
+    color:var(--clr-medium-gray);
+    font-weight: 500;
+    font-size: var(--heading-M);
+  }
+  .form_field input{
+    margin:8px 0;
+  }
+  
+  
+  .primary_input{
+    padding:9px 16px;
+    border: 1px solid rgba(130, 143, 163, 0.25);
+    border-radius: 4px;
+    font-size:var(--body-L);
+    color:var(--clr-black);
+  }
+  .primary_input::placeholder{
+    color: var(--clr-black);
+    opacity: 0.25;
+  }
+ 
+
+  .padding_top{
+    padding-top:var(--padding_top);
+  }
+
+  .text_center{
+    text-align: center;
+  }
+
