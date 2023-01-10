@@ -1,0 +1,6 @@
+.larger_font{
+    font-size:var(--heading-XL);
+    font-weight: bold;
+    color:#2B2C37;  
+  }
+

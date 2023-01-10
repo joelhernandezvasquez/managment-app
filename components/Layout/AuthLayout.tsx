@@ -1,5 +1,5 @@
 import Head from "next/head";
-import styles from '../../styles/share.module.css';
+import auth from '../../styles/auth.module.css';
 import {ReactNode } from 'react';
 
 type authArgs = {
@@ -16,12 +16,13 @@ const AuthLayout = (props:authArgs) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
     </Head>
 
-   <header className={styles.authHeader}>
-
-   </header>
+   <header className={auth.authHeader}></header>
     
     <main>
-      {props.children}
+      <section className={auth.auth_info}>
+      {props.children} 
+      </section>
+     
     </main>
     </>
   )
