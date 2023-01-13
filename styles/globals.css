@@ -61,17 +61,18 @@
   
   :root{
     /* Font sizes */
-    --heading-XL:24px;
-    --heading-L:18px;
-    --heading-M:15px;
-    --heading-s:12px;
-    --body-M:12px;
-    --body-L:13px;
+    --heading-XL:1.5rem;
+    --heading-L:1.125rem;
+    --heading-M:0.9375rem;
+    --heading-s:0.75rem;
+    --body-M:0.75rem;
+    --body-L:0.8125rem;
 
     /* Light Mode colors */
      --clr-main-purple:#635FC7;
      --clr-black:#000112;
      --clr-medium-gray:#828FA3;
+     --clr-red:#EA5555;
     /* BreakPoints */
     --tablet-breakpoint:550px;
     --laptop-breakpoint:1100px;
@@ -91,6 +92,8 @@
     padding:10px 60px;
     border:none;
   }
+
+
 
   
 

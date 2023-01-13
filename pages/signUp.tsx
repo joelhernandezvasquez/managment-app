@@ -1,6 +1,5 @@
 import AuthLayout from "../components/Layout/AuthLayout"
 
-
 const signUp = () => {
   return (
    <AuthLayout titlePage="Sign up">
