@@ -1,5 +1,6 @@
 import { FormEvent,useMemo} from "react";
 import { UseForm } from "../../hooks/UseForm";
+import FormField from "../FormField/FormField";
 import { FormData} from "../../types/types";
 import styles from '../../styles/share.module.css';
 import button from '../../styles/buttons/buttons.module.css';
@@ -32,9 +33,8 @@ export const LoginForm = () => {
    
     return (
     <form className={styles.padding_top} onSubmit ={onSubmitFormLogin}>
-    <div className={styles.form_field}>
+    <FormField>
       <label className={`${styles.capitalize} ${styles.label} ${emailField === 'invalid_field' ? styles.show_invalid:''}`} htmlFor="email">email address</label>
-      
       <input 
       className={`${styles.primary_input} ${emailField === 'invalid_field' ? styles.invalid_field:''}`} 
       type="email" 
@@ -44,9 +44,9 @@ export const LoginForm = () => {
       value={email} 
       onChange = {handleChange}
       />
-    </div>
+    </FormField>
 
-    <div className={styles.form_field}>
+    <FormField>
       <label className={`${styles.capitalize} ${styles.label} ${passwordField === 'invalid_field' ? styles.show_invalid:''}`} htmlFor="password">password</label>
       <input className={`${styles.primary_input} ${passwordField === 'invalid_field' ? styles.invalid_field:''}`} 
       type="password" 
@@ -55,7 +55,7 @@ export const LoginForm = () => {
       value={password}
       onChange = {handleChange}
       />
-    </div>
+    </FormField>
 
     <button className={`${button.btn_primary} ${button.auth_submit_btn}`} type="submit">
      sign in

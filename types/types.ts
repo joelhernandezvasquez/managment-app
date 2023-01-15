@@ -4,6 +4,12 @@ export interface FormData {
     password:string
   }
 
+  export interface registerFormData {
+    name:string
+    email:string,
+    password:string
+  }
+
 
 
 
