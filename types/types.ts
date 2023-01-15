@@ -10,13 +10,14 @@ export interface FormData {
     password:string
   }
   export interface RequiredInputArgs {
-    inputValidator:string | undefined,
+    labelName:string,
     type:string,
     id:string,
     name:string,
     onChangeHandler:({target}:ChangeEvent<HTMLInputElement>) => void
     fieldState:string,
-    placeholderText?:string
+    placeholderText?:string,
+    isFormSubmitted:boolean
 }
 
 
