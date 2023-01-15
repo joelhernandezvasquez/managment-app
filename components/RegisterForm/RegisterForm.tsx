@@ -1,5 +1,6 @@
 import { useMemo,FormEvent } from "react";
 import { UseForm } from "../../hooks/UseForm";
+import RequiredInput from "../RequiredInput/RequiredInput";
 import FormField from '../FormField/FormField';
 import { registerFormData } from "../../types/types";
 import styles from '../../styles/share.module.css';
@@ -39,38 +40,42 @@ const RegisterForm = () => {
     <form className={styles.padding_top} onSubmit={onSubmitRegisterForm}>
       <FormField>
       <label className={`${styles.capitalize} ${styles.label} ${nameField === 'invalid_field' ? styles.show_invalid:''}`} htmlFor="name">name</label>
-      <input 
-      className={`${styles.primary_input} ${nameField === 'invalid_field' ? styles.invalid_field:''} `} 
-      type="text" 
-      id="name"
-      name='name' 
-      value={name} 
-      onChange = {handleChange}
+      <RequiredInput
+       inputValidator={nameField}
+       type="text"
+       id="name"
+       name="name"
+       placeholderText ="Name"
+       fieldState={name} 
+       onChangeHandler = {handleChange}
       />
     </FormField>
    
     <FormField>
       <label className={`${styles.capitalize} ${styles.label} ${emailField === 'invalid_field' ? styles.show_invalid:''}`} htmlFor="email">email</label>
-      <input 
-      className={`${styles.primary_input} ${emailField === 'invalid_field' ? styles.invalid_field:''} `} 
-      type="email" 
-      id="emailRegister"
-      name='email' 
-      value={email} 
-      onChange = {handleChange}
+      <RequiredInput
+       inputValidator={emailField}
+       type="email"
+       id="emailRegister"
+       name="email"
+       placeholderText ="demo@gmail.com"
+       fieldState={email} 
+       onChangeHandler = {handleChange}
       />
+     
     </FormField>
 
     <FormField>
       <label className={`${styles.capitalize} ${styles.label} ${passwordField === 'invalid_field' ? styles.show_invalid:''}`} htmlFor="password">password</label>
-      <input 
-      className={`${styles.primary_input} ${passwordField === 'invalid_field' ? styles.invalid_field:''} `} 
-      type="password" 
+      <RequiredInput
+      inputValidator={passwordField}
+      type="password"
       id="passwordRegister"
-      name='password' 
-      value={password} 
-      onChange = {handleChange}
+      name="password"  
+      fieldState={password} 
+      onChangeHandler = {handleChange}
       />
+    
     </FormField>
 
     <button className={`${button.btn_primary} ${button.auth_submit_btn}`} type="submit">
