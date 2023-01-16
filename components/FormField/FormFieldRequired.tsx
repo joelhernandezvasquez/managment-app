@@ -2,7 +2,6 @@ import {useMemo} from 'react'
 import {RequiredInputArgs} from '../../types/types';
 import styles from '../../styles/share.module.css';
 
-
 const FormFieldRequired = (props:RequiredInputArgs) => {
     
     const inputFieldValidator = useMemo(()=>{
