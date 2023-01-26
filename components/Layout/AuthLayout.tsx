@@ -2,14 +2,14 @@
 import Head from "next/head";
 import { useHasMounted } from "../../hooks/useHasMounted";
 import auth from '../../styles/auth.module.css';
-import {ReactNode,FC } from 'react';
+import {ReactNode ,FC} from 'react';
 
-interface AuthArgs {
-    title:string,
-    children:ReactNode
+interface authArgs  {
+    children: ReactNode,
+    title:string
 }
 
-const AuthLayout:FC<AuthArgs> = ({children,title}) => {
+const AuthLayout:FC<authArgs> = ({children,title}) => {
   return (
     <>
     <Head>
