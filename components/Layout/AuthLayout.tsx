@@ -2,20 +2,14 @@
 import Head from "next/head";
 import { useHasMounted } from "../../hooks/useHasMounted";
 import auth from '../../styles/auth.module.css';
-import {FC, ReactNode } from 'react';
+import {ReactNode } from 'react';
 
-interface authArgs {
-    children: ReactNode,
-    titlePage:string
+interface AuthArgs {
+    titlePage:string,
+    children:ReactNode
 }
 
-const AuthLayout:FC <authArgs>= ({children,titlePage}) => {
-  
-  const hasMounted = useHasMounted();
-  
-  if (!hasMounted) {
-    return null;
-  }
+const AuthLayout = (props:authArgs) => {
   return (
     <>
     <Head>
