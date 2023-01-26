@@ -1,5 +1,6 @@
 import {FormEvent } from "react";
 import { UseForm } from "../../hooks/UseForm";
+import UseAuth from "../../hooks/UseAuth";
 import FormFieldRequired from "../FormField/FormFieldRequired";
 import { registerFormData } from "../../types/types";
 import styles from '../../styles/share.module.css';
@@ -10,21 +11,21 @@ const registerForm:registerFormData = {name:'',email:'',password:'' }
 
 const RegisterForm = () => {
     const {formSubmitted,name,email,password,handleChange,setFormSubmitted}  = UseForm<registerFormData>(registerForm);
-    
-  const onSubmitRegisterForm = (e:FormEvent<HTMLFormElement>):void =>{
+    const {createUser}  = UseAuth();
+  
+    const onSubmitRegisterForm = (e:FormEvent<HTMLFormElement>):void =>{
     e.preventDefault(); 
     setFormSubmitted(true); 
 
     if(isValidForm({name,email,password})){
-      alert('form is valid')
       setFormSubmitted(false);
+      createUser({name,email,password});
       return;
     }
-
-    alert('form is invalid')  
+     
   }
     
-      return (
+    return (
     <form className={styles.padding_top} onSubmit={onSubmitRegisterForm}>
       <FormFieldRequired
         labelName ={'name'}
