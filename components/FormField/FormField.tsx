@@ -1,14 +1,14 @@
-import { ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 import styles from '../../styles/share.module.css';
 
 interface FormFieldArgs {
     children:ReactNode
 }
 
-const FormField = (props:FormFieldArgs) => {
+const FormField:FC<FormFieldArgs>= ({children}) => {
   return (
     <div className={styles.form_field}>
-      {props.children}
+      {children}
     </div>
   )
 }

@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import RegisterForm from "../components/RegisterForm/RegisterForm";
 import AuthLayout from "../components/Layout/AuthLayout"
@@ -6,7 +7,8 @@ import typografy from '../styles/typography.module.css';
 import auth from '../styles/auth.module.css'; 
 
 const signUp = () => {
-  return (
+
+    return (
    <AuthLayout titlePage="Sign up">
      <h1 className={`${typografy.larger_font} ${styles.text_center}`}>Create a new Account</h1>
      <p className={`${auth.subheading} ${styles.text_center}`}>Already have an account?
