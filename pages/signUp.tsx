@@ -9,7 +9,7 @@ import auth from '../styles/auth.module.css';
 const signUp = () => {
 
     return (
-   <AuthLayout titlePage="Sign up">
+   <AuthLayout title="Sign up">
      <h1 className={`${typografy.larger_font} ${styles.text_center}`}>Create a new Account</h1>
      <p className={`${auth.subheading} ${styles.text_center}`}>Already have an account?
      <Link className={auth.primary_auth_link} href="/login">Sign in</Link> 
