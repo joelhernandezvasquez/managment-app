@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { MobileNavBar } from "../components/MobileNavBar";
+import style from '../styles/dashboard.module.css';
 
 const dashboard = () => {
   return (
@@ -11,10 +12,14 @@ const dashboard = () => {
       <meta name="keywords" content="kanban,tasks,managment,manage tasks,organize tasks"/>
     </Head>
 
-   <div className="wrapper">
+   <div className={style.wrapper}>
       <header>
         <MobileNavBar/>
       </header>
+
+      <main>
+
+      </main>
      
    </div>
 
