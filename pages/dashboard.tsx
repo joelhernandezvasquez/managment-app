@@ -1,4 +1,6 @@
 import Head from "next/head";
+import { EmptyBoard } from "../components/EmptyBoard/EmptyBoard";
+import { MaxWidthWrapper } from "../components/MaxWidthWrapper/MaxWidthWrapper";
 import { MobileNavBar } from "../components/MobileNavBar";
 import style from '../styles/dashboard.module.css';
 
@@ -17,8 +19,10 @@ const dashboard = () => {
         <MobileNavBar/>
       </header>
 
-      <main>
 
+
+      <main>
+         <EmptyBoard/>
       </main>
      
    </div>

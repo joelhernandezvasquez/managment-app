@@ -73,12 +73,15 @@
      --clr-black:#000112;
      --clr-medium-gray:#828FA3;
      --clr-red:#EA5555;
+     --clr-body:#F4F7FD;
     /* BreakPoints */
     --tablet-breakpoint:550px;
     --laptop-breakpoint:1100px;
     --desktop-breakpoint:1500px;
 
     --padding_top:16px;
+    --padding-left-space:16px;
+    --padding-right-space:16px;
 
   }
 
@@ -91,6 +94,12 @@
     font-size:var(--heading-M);
     padding:10px 60px;
     border:none;
+  }
+
+  .max_width_wrapper{
+    padding-left:var(--padding-left-space);
+    padding-right: var(--padding-right-space);
+    border:1px solid red;
   }
 
 

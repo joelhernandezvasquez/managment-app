@@ -20,3 +20,13 @@
     font-size: var(--heading-L);
     
 }
+.add_column_btn{
+    display:flex;
+    align-items: baseline;
+    gap:5px;
+    margin-left:auto;
+    margin-right: auto;
+    padding:12px 18px;
+    font-weight: 700;
+    font-size:var(--heading-M);
+}

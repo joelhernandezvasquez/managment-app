@@ -1,5 +1,38 @@
 
 
 .wrapper{
-    outline:2px solid greenyellow;
+    display:grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+    "header"
+    "main"
+    ;
+    min-height:100%;
+   
+}
+.wrapper header{
+    grid-area: header;
+}
+
+.wrapper main{
+    grid-area:main;
+    background:var(--clr-body);
+    min-height:100vh;
+   display: grid;
+}
+
+.empty_board{
+    justify-self: center;
+    align-self: center;
+    padding-left:var(--padding-left-space);
+    padding-right:var(--padding-right-space);
+
+}
+.empty_board p{
+  text-align: center;
+  font-size:var(--heading-L);
+  color:var(--clr-medium-gray);
+  font-weight: 700;
+  line-height:23px;
+  margin-bottom: 25px;
 }
