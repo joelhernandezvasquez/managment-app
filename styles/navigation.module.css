@@ -1,0 +1,35 @@
+.mobile_nav_bar{
+  display:flex;
+  align-items: center;
+  min-height:64px;
+  padding-left:16px;
+  padding-right:16px;
+}
+
+.SideBar_mobile{
+  margin-right: auto;
+  margin-left: 16px;
+  display:flex;
+  align-items: baseline;
+}
+.SideBar_mobile_headline{
+    font-weight: 700;
+    font-size: var(--heading-L);
+    color:var(--clr-black);
+}
+
+.SideBar_mobile_chevron_down{
+    margin-left:8px;
+}
+
+.show_board_menu{
+  margin-left:16px;
+}
+.show_board_menu_button{
+    display:block;
+   width:4px;
+   height:4px;
+   border-radius: 50%;
+   background:#828FA3;
+   margin:3px 0;
+}
