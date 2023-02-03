@@ -1,0 +1,47 @@
+.mobile_nav_bar{
+  display:flex;
+  align-items: center;
+  min-height:64px;
+  padding-left:16px;
+  padding-right:16px;
+  position: relative;
+}
+
+.SideBar_mobile{
+  margin-right: auto;
+  margin-left: 16px;
+  display:flex;
+  align-items: baseline;
+}
+.SideBar_mobile_headline{
+    font-weight: 700;
+    font-size: var(--heading-L);
+    color:var(--clr-black);
+}
+
+.SideBar_mobile_chevron_down{
+    margin-left:8px;
+}
+
+.show_board_menu{
+  margin-left:16px;
+}
+.show_board_menu_button{
+    display:block;
+   width:4px;
+   height:4px;
+   border-radius: 50%;
+   background:#828FA3;
+   margin:3px 0;
+}
+
+.modal_nav_bar_menu{
+  width:100%;
+  height:100vh;
+  position:absolute;
+  top:65px;
+  left:0;
+  right:0;
+  bottom:0;
+  background:rgba(0,0,0,0.5);
+}

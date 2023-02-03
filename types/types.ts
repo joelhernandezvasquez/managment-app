@@ -20,6 +20,12 @@ export interface FormData {
     isFormSubmitted:boolean
 }
 
+export interface user {
+  email:string,
+  password:string,
+  name?:string,
+ }
+
 
 
 

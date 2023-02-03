@@ -5,22 +5,23 @@ import styles from '../../styles/share.module.css';
 import button from '../../styles/buttons/buttons.module.css';
 import FormFieldRequired from "../FormField/FormFieldRequired";
 import { isValidForm } from "../../helpers";
+import UseAuth from "../../hooks/UseAuth";
 
 const loginForm:FormData = { email:'',password:'' }
 
 export const LoginForm = () => {
     const {formSubmitted,email,password,handleChange,setFormSubmitted}  = UseForm<FormData>(loginForm);
-  
+    const {startAuthentication} = UseAuth();
+    
     const onSubmitFormLogin = (e:FormEvent<HTMLFormElement>):void =>{
         e.preventDefault(); 
         setFormSubmitted(true);
         
         if(isValidForm({email,password})){
-         alert('form is valid')
          setFormSubmitted(false);
+         startAuthentication({email,password});
          return;
         }
-          alert('form is invalid');     
     }
    
     return (

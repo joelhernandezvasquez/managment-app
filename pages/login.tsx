@@ -8,7 +8,7 @@ import typografy from '../styles/typography.module.css';
 const login = () => {
   
 return (
-   <AuthLayout titlePage='Sign in'>
+   <AuthLayout title='Sign in'>
     <h1 className={`${typografy.larger_font} ${styles.text_center}`}>Sign in to your account </h1>
     <p className={`${auth.subheading} ${styles.text_center}`}>Not a member yet?
      <Link className={auth.primary_auth_link} href="/signUp">Get started now</Link> 
