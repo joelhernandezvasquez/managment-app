@@ -1,0 +1,27 @@
+.toggle_theme_container{
+  
+ display:flex;
+ justify-content: space-around;
+ align-items: center;
+  background:var(--clr-body);
+  border-radius: 6px;
+  margin:16px 16px 0px 16px;
+  padding:0 15px;
+  height:48px;
+
+}
+.toggle{
+    display:flex;
+    align-items: center;
+    width:40px;
+    height:20px;
+    background-color: var( --clr-main-purple);
+    border-radius: 12px;
+    padding:0 5px;
+}
+.toggle_btn{
+    width:14px;
+    height:14px;
+    border-radius: 50%;
+    background:white;
+}

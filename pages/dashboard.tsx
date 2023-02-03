@@ -19,8 +19,6 @@ const dashboard = () => {
         <MobileNavBar/>
       </header>
 
-
-
       <main>
          <EmptyBoard/>
       </main>

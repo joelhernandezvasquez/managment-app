@@ -58,6 +58,10 @@
     isolation: isolate;
   }
 
+  ul{
+    list-style-type: none;
+  }
+
   
   :root{
     /* Font sizes */
@@ -104,7 +108,6 @@
 
 
 
-  
 
 
 

@@ -1,5 +1,4 @@
 
-
 .wrapper{
     display:grid;
     grid-template-columns: 1fr;
@@ -18,7 +17,7 @@
     grid-area:main;
     background:var(--clr-body);
     min-height:100vh;
-   display: grid;
+    display: grid;
 }
 
 .empty_board{
@@ -35,4 +34,63 @@
   font-weight: 700;
   line-height:23px;
   margin-bottom: 25px;
+}
+
+
+.board_container{
+    width:264px;
+    background:white;
+    border-radius: 8px;
+    box-shadow: 0px 10px 20px rgba(54, 78, 126, 0.25);
+    position:relative;
+    top:10px;
+    left:50px;
+    padding-bottom: 16px;
+    
+}
+.board_menu{
+    padding-top:16px;
+}
+.board_menu_headline{
+    text-transform: capitalize;
+    color:var(--clr-medium-gray);
+    font-size: var(--heading-M);
+    letter-spacing: 2.4px;
+    font-weight: 700;
+    margin-left:24px;
+    margin-bottom: 20px;
+}
+.board_items{
+    padding:0;
+}
+.board_items li{
+    display: flex;
+    align-items: center;
+    width:90%;
+    padding:14px;
+   color:var(--clr-medium-gray);
+   font-size: var(--heading-M);
+   font-weight: 700;
+}
+.board_items li svg{
+    margin-right:12px;
+    fill:var(--clr-medium-gray);
+}
+
+/* Need to convert this selector to a class */
+.board_items li:nth-child(1){
+   background-color:var(--clr-main-purple);
+   color:white;
+   border-radius: 0px 100px 100px 0px;
+}
+.board_items li:nth-child(1) svg{
+   fill:white;
+}
+
+.create_board_btn span{
+    text-transform: capitalize;
+    color:var(--clr-main-purple);
+}
+.create_board_btn path{
+   fill:var(--clr-main-purple);
 }
