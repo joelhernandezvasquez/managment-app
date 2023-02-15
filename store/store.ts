@@ -5,6 +5,7 @@ import { devtools} from 'zustand/middleware'
 
 interface AuthState{
     status:string,
+    user:userPayload,
     errorMessage:string,
     onChecking:() => void,
     onLogin:(user:userPayload) => void
@@ -22,12 +23,12 @@ export const useAuthStore = create <AuthState>()(
     devtools(
         (set) => ({
           status:'checking', // 'authenticated' , 'not-authenticated'
-          user:{},
+          user:{name:'',uid:''},
           errorMessage:'',
           
           onChecking:() =>  set((state)=> ({
             status:'checking',
-            user:{},
+            user:{name:'',uid:''},
            errorMessage:undefined
           })),
 
@@ -39,7 +40,7 @@ export const useAuthStore = create <AuthState>()(
 
           onLogOut:(errorMsg:string) =>  set((state)=> ({
             status:'not-authenticated',
-            user:{},
+            user:{name:'',uid:''},
             errorMessage:errorMsg
           })),
 

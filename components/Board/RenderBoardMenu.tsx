@@ -1,15 +1,28 @@
+
+import { useBoard } from '../../hooks/useBoard';
 import { BoardItem } from './BoardItem';
+import Loader from '../Loaders/Loader';
 import dashboard from '../../styles/dashboard.module.css';
 
-export const BoardMenu = () => {
-     // this array is only for testing until get the data from the back-end
-     const boardItems:string[] = ['Platform Launch','Marketing Plan','Roadmap'];
+export const RenderBoardMenu = () => {
+  
+  const {board_names,isLoading,isError} = useBoard();
+  
+  if (isLoading) {
+    return  <Loader/>
+  }
+
+  if(isError){
+    return <p className={dashboard.not_board_create_message_error}>No board has not been creates]d yet.</p>
+  }
+
   return (
     <div className={dashboard.board_menu}>
-    <h2 className={dashboard.board_menu_headline}>all boards (3)</h2>
+    <h2 className={dashboard.board_menu_headline}>all boards ({board_names.length})</h2>
+   
     <ul className={dashboard.board_items}>
-        {boardItems.map((item,index)=>{
-        return <BoardItem key={index} item={item}/>
+        {board_names.map((item)=>{
+        return <BoardItem key={item._id} item={item.name}/>
         })}
       <li className={dashboard.create_board_btn}> 
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

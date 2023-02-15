@@ -26,6 +26,18 @@ export interface user {
   name?:string,
  }
 
+ export interface BoardNamesListResponse {
+  success:          boolean;
+  board_names: BoardName[];
+}
+
+export interface BoardName {
+  _id:  string;
+  name: string;
+}
+
+
+
 
 
 

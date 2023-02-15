@@ -1,9 +1,10 @@
-
-import '../styles/globals.css'
+import { useEffect } from 'react';
 import type { AppProps } from 'next/app'
 import {Plus_Jakarta_Sans} from '@next/font/google';
+import {QueryClient,QueryClientProvider,} from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import UseAuth from '../hooks/UseAuth';
-import { useEffect } from 'react';
+import '../styles/globals.css'
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets:['latin'],
@@ -11,14 +12,19 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 })
 export default function App({ Component, pageProps }: AppProps) {
   const {checkAuthToken} = UseAuth();
-useEffect(()=>{
+  const queryClient = new QueryClient()
+
+  useEffect(()=>{
  checkAuthToken();
 },[])
 
   return(
   
      <main className={plusJakartaSans.className}>
-      <Component {...pageProps} />
+      <QueryClientProvider client={queryClient}>
+         <Component {...pageProps} />
+         <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </main>
    
   )

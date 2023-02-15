@@ -94,3 +94,12 @@
 .create_board_btn path{
    fill:var(--clr-main-purple);
 }
+
+.not_board_create_message_error{
+    font-size: 1rem;
+    padding:20px 10px;
+    color:var(--clr-main-purple);
+    font-weight: 700;
+    text-align: center;
+  }
+
