@@ -86,10 +86,21 @@
 .board_items li:nth-child(1) svg{
    fill:white;
 }
+.create_board_btn{
+    display:flex;
+    align-items: center;
+    border:none;
+    background:none;
+    width:100%;
+    padding:14px;
+}
 
 .create_board_btn span{
+    display:inline-block;
+    margin-left:12px;
     text-transform: capitalize;
     color:var(--clr-main-purple);
+    font-weight: 700;
 }
 .create_board_btn path{
    fill:var(--clr-main-purple);
