@@ -1,5 +1,4 @@
-import { AxiosError } from "axios";
-import EventEmitter from "events";
+
 import { kanbanApi } from "../api/kanbanApi";
 import { BoardNamesListResponse,BoardName} from "../types/types";
 

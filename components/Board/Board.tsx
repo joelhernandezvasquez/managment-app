@@ -1,7 +1,7 @@
-import { RenderBoardMenu } from './renderBoardMenu';
+import { RenderBoardMenu } from './RenderBoardMenu';
 import { DarkLightModeToogle } from './DarkLightModeToogle';
-import dashboard from '../../styles/dashboard.module.css';
 import { RenderCreateNewBoardButton } from '../RenderCreateNewBoardButton/RenderCreateNewBoardButton';
+import dashboard from '../../styles/dashboard.module.css';
 
 export const Board = () => {
   

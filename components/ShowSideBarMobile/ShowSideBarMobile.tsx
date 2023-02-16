@@ -1,16 +1,16 @@
-import { useState } from 'react';
-import navigation from '../../styles/navigation.module.css';
+
+import { useSideBar } from '../../hooks/useSideBar';
 import { Board } from '../Board/Board';
 import { ModalSideBarMobile } from '../ModalSideBarMobile/ModalSideBarMobile';
+import navigation from '../../styles/navigation.module.css';
+
 
 export const ShowSideBarMobile = () => {
-  const [isSideBarOpen,setIsSideBarOpen] = useState(false);
   
-  const handleIsSideBarOpen = ():void =>{
-     setIsSideBarOpen(!isSideBarOpen);
-  }
+   const {isSideBarOpen,toggleSideBar} = useSideBar();
+ 
   return (
-   <div className={navigation.SideBar_mobile} onClick={handleIsSideBarOpen}>
+   <div className={navigation.SideBar_mobile}  onClick={toggleSideBar} >
     <h1 className={navigation.SideBar_mobile_headline}>Platform Launch</h1>
     <svg className={`${navigation.SideBar_mobile_chevron_down} ${isSideBarOpen && navigation.SideBar_mobile_chevron_up}`} 
       width="9" height="7" viewBox="0 0 9 7" 
