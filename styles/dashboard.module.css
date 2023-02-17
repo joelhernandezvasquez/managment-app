@@ -78,13 +78,16 @@
 }
 
 /* Need to convert this selector to a class */
-.board_items li:nth-child(1){
+.board_items_active{
    background-color:var(--clr-main-purple);
-   color:white;
    border-radius: 0px 100px 100px 0px;
 }
-.board_items li:nth-child(1) svg{
+.board_items_active path{
    fill:white;
+   
+}
+.board_items_active span{
+    color:white;
 }
 .create_board_btn{
     display:flex;

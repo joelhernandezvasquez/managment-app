@@ -7,7 +7,7 @@ import dashboard from '../../styles/dashboard.module.css';
 export const RenderBoardMenu = () => {
   
   const {board_names,isLoading,isError} = useBoard();
-  
+
   if (isLoading) {
     return  <Loader/>
   }
@@ -22,7 +22,7 @@ export const RenderBoardMenu = () => {
    
     <ul className={dashboard.board_items}>
         {board_names.map((item)=>{
-        return <BoardItem key={item._id} item={item.name}/>
+        return <BoardItem  key={item._id} item={item}/>
         })}
     </ul>
    </div>
