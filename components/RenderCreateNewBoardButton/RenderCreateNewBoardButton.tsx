@@ -1,7 +1,7 @@
-
+import {memo,FC } from 'react';
 import dashboard from '../../styles/dashboard.module.css';
 
-export const RenderCreateNewBoardButton = () => {
+export const RenderCreateNewBoardButton:FC = memo(() => {
   return (
     <button className={dashboard.create_board_btn}> 
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -10,4 +10,5 @@ export const RenderCreateNewBoardButton = () => {
       <span>+ create new board</span>
    </button>
   )
-}
+})
+RenderCreateNewBoardButton.displayName = 'RenderCreateNewBoardButton';

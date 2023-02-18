@@ -3,7 +3,7 @@ import {UIStore} from '../store/UIStates/store';
 
 export const useUIStates = () => {
   
-    const {setActiveBoard,currentBoardSelected,hasHydrated} = UIStore();
+    const {setActiveBoard,currentBoardSelected} = UIStore();
 
     const getActiveBoard = () =>{
         return currentBoardSelected;
@@ -11,7 +11,6 @@ export const useUIStates = () => {
 
     return {
         getActiveBoard,
-        setActiveBoard,
-        hasHydrated
+        setActiveBoard
     }
 }
