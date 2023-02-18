@@ -1,7 +1,7 @@
-import {useUiStore} from '../store/UIStates/store'
+import {UIStore} from '../store/UIStates/store'
 
 export const useSideBar = () => {
-   const {isSideBarOpen,toggleSideBar,closeSideBar} = useUiStore();
+   const {isSideBarOpen,toggleSideBar,closeSideBar} = UIStore();
    
    return{
       isSideBarOpen,

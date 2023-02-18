@@ -11,7 +11,6 @@ interface AuthState{
     onLogin:(user:userPayload) => void
     onLogOut:(errorMsg:string) => void
     clearErrorMessage:() => void
-
 }
 
 interface userPayload{

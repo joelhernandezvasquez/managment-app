@@ -1,22 +1,22 @@
 
 import { create } from 'zustand';
-
-import { devtools} from 'zustand/middleware'
+import { devtools,persist} from 'zustand/middleware'
 import {BoardName} from '../../types/types';
 interface UIState{
     isSideBarOpen:boolean,
     currentBoardSelected:BoardName,
     toggleSideBar:() => void,
     closeSideBar:() => void,
-    setCurrentBoard:(boardName:BoardName) => void,
+    setActiveBoard:(boardName:BoardName) => void,
+   
 }
 
-export const useUiStore = create <UIState>()(
+export const UIStore = create <UIState>()(
     devtools(
+      persist(
         (set) => ({
             isSideBarOpen:false,
              currentBoardSelected:{_id:'',name:''},
-
             toggleSideBar:() =>  set((state)=> ({
             isSideBarOpen:!state.isSideBarOpen
           })),
@@ -25,16 +25,26 @@ export const useUiStore = create <UIState>()(
             isSideBarOpen:false
           })),
 
-          setCurrentBoard:(boardName) => set((state)=>({
+          setActiveBoard:(boardName) => set((state)=>({
             currentBoardSelected:boardName
           })),
 
-          
+        
 
         }),
        
+
+        {
+          
+          name: 'ui-storage', 
+          serialize: (state) => btoa(JSON.stringify(state)),
+          deserialize: (storedState) => JSON.parse(atob(storedState))
+        }
+      ),
+      
       
     )
   )
+
 
  

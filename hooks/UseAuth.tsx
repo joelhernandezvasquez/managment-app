@@ -45,7 +45,7 @@ const UseAuth= () => {
     const token = localStorage.getItem('token');
     
     if(!token) {
-     onLogOut('not token avaialable');
+     onLogOut('not token avaliable');
      router.push("/login");
      return;
     }
@@ -81,8 +81,6 @@ const UseAuth= () => {
 
     return {
       status,
-
-      
       startAuthentication,
       createUser,
       checkAuthToken
