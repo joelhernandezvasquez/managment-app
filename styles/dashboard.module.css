@@ -78,19 +78,42 @@
 }
 
 /* Need to convert this selector to a class */
-.board_items li:nth-child(1){
+.board_items_active{
    background-color:var(--clr-main-purple);
-   color:white;
    border-radius: 0px 100px 100px 0px;
 }
-.board_items li:nth-child(1) svg{
+.board_items_active path{
    fill:white;
+   
+}
+.board_items_active span{
+    color:white;
+}
+.create_board_btn{
+    display:flex;
+    align-items: center;
+    border:none;
+    background:none;
+    width:100%;
+    padding:14px;
 }
 
 .create_board_btn span{
+    display:inline-block;
+    margin-left:12px;
     text-transform: capitalize;
     color:var(--clr-main-purple);
+    font-weight: 700;
 }
 .create_board_btn path{
    fill:var(--clr-main-purple);
 }
+
+.not_board_create_message_error{
+    font-size: 1rem;
+    padding:20px 10px;
+    color:var(--clr-main-purple);
+    font-weight: 700;
+    text-align: center;
+  }
+

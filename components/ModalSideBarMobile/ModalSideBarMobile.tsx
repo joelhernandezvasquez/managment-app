@@ -4,8 +4,9 @@ interface Props{
     children:ReactNode
 }
 export const ModalSideBarMobile:FC <Props> = ({children}) => {
+  
   return (
-    <div className={style.modal_nav_bar_menu}>
+    <div className={style.modal_nav_bar_menu} onClick={(event)=> event.stopPropagation()}>
         {children}
     </div>
   )
