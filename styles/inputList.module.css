@@ -1,0 +1,17 @@
+
+.container{
+    margin-top:24px ;
+}
+.title{
+    color:var(--clr-medium-gray);
+    text-align: left;
+    font-weight: 700;
+    font-size:0.82rem;
+}
+.list{
+    margin-top:8px;
+}
+
+.list_input{
+    margin-bottom:12px;
+}
