@@ -1,0 +1,42 @@
+
+import { create } from 'zustand';
+import { devtools} from 'zustand/middleware'
+import { BoardInput } from '../../types/types';
+import { v4 as uuidv4 } from 'uuid';
+
+interface InputListProps{
+   inputList:BoardInput [],
+    addNewListItem:(payload:BoardInput ) => void,
+    updateListItem:(payload:BoardInput []) => void,
+    deleteItemFromInputList:(itemId:string) => void,
+    resetListItem:() => void
+}
+
+export const InputListStore = create <InputListProps>()(
+    devtools(
+        (set) => ({
+            inputList:[{id:uuidv4(),column:''}],
+          
+           addNewListItem:(payload) =>  set((state)=> ({
+            inputList: [...state.inputList,payload] 
+          })),
+
+          updateListItem:(payload) =>  set((state)=> ({
+            inputList: payload 
+          })),
+
+          deleteItemFromInputList:(itemId) =>  set((state)=> ({
+            inputList: state.inputList.filter((itemInput:BoardInput)=> itemInput.id !== itemId)
+          })),
+          
+          resetListItem:() => set((state)=>({
+            inputList:[]
+          }))
+
+        }),
+       
+      
+    )
+  )
+
+ 

@@ -1,7 +1,7 @@
+import{FC,memo} from 'react';
 import theme from '../../styles/theme.module.css';
 
-
-export const DarkLightModeToogle = () => {
+export const DarkLightModeToogle:FC = memo(() => {
   return (
     <div className={theme.toggle_theme_container}>
      <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -16,4 +16,6 @@ export const DarkLightModeToogle = () => {
      </svg>
    </div>
   )
-}
+})
+DarkLightModeToogle.displayName = 'DarkLightModeToogle';
+

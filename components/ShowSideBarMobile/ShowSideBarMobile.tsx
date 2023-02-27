@@ -10,11 +10,14 @@ export const ShowSideBarMobile = () => {
    const {getActiveBoard} = useUIStates();
    const hasMounted = useHasMounted();
   
+   if(!hasMounted){
+    return false;
+   }
     
   return (
    <div className={navigation.SideBar_mobile}  onClick={toggleSideBar} >
     <h1 className={navigation.SideBar_mobile_headline}>
-      {hasMounted && getActiveBoard().name}
+      {getActiveBoard().name}
     </h1>
     <svg className={`${navigation.SideBar_mobile_chevron_down} ${isSideBarOpen && navigation.SideBar_mobile_chevron_up}`} 
       width="9" height="7" viewBox="0 0 9 7" 

@@ -37,6 +37,15 @@ export interface BoardName {
 }
 
 
+export interface BoardInputList{
+  boardList: BoardInput []
+}
+
+export interface BoardInput{
+  id:string,
+  column:string
+}
+
 
 
 
