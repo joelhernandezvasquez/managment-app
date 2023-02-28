@@ -1,4 +1,4 @@
-import {memo,FC,KeyboardEvent} from 'react';
+import {memo,FC} from 'react';
 import { useModal } from '../../hooks';
 import dashboard from '../../styles/dashboard.module.css';
 import { AddNewBoard } from '../AddNewBoard/AddNewBoard';

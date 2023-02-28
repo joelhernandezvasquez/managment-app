@@ -21,6 +21,7 @@ export const AddNewBoard = () => {
   
  }
 
+
   return (
     <form className={layout.modal_form} onSubmit={handleSubmitForm}>
      <FormFieldRequired
