@@ -18,8 +18,9 @@ export const AddNewBoard = () => {
   
   const handleSubmitForm = (event:FormEvent<HTMLFormElement>) =>{
   event.preventDefault();
-  console.log(listInput);
+  
  }
+
 
   return (
     <form className={layout.modal_form} onSubmit={handleSubmitForm}>

@@ -4,7 +4,7 @@ export const useModal = () => {
   const [isModalOpen,setModal] = useState<boolean>(false);
 
    const toggleModal = () =>{
-    setModal(!isModalOpen);
+       setModal(!isModalOpen);
    }
 
    return{
