@@ -1,11 +1,10 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent} from 'react';
 import {InputListStore}  from '../store/inputDynamicStore/store';
 import { v4 as uuidv4 } from 'uuid';
 
 export const useInputList = () => {
 
-const {inputList:listInput,addNewListItem,updateListItem,deleteItemFromInputList,
-        resetListItem
+const {inputList:listInput,isCurrentInputEmpty,addNewListItem,updateListItem,deleteItemFromInputList,updateIsCurrentInputEmpty
       } = InputListStore(); 
 
 const insertNewListItem = () =>{
@@ -31,11 +30,18 @@ const deleteInput = (itemId:string) =>{
    deleteItemFromInputList(itemId);
 }
 
-    
-    return{
+const areInputListItemsValid = ():boolean =>{
+return listInput.map((input)=> input.column)
+            .every((input)=> input.length > 0);
+}
+
+  return{
         listInput,
+        isCurrentInputEmpty,
         insertNewListItem,
         updateListInput,
-        deleteInput
+        deleteInput,
+        areInputListItemsValid,
+        updateIsCurrentInputEmpty
     }
 }

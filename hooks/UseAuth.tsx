@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useAuthStore } from "../store/store";
-import Swal from 'sweetalert2'
+import { notifyErrorAlert } from '../helpers';
 import {kanbanApi} from '../api/kanbanApi';
 import { user } from "../types/types";
 
@@ -66,13 +66,8 @@ const UseAuth= () => {
     }
 
   const onHandleRequestError = (errorMsg:string) =>{
-   
-    Swal.fire({
-    icon: 'error',
-    title: 'Oops...',
-    text:errorMsg
-  })
-  onLogOut(errorMsg);
+    notifyErrorAlert(errorMsg);
+    onLogOut(errorMsg);
 
   setTimeout(()=>{
    clearErrorMessage();

@@ -1,5 +1,6 @@
 
 import { kanbanApi } from "../api/kanbanApi";
+import Swal from "sweetalert2";
 import { BoardNamesListResponse,BoardName} from "../types/types";
 
 export const isValidForm = (fields:any):boolean =>{
@@ -36,4 +37,12 @@ export const fetchNamesOfBoards = async (userId:string):Promise<BoardNamesListRe
 
 const mapNamesOfBoards = (data:BoardNamesListResponse) =>{
   return data.board_names.map((board:BoardName)=> board)
+}
+
+export const notifyErrorAlert = (errorMessage:string) =>{
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text:errorMessage
+  })
 }
