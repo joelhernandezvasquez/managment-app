@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 export const useInputList = () => {
 
-const {inputList:listInput,isCurrentInputEmpty,addNewListItem,updateListItem,deleteItemFromInputList,updateIsCurrentInputEmpty
+const {inputList:listInput,isCurrentInputEmpty,addNewListItem,updateListItem,deleteItemFromInputList,updateIsCurrentInputEmpty,resetListItem
       } = InputListStore(); 
 
 const insertNewListItem = () =>{
@@ -35,6 +35,10 @@ return listInput.map((input)=> input.column)
             .every((input)=> input.length > 0);
 }
 
+const resetInputList = () =>{
+  resetListItem();
+}
+
   return{
         listInput,
         isCurrentInputEmpty,
@@ -42,6 +46,7 @@ return listInput.map((input)=> input.column)
         updateListInput,
         deleteInput,
         areInputListItemsValid,
-        updateIsCurrentInputEmpty
+        updateIsCurrentInputEmpty,
+        resetInputList
     }
 }

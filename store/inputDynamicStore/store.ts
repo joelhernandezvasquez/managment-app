@@ -5,7 +5,7 @@ import { BoardInput } from '../../types/types';
 import { v4 as uuidv4 } from 'uuid';
 
 interface InputListProps{
-   inputList:BoardInput [],
+    inputList:BoardInput [],
     isCurrentInputEmpty:boolean,
     addNewListItem:(payload:BoardInput ) => void,
     updateListItem:(payload:BoardInput []) => void,
@@ -37,7 +37,7 @@ export const InputListStore = create <InputListProps>()(
           })),
           
           resetListItem:() => set((state)=>({
-            inputList:[]
+            inputList:[{id:uuidv4(),column:'Done'}]
           }))
 
         }),

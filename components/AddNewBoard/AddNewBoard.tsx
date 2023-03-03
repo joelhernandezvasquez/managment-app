@@ -16,7 +16,7 @@ const boardForm:BoardProps = {boardName:''}
 
 export const AddNewBoard:FC <Props>= ({closeModal}) => {
   const {boardName,formSubmitted,setFormSubmitted,handleChange} = UseForm<BoardProps>(boardForm);
-  const {listInput,areInputListItemsValid,updateIsCurrentInputEmpty} = useInputList();
+  const {listInput,areInputListItemsValid,updateIsCurrentInputEmpty,resetInputList} = useInputList();
   const {createBoard} = useBoard();
   
   const onSubmitBoardForm = (event:FormEvent<HTMLFormElement>) =>{
@@ -26,6 +26,7 @@ export const AddNewBoard:FC <Props>= ({closeModal}) => {
   if(isValidForm({boardName}) && areInputListItemsValid()){
       setFormSubmitted(false);
       createBoard({boardName:boardName,boardColumns:listInput});
+      resetInputList();
       closeModal();
       return;
     }
