@@ -46,3 +46,13 @@ export const notifyErrorAlert = (errorMessage:string) =>{
     text:errorMessage
   })
 }
+
+export const notifySuccessAlert = (message:string) =>{
+  Swal.fire({
+    icon: 'success',
+    title: 'Success',
+    text:message,
+    showConfirmButton: false,
+    timer: 2500
+  })
+}
