@@ -46,6 +46,11 @@ export interface BoardInput{
   column:string
 }
 
+export interface Board{
+  boardName:string,
+  boardColumns: BoardInput []
+}
+
 
 
 

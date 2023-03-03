@@ -11,7 +11,6 @@ export const ModalFormLayout:FC<Props> = ({children,formTitle}) => {
   
   const closeModalContainer = (event:MouseEvent) =>{
     event.stopPropagation();
-    
     if(event.target === modalRef.current){
       closeSideBar();
     }

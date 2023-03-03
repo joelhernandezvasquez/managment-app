@@ -1,29 +1,39 @@
 
-import {FormEvent} from 'react'
-import { UseForm,useInputList} from "../../hooks"
+import {FormEvent,FC} from 'react'
+import { useBoard, UseForm,useInputList} from "../../hooks"
 import { CreateInputList } from "../CreateInputsLists/CreateInputList";
 import FormFieldRequired from "../FormField/FormFieldRequired";
+import { isValidForm} from '../../helpers';
 import layout from "../../styles/layouts.module.css";
 import button from '../../styles/buttons/buttons.module.css';
-
-interface BoardProps{
-  boardName:string
+interface Props{
+ closeModal:() => void;
 }
-
+interface BoardProps{
+  boardName:string,
+}
 const boardForm:BoardProps = {boardName:''}
 
-export const AddNewBoard = () => {
+export const AddNewBoard:FC <Props>= ({closeModal}) => {
   const {boardName,formSubmitted,setFormSubmitted,handleChange} = UseForm<BoardProps>(boardForm);
-  const {listInput} = useInputList();
+  const {listInput,areInputListItemsValid,updateIsCurrentInputEmpty} = useInputList();
+  const {createBoard} = useBoard();
   
-  const handleSubmitForm = (event:FormEvent<HTMLFormElement>) =>{
+  const onSubmitBoardForm = (event:FormEvent<HTMLFormElement>) =>{
   event.preventDefault();
-  
+  setFormSubmitted(true);
+ 
+  if(isValidForm({boardName}) && areInputListItemsValid()){
+      setFormSubmitted(false);
+      createBoard({boardName:boardName,boardColumns:listInput});
+      closeModal();
+      return;
+    }
+    updateIsCurrentInputEmpty(true);
  }
 
-
   return (
-    <form className={layout.modal_form} onSubmit={handleSubmitForm}>
+    <form className={layout.modal_form} onSubmit={onSubmitBoardForm}>
      <FormFieldRequired
         labelName ={'Board Name'}
         type = "text"

@@ -6,9 +6,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 interface InputListProps{
    inputList:BoardInput [],
+    isCurrentInputEmpty:boolean,
     addNewListItem:(payload:BoardInput ) => void,
     updateListItem:(payload:BoardInput []) => void,
     deleteItemFromInputList:(itemId:string) => void,
+    updateIsCurrentInputEmpty:(payload:boolean) => void,
     resetListItem:() => void
 }
 
@@ -16,7 +18,8 @@ export const InputListStore = create <InputListProps>()(
     devtools(
         (set) => ({
             inputList:[{id:uuidv4(),column:''}],
-          
+            isCurrentInputEmpty:false,
+
            addNewListItem:(payload) =>  set((state)=> ({
             inputList: [...state.inputList,payload] 
           })),
@@ -27,6 +30,10 @@ export const InputListStore = create <InputListProps>()(
 
           deleteItemFromInputList:(itemId) =>  set((state)=> ({
             inputList: state.inputList.filter((itemInput:BoardInput)=> itemInput.id !== itemId)
+          })),
+
+          updateIsCurrentInputEmpty:(payload) => set((state) => ({
+            isCurrentInputEmpty:payload
           })),
           
           resetListItem:() => set((state)=>({

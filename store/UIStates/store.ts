@@ -8,6 +8,7 @@ interface UIState{
     toggleSideBar:() => void,
     closeSideBar:() => void,
     setActiveBoard:(boardName:BoardName) => void, 
+   
 }
 
 export const UIStore = create <UIState>()(
@@ -28,7 +29,7 @@ export const UIStore = create <UIState>()(
             currentBoardSelected:boardName
           })),
 
-        
+          
 
         }),
        

@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC,MouseEvent} from 'react';
 import { BoardInput} from "../../types/types";
 import { useInputList } from '../../hooks/useInputList';
 import { RenderInputItem } from './RenderInputItem';
@@ -12,17 +12,30 @@ interface InputListProps{
    
 export const CreateInputList:FC<InputListProps> = ({listName,buttonName}) => {
    
-  const {listInput,insertNewListItem} =  useInputList();
+  const {listInput,areInputListItemsValid,updateIsCurrentInputEmpty,insertNewListItem} = useInputList();
+
+   const insertNewInputItem  = (event:MouseEvent<HTMLButtonElement>) =>{
+         event.preventDefault();
+          if(areInputListItemsValid()){
+             updateIsCurrentInputEmpty(false);
+             insertNewListItem();
+            return;
+         }
+         updateIsCurrentInputEmpty(true);   
+   }
 
   return (
     <div className={list.container}>
        <p className={list.title}>{listName}</p>
        <ul className={list.list}>
         {listInput.map((item:BoardInput,index:number)=>{
-         return <RenderInputItem key={item.id} inputItem={item} indexInputItem={index}/>
+         return <RenderInputItem key={item.id} 
+                 inputItem={item} 
+                 indexInputItem={index}
+                  />
         })}
        </ul>
-       <button className={button.input_list_btn} onClick={insertNewListItem}>{buttonName}</button>
+       <button className={button.input_list_btn} onClick={(event)=>insertNewInputItem(event)}>{buttonName}</button>
     </div>
   )
       }

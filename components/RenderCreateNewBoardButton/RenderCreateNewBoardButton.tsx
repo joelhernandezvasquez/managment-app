@@ -17,7 +17,7 @@ export const RenderCreateNewBoardButton:FC = memo(() => {
 
       {isModalOpen &&
        <ModalFormLayout formTitle='Add New Board'>
-         <AddNewBoard/>
+         <AddNewBoard closeModal = {toggleModal}/>
        </ModalFormLayout>
       }
    </div>

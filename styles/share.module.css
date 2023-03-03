@@ -25,6 +25,7 @@
     font-size:var(--body-L);
     color:var(--clr-black);
    
+   
   }
   .primary_input::placeholder{
     color: var(--clr-black);
@@ -46,7 +47,7 @@
   }
 
   .label::after{
-   display:none;
+    display:none;
     content:'Cannot be empty';
     position:absolute;
     top:40px;
@@ -56,6 +57,21 @@
   }
   .label.show_invalid::after{
     display:block;
+  }
+
+  .invalid_input{
+    border: 1px solid var(--clr-red);
+    position:relative;
+  }
+
+  .invalid_input::placeholder{
+    position: absolute;
+    top:11px;
+    right:10px;
+    color:red;
+    font-size: var(--heading-s);
+    opacity: 1;
+   
   }
 
   .d_flex{
