@@ -1,4 +1,6 @@
+
 import { RenderBoardMenu } from './RenderBoardMenu';
+import { useSideBar } from '../../hooks';
 import { DarkLightModeToogle } from './DarkLightModeToogle';
 import { RenderCreateNewBoardButton } from '../RenderCreateNewBoardButton/RenderCreateNewBoardButton';
 import dashboard from '../../styles/dashboard.module.css';
@@ -16,7 +18,6 @@ export const Board = () => {
         <DarkLightModeToogle/>
       </section>
 
-   
     </div>
   )
 }

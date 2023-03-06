@@ -1,4 +1,4 @@
-import {FC,MouseEvent} from 'react';
+import {FC,MouseEvent,memo} from 'react';
 import { BoardInput} from "../../types/types";
 import { useInputList } from '../../hooks/useInputList';
 import { RenderInputItem } from './RenderInputItem';
@@ -10,7 +10,7 @@ interface InputListProps{
     buttonName:string,
   }
    
-export const CreateInputList:FC<InputListProps> = ({listName,buttonName}) => {
+export const CreateInputList:FC<InputListProps> = memo( ({listName,buttonName}) => {
    
   const {listInput,areInputListItemsValid,updateIsCurrentInputEmpty,insertNewListItem} = useInputList();
 
@@ -38,4 +38,5 @@ export const CreateInputList:FC<InputListProps> = ({listName,buttonName}) => {
        <button className={button.input_list_btn} onClick={(event)=>insertNewInputItem(event)}>{buttonName}</button>
     </div>
   )
-      }
+      })
+      CreateInputList.displayName = 'CreateInputList';

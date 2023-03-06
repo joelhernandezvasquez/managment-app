@@ -15,6 +15,7 @@ interface BoardProps{
 const boardForm:BoardProps = {boardName:''}
 
 export const AddNewBoard:FC <Props>= ({closeModal}) => {
+
   const {boardName,formSubmitted,setFormSubmitted,handleChange} = UseForm<BoardProps>(boardForm);
   const {listInput,areInputListItemsValid,updateIsCurrentInputEmpty,resetInputList} = useInputList();
   const {createBoard} = useBoard();
