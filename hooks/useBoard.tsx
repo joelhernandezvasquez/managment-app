@@ -8,7 +8,7 @@ import { Board } from '../types/types';
 export const useBoard = () => {
     
 const {user} = useAuthStore();
-const {data,isLoading,isError,error} =  useQuery({queryKey:['boardNames'],queryFn:()=> fetchNamesOfBoards(user.uid)}) 
+const {data,isLoading,isError,error} =  useQuery({queryKey:['boardNames'],queryFn:()=> fetchNamesOfBoards(user.uid),retry: 1}) 
 
  const createBoard = async (board:Board) =>{
     const boardColumns =  mappedBoardColumns(board);

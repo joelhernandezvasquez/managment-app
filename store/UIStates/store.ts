@@ -13,11 +13,13 @@ interface UIState{
 
 export const UIStore = create <UIState>()(
     devtools(
+      
       persist(
         (set) => ({
-            isSideBarOpen:false,
+              isSideBarOpen:false,
              currentBoardSelected:{_id:'',name:''},
-            toggleSideBar:() =>  set((state)=> ({
+               
+             toggleSideBar:() =>  set((state)=> ({
             isSideBarOpen:!state.isSideBarOpen
           })),
 
@@ -28,8 +30,6 @@ export const UIStore = create <UIState>()(
           setActiveBoard:(boardName) => set((state)=>({
             currentBoardSelected:boardName
           })),
-
-          
 
         }),
        
