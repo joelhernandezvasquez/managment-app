@@ -1,4 +1,3 @@
-
 import { useQuery } from '@tanstack/react-query'
 import { useAuthStore } from '../store/store';
 import {kanbanApi} from '../api/kanbanApi';
@@ -16,8 +15,15 @@ const {data,isLoading,isError,error} =  useQuery({queryKey:['boardNames'],queryF
        await kanbanApi.post('/board/create',{name:board.boardName,columns:boardColumns,user:user.uid});
        notifySuccessAlert('Board has been saved');
     }
-     catch(error){
+     catch(error:any){
        console.log(error);
+       const {response} = error;
+        
+       if(response.status == 401){
+          notifyErrorAlert(response.data.msg);
+          return;
+        }
+
        notifyErrorAlert('Board was not created, Please contact Admin');
      }
  }
