@@ -5,6 +5,8 @@ import { MobileNavBar } from "../components/MobileNavBar";
 import style from '../styles/dashboard.module.css';
 
 const dashboard = () => {
+
+ 
   return (
     <>
      <Head>
