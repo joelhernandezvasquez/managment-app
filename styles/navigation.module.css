@@ -31,9 +31,10 @@
 
 .show_board_menu{
   margin-left:16px;
+  cursor: pointer;
 }
 .show_board_menu_button{
-    display:block;
+   display:block;
    width:4px;
    height:4px;
    border-radius: 50%;
@@ -52,3 +53,28 @@
   background:rgba(0,0,0,0.5);
   z-index:2;
 }
+
+.active_board_menu{
+  position:absolute;
+  top:60px;
+  right:15px;
+  width:190px;
+  height:94px;
+  z-index:2;
+  box-shadow: 0px 10px 20px rgba(54, 78, 126, 0.25);
+  border-radius: 8px;
+  background:white;
+}
+.active_board_menu ul{
+ padding:16px;
+}
+.active_board_menu ul > li{
+  margin-bottom: 16px;
+  color:var(--clr-medium-gray);
+  font-size:var(--body-L);
+  font-weight: 500;
+  cursor: pointer;
+ }
+ .active_board_menu ul > li:hover{
+   color:var(--clr-red);
+ }

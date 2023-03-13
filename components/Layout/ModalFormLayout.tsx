@@ -3,9 +3,10 @@ import { useSideBar } from '../../hooks';
 import layouts from '../../styles/layouts.module.css';
 interface Props{
     children:ReactNode,
-    formTitle:string
+    formTitle:string,
+    formTitleColor?:string
 }
-export const ModalFormLayout:FC<Props> = ({children,formTitle}) => {
+export const ModalFormLayout:FC<Props> = ({children,formTitle,formTitleColor}) => {
 
   const {sidebarRef,closeMobileSidebar} = useSideBar();
   
@@ -14,7 +15,7 @@ export const ModalFormLayout:FC<Props> = ({children,formTitle}) => {
       onClick={(event:MouseEvent)=> closeMobileSidebar(event)}
       >
        <div className={layouts.modal_inner_form}>
-       <h2 className={layouts.modal_title}>{formTitle}</h2>
+       <h2 style={{color:`${formTitleColor}`}} className={layouts.modal_title}>{formTitle}</h2>
         {children}
        </div>
        

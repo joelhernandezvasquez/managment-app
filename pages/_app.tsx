@@ -4,7 +4,7 @@ import {Plus_Jakarta_Sans} from '@next/font/google';
 import {QueryClient,QueryClientProvider,} from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import UseAuth from '../hooks/UseAuth';
-import { useSideBar } from '../hooks';
+import { useSideBar, useUIStates } from '../hooks';
 import '../styles/globals.css'
 
 
@@ -15,6 +15,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export default function App({ Component, pageProps }: AppProps) {
   const {checkAuthToken} = UseAuth();
   const {closeSideBar} = useSideBar();
+  const {closeBoardMenu} = useUIStates();
   const queryClient = new QueryClient()
 
   useEffect(()=>{
@@ -22,6 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
   
    addEventListener('beforeunload',() => { 
     closeSideBar();
+    closeBoardMenu();
   });
 },[])
 
