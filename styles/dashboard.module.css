@@ -117,3 +117,10 @@
     text-align: center;
   }
 
+  .prompt{
+   color:var(--clr-medium-gray);
+   font-size:var(--body-L);
+   font-weight: 500;
+   margin-top:20px;
+  }
+

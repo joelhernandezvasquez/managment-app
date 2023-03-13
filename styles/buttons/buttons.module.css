@@ -2,6 +2,7 @@
 .btn_primary{
     --background-btn:var(--clr-main-purple);
     cursor: pointer;
+ 
 }
 
 .auth_submit_btn{
@@ -39,4 +40,13 @@
     font-size:0.82rem;
     margin-top:20px;
     width:100%
+}
+
+.delete_button{
+    --background-btn:var(--clr-red);
+   border-radius: 20px;
+   width:100%;
+   font-weight: 700;
+    font-size:0.82rem;
+    margin-top:20px;
 }

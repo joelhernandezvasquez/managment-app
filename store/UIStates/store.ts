@@ -5,9 +5,12 @@ import {BoardName} from '../../types/types';
 interface UIState{
     isSideBarOpen:boolean,
     currentBoardSelected:BoardName,
+    isBoadMenuOpen:boolean,
     toggleSideBar:() => void,
     closeSideBar:() => void,
     setActiveBoard:(boardName:BoardName) => void, 
+    toggleBoardMenu:() => void,
+    closeBoardMenu:() => void
    
 }
 
@@ -18,6 +21,7 @@ export const UIStore = create <UIState>()(
         (set) => ({
               isSideBarOpen:false,
              currentBoardSelected:{_id:'',name:''},
+             isBoadMenuOpen:false,
                
              toggleSideBar:() =>  set((state)=> ({
             isSideBarOpen:!state.isSideBarOpen
@@ -30,6 +34,12 @@ export const UIStore = create <UIState>()(
           setActiveBoard:(boardName) => set((state)=>({
             currentBoardSelected:boardName
           })),
+          toggleBoardMenu:() => set((state)=>({
+            isBoadMenuOpen: !state.isBoadMenuOpen
+          })),
+          closeBoardMenu:() => set((state)=>({
+            isBoadMenuOpen:false
+          }))
 
         }),
        

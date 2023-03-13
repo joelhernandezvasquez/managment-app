@@ -11,6 +11,7 @@
     display:grid;
     place-items: center;
     padding:0 16px;
+    z-index:3;
 }
 
 .modal_inner_form{
@@ -26,6 +27,9 @@
     color:var(--clr-black);
     font-weight: 700;
     font-size:1.125rem;
+}
+.modal_title::first-letter{
+    text-transform: capitalize;
 }
 
 .modal_form{

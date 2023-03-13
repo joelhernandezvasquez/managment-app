@@ -56,3 +56,18 @@ export const notifySuccessAlert = (message:string) =>{
     timer: 2500
   })
 }
+
+export const activeBoardItems = [
+  {
+  id:0,
+  item:'Edit Board',
+  action:'edit'
+ },
+
+ {
+  id:1,
+  item:'Delete Board',
+  action:'delete'
+ }
+
+]
