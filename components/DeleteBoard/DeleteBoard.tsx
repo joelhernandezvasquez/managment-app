@@ -4,11 +4,12 @@ import button from '../../styles/buttons/buttons.module.css';
 
 export const DeleteBoard = () => {
  
-    const {getActiveBoard,onToogleBoardMenu} = useUIStates();
+    const {getActiveBoard,onToogleBoardMenu,closeBoardMenu} = useUIStates();
     const {removeBoard} = useBoard();
 
     const startDeletingBoard = () =>{
         removeBoard(getActiveBoard()._id);
+        closeBoardMenu();
     }
    
     return (

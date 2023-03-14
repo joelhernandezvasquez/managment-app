@@ -33,6 +33,7 @@ const {data,isLoading,isError,error} =  useQuery({queryKey:['boardNames'],queryF
   try{
    await kanbanApi.delete(`/board/${boardId}`);
    notifySuccessAlert('Board has been deleted');
+   
   }
     catch(error){
       console.log(error);
