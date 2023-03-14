@@ -31,12 +31,12 @@ const {data,isLoading,isError,error} =  useQuery({queryKey:['boardNames'],queryF
  const removeBoard = async(boardId:string) =>{
     
   try{
-   
-    await kanbanApi.delete(`/board/${boardId}`);
-   
+   await kanbanApi.delete(`/board/${boardId}`);
+   notifySuccessAlert('Board has been deleted');
   }
     catch(error){
       console.log(error);
+      notifyErrorAlert('Board was not deleted, Please contact Admin');
     }
  }
  
