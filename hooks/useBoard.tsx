@@ -27,6 +27,18 @@ const {data,isLoading,isError,error} =  useQuery({queryKey:['boardNames'],queryF
        notifyErrorAlert('Board was not created, Please contact Admin');
      }
  }
+
+ const removeBoard = async(boardId:string) =>{
+    
+  try{
+   
+    await kanbanApi.delete(`/board/${boardId}`);
+   
+  }
+    catch(error){
+      console.log(error);
+    }
+ }
  
  const mappedBoardColumns = (board:Board) =>{
    return board.boardColumns.map((board)=> board.column);
@@ -38,6 +50,7 @@ return{
       error,
       isLoading,
       isError,
-      createBoard
+      createBoard,
+      removeBoard
 }
 }
