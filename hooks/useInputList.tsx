@@ -1,10 +1,12 @@
 import { ChangeEvent} from 'react';
 import {InputListStore}  from '../store/inputDynamicStore/store';
+import {mappedBoardInputs} from "../helpers";
 import { v4 as uuidv4 } from 'uuid';
+
 
 export const useInputList = () => {
 
-const {inputList:listInput,isCurrentInputEmpty,addNewListItem,updateListItem,deleteItemFromInputList,updateIsCurrentInputEmpty,resetListItem
+const {inputList:listInput,isCurrentInputEmpty,addNewListItem,updateListItem,deleteItemFromInputList,updateIsCurrentInputEmpty,resetListItem,insertAnEntireList
       } = InputListStore(); 
 
 const insertNewListItem = () =>{
@@ -39,6 +41,12 @@ const resetInputList = () =>{
   resetListItem();
 }
 
+
+const insertEntireInputList = (inputList:string [] | undefined) =>{
+   console.log('it is called')
+  insertAnEntireList(mappedBoardInputs(inputList as string[]));
+}
+
   return{
         listInput,
         isCurrentInputEmpty,
@@ -47,6 +55,7 @@ const resetInputList = () =>{
         deleteInput,
         areInputListItemsValid,
         updateIsCurrentInputEmpty,
-        resetInputList
+        resetInputList,
+        insertEntireInputList
     }
 }

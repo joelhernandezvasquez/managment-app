@@ -10,8 +10,9 @@ interface UIState{
     closeSideBar:() => void,
     setActiveBoard:(boardName:BoardName) => void, 
     toggleBoardMenu:() => void,
-    closeBoardMenu:() => void
-   
+    closeBoardMenu:() => void,
+    restoreBoardSelected:() =>void,
+  
 }
 
 export const UIStore = create <UIState>()(
@@ -39,6 +40,9 @@ export const UIStore = create <UIState>()(
           })),
           closeBoardMenu:() => set((state)=>({
             isBoadMenuOpen:false
+          })),
+          restoreBoardSelected:() => set((state)=>({
+            currentBoardSelected:{_id:'',name:''},
           }))
 
         }),

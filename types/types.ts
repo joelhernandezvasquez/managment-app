@@ -36,7 +36,6 @@ export interface BoardName {
   name: string;
 }
 
-
 export interface BoardInputList{
   boardList: BoardInput []
 }
@@ -49,6 +48,11 @@ export interface BoardInput{
 export interface Board{
   boardName:string,
   boardColumns: BoardInput []
+}
+
+export interface BoardListResponse {
+  board_name:string,
+  board_columns: string []
 }
 
 

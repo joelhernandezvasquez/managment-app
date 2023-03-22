@@ -3,7 +3,7 @@ import {UIStore} from '../store/UIStates/store';
 
 export const useUIStates = () => {
   
-    const {setActiveBoard,currentBoardSelected,isBoadMenuOpen,toggleBoardMenu,closeBoardMenu} = UIStore();
+    const {setActiveBoard,currentBoardSelected,isBoadMenuOpen,toggleBoardMenu,closeBoardMenu,restoreBoardSelected} = UIStore();
 
     const getActiveBoard = () =>{
         return currentBoardSelected;
@@ -17,12 +17,18 @@ export const useUIStates = () => {
         toggleBoardMenu();
     }
 
+    const resetBoardSelected = () =>{
+        restoreBoardSelected();
+    }
+
     return {
         getActiveBoard,
         isBoardMenuCurrentlyOpen,
         setActiveBoard,
-       onToogleBoardMenu,
-       closeBoardMenu
+        onToogleBoardMenu,
+        closeBoardMenu,
+        resetBoardSelected
+        
 
     }
 }

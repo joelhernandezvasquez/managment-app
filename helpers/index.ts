@@ -1,7 +1,8 @@
 
 import { kanbanApi } from "../api/kanbanApi";
 import Swal from "sweetalert2";
-import { BoardNamesListResponse,BoardName} from "../types/types";
+import { BoardNamesListResponse,BoardName,BoardListResponse, BoardInput} from "../types/types";
+import { v4 as uuidv4 } from 'uuid';
 
 export const isValidForm = (fields:any):boolean =>{
  
@@ -35,8 +36,40 @@ export const fetchNamesOfBoards = async (userId:string):Promise<BoardNamesListRe
     }
 }
 
+export const fetchBoardById = async (id:string):Promise<BoardListResponse> =>{
+  try{
+     const {data} = await kanbanApi.post('/board/getBoard',{id});
+     
+     return{
+       board_name:data.name,
+       board_columns:data.columns
+     }
+  }
+  catch(error){
+    console.error(error)
+    let message
+    if (error instanceof Error) 
+     message = error.message
+    else message = String(error)
+
+    return Promise.reject(new Error(message))
+   
+  }
+}
+
 const mapNamesOfBoards = (data:BoardNamesListResponse) =>{
   return data.board_names.map((board:BoardName)=> board)
+}
+
+export const mappedBoardInputs = (inputList:string []):BoardInput [] =>{
+  
+ return inputList.map((input)=> {
+    return{
+      id:uuidv4(),
+      column:input
+    }
+  })
+  
 }
 
 export const notifyErrorAlert = (errorMessage:string) =>{

@@ -8,6 +8,7 @@ interface InputListProps{
     inputList:BoardInput [],
     isCurrentInputEmpty:boolean,
     addNewListItem:(payload:BoardInput ) => void,
+    insertAnEntireList:(payload:BoardInput []) => void,
     updateListItem:(payload:BoardInput []) => void,
     deleteItemFromInputList:(itemId:string) => void,
     updateIsCurrentInputEmpty:(payload:boolean) => void,
@@ -22,6 +23,11 @@ export const InputListStore = create <InputListProps>()(
 
            addNewListItem:(payload) =>  set((state)=> ({
             inputList: [...state.inputList,payload] 
+          })),
+
+          insertAnEntireList:(payload) =>  set((state)=> ({
+            inputList: payload 
+            
           })),
 
           updateListItem:(payload) =>  set((state)=> ({

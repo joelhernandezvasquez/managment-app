@@ -6,3 +6,5 @@ export * from './useUIStates';
 export * from './useHasMounted';
 export * from './useModal';
 export * from './useInputList';
+export * from './useFetchBoard';
+
