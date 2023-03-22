@@ -8,6 +8,7 @@ export const RenderBoardMenu = () => {
   
   const {board_names,isLoading,isError} = useBoard();
 
+
   if (isLoading) {
     return  <Loader/>
   }

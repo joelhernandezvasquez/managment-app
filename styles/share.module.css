@@ -24,8 +24,7 @@
     border-radius: 4px;
     font-size:var(--body-L);
     color:var(--clr-black);
-   
-   
+  
   }
   .primary_input::placeholder{
     color: var(--clr-black);
@@ -76,6 +75,9 @@
 
   .d_flex{
     display:flex;
+  }
+  .d_flex_col{
+    flex-direction: column;
   }
   .d_align_flex_center{
     align-items: center;
