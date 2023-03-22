@@ -15,13 +15,17 @@
 }
 
 .modal_inner_form{
+    position:absolute;
+    top:70px;
     display:flex;
     flex-direction: column;
     align-items: flex-start;
     background:white;
     border-radius: 6px;
     min-width:340px;
+    max-height:550px;
     padding:24px;
+    overflow-y: auto;
 }
 .modal_title{
     color:var(--clr-black);
