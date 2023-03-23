@@ -1,6 +1,5 @@
-
-import { useEffect,ChangeEvent, useState } from "react";
-import {useFetchBoard, useInputList} from "../../hooks";
+import { useEffect,ChangeEvent, useState,FormEvent } from "react";
+import {useBoard, useFetchBoard, useInputList, useUIStates} from "../../hooks";
 import { CreateInputList } from "../CreateInputsLists/CreateInputList";
 import layout from "../../styles/layouts.module.css";
 import button from '../../styles/buttons/buttons.module.css';
@@ -8,9 +7,12 @@ import share from '../../styles/share.module.css';
 
 export const UpdateBoard = () => {
 
-   const {insertEntireInputList} = useInputList();
+   const {updateBoardMutation} =useBoard();
+   const {getActiveBoard} = useUIStates();
+   const {insertEntireInputList,listInput,areInputListItemsValid,updateIsCurrentInputEmpty} = useInputList();
    const {board_columns,board_name,isLoading,isSuccess} = useFetchBoard();
    const [boardNameInput,setBoardNameInput] = useState('');
+   const [isFormSubmitted,setIsFormSubmitted] = useState(false);
    
    useEffect(()=>{
     if(isSuccess){
@@ -25,20 +27,37 @@ export const UpdateBoard = () => {
     setBoardNameInput(target.value);
   }
 
+  const onSubmitUpdateBoardForm = (event:FormEvent<HTMLFormElement>) =>{
+    event.preventDefault();
+
+    if(boardNameInput !=='' && areInputListItemsValid()){
+        setIsFormSubmitted(false);
+        updateBoardMutation.mutate(
+          { 
+            board:{boardName:boardNameInput,boardColumns:listInput},
+             boardId:getActiveBoard()._id
+          }
+          )
+      return;
+    }
+    setIsFormSubmitted(true);
+    updateIsCurrentInputEmpty(true);
+
+  }
+
   return (
-   
-   <form className={layout.modal_form}>
+   <form className={layout.modal_form} onSubmit={onSubmitUpdateBoardForm}>
     <div className={`${share.d_flex} ${share.d_flex_col} ${share.form_field} `}>
     <label className={share.label}>
       Board Name</label>
       <input
-       className={`${share.primary_input} ${share.d_flex_grow}`}
+        className={`${share.primary_input} ${share.d_flex_grow} ${isFormSubmitted && boardNameInput==='' && share.invalid_input}`}
         type = "text"
         id="boardName"
         name="boardName"
         value={boardNameInput}
         onChange = {updateBoardNameInput}
-        placeholder = "e.g. Web Design"
+        placeholder = {boardNameInput ==='' ? "cannot be empty":"e.g. Web Design"}
      />
     </div>
     
