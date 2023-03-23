@@ -1,5 +1,5 @@
 import { useEffect,ChangeEvent, useState,FormEvent } from "react";
-import {useFetchBoard, useInputList} from "../../hooks";
+import {useBoard, useFetchBoard, useInputList, useUIStates} from "../../hooks";
 import { CreateInputList } from "../CreateInputsLists/CreateInputList";
 import layout from "../../styles/layouts.module.css";
 import button from '../../styles/buttons/buttons.module.css';
@@ -7,7 +7,9 @@ import share from '../../styles/share.module.css';
 
 export const UpdateBoard = () => {
 
-   const {insertEntireInputList,areInputListItemsValid,updateIsCurrentInputEmpty} = useInputList();
+   const {updateBoardMutation} =useBoard();
+   const {getActiveBoard} = useUIStates();
+   const {insertEntireInputList,listInput,areInputListItemsValid,updateIsCurrentInputEmpty} = useInputList();
    const {board_columns,board_name,isLoading,isSuccess} = useFetchBoard();
    const [boardNameInput,setBoardNameInput] = useState('');
    const [isFormSubmitted,setIsFormSubmitted] = useState(false);
@@ -29,11 +31,15 @@ export const UpdateBoard = () => {
     event.preventDefault();
 
     if(boardNameInput !=='' && areInputListItemsValid()){
-      console.log('form can be sent...');
         setIsFormSubmitted(false);
+        updateBoardMutation.mutate(
+          { 
+            board:{boardName:boardNameInput,boardColumns:listInput},
+             boardId:getActiveBoard()._id
+          }
+          )
       return;
     }
-    console.log('form cannot be submitted');
     setIsFormSubmitted(true);
     updateIsCurrentInputEmpty(true);
 

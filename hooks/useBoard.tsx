@@ -5,6 +5,11 @@ import {kanbanApi} from '../api/kanbanApi';
 import { fetchNamesOfBoards,notifySuccessAlert,notifyErrorAlert} from '../helpers';
 import { Board } from '../types/types';
 
+interface UpdatedBoard{
+  board:Board, 
+  boardId:string
+}
+
 export const useBoard = () => {
     
 const {user} = useAuthStore();
@@ -17,11 +22,17 @@ const createBoardMutation = useMutation({
   }
 })
 
+const updateBoardMutation = useMutation({
+  mutationFn:({board,boardId}:UpdatedBoard )=>{
+    return updateBoard({board,boardId})
+  }
+})
+
 
 const createBoard = async (board:Board) =>{
-    const boardColumns =  mappedBoardColumns(board);
+
   try{
-       const response = await kanbanApi.post('/board/create',{name:board.boardName,columns:boardColumns,user:user.uid});
+       const response = await kanbanApi.post('/board/create',{name:board.boardName,columns:mappedBoardColumns(board),user:user.uid});
        notifySuccessAlert('Board has been saved');
        return response.data;
     }
@@ -35,6 +46,19 @@ const createBoard = async (board:Board) =>{
         }
 
        notifyErrorAlert('Board was not created, Please contact Admin');
+     }
+ }
+
+ const updateBoard = async({board,boardId}:UpdatedBoard) =>{
+  try{
+       const response = await kanbanApi.put(`/board/${boardId}`,{name:board.boardName,columns:mappedBoardColumns(board)});
+       notifySuccessAlert('Board has been updated');
+       return response.data;
+    }
+     catch(error:any){
+       console.error(error);
+       const {response} = error;
+       notifyErrorAlert(response.data.msg);
      }
  }
 
@@ -62,6 +86,7 @@ return{
       isLoading,
       isError,
       createBoardMutation,
+      updateBoardMutation,
       removeBoard
 }
 }
