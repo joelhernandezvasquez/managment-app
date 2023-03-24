@@ -20,6 +20,11 @@ export const useUIStates = () => {
     const resetBoardSelected = () =>{
         restoreBoardSelected();
     }
+    const closeBoardMenuWindow = () =>{
+        setTimeout(()=>{
+         closeBoardMenu();
+        },1000)
+    }
 
     return {
         getActiveBoard,
@@ -27,6 +32,7 @@ export const useUIStates = () => {
         setActiveBoard,
         onToogleBoardMenu,
         closeBoardMenu,
+        closeBoardMenuWindow,
         resetBoardSelected
         
 

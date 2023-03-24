@@ -8,7 +8,7 @@ import share from '../../styles/share.module.css';
 export const UpdateBoard = () => {
 
    const {updateBoardMutation} =useBoard();
-   const {getActiveBoard} = useUIStates();
+   const {getActiveBoard,closeBoardMenuWindow} = useUIStates();
    const {insertEntireInputList,listInput,areInputListItemsValid,updateIsCurrentInputEmpty} = useInputList();
    const {board_columns,board_name,isLoading,isSuccess} = useFetchBoard();
    const [boardNameInput,setBoardNameInput] = useState('');
@@ -38,6 +38,7 @@ export const UpdateBoard = () => {
              boardId:getActiveBoard()._id
           }
           )
+       closeBoardMenuWindow();
       return;
     }
     setIsFormSubmitted(true);

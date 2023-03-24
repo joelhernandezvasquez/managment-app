@@ -86,7 +86,7 @@ export const notifySuccessAlert = (message:string) =>{
     title: 'Success',
     text:message,
     showConfirmButton: false,
-    timer: 2500
+    timer: 1500
   })
 }
 
