@@ -9,6 +9,7 @@ export const useSideBar = () => {
       event.stopPropagation();
       if(event.target === sidebarRef.current){
       closeSideBar();
+      return;
     }  
    }
 
