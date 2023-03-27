@@ -7,4 +7,5 @@ export * from './useHasMounted';
 export * from './useModal';
 export * from './useInputList';
 export * from './useFetchBoard';
+export * from './useUpdateBoard';
 

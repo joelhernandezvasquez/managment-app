@@ -13,7 +13,7 @@ export const SelectBoardAction:FC <Props> = ({boardAction}) => {
     formTitleColor = {boardAction === 'delete' ? '#EA5555':''}
     >
       {
-        boardAction === 'delete' ? <DeleteBoard/>: <UpdateBoard/>
+        boardAction === 'delete' ? <DeleteBoard/> : <UpdateBoard/>
       }
    </ModalFormLayout>
   

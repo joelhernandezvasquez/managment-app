@@ -43,7 +43,6 @@ const resetInputList = () =>{
 
 
 const insertEntireInputList = (inputList:string [] | undefined) =>{
-   console.log('it is called')
   insertAnEntireList(mappedBoardInputs(inputList as string[]));
 }
 
