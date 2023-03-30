@@ -17,7 +17,7 @@
     margin:8px 0;
   }
   
-  
+
   .primary_input{
     padding:9px 16px;
     border: 1px solid rgba(130, 143, 163, 0.25);
@@ -90,4 +90,14 @@
  }
  .d_flex_gap_16{
   gap:16px;
+ }
+
+ .text_area_input{
+  min-height: 112px;
+
+  /* padding:0 16px; */
+ }
+ .errorMessage{
+    color: var(--clr-red);
+    font-size: var(--heading-s);
  }

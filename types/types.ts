@@ -12,6 +12,7 @@ export interface FormData {
   export interface RequiredInputArgs {
     labelName:string,
     type:string,
+    isTextArea?:boolean
     id:string,
     name:string,
     onChangeHandler:({target}:ChangeEvent<HTMLInputElement>) => void
@@ -54,6 +55,15 @@ export interface BoardListResponse {
   board_name:string,
   board_columns: string []
 }
+
+export interface StatusList {
+  listOfStatus: Status []
+ }
+ 
+ export interface Status{
+     id:string,
+     status:string
+ }
 
 
 
