@@ -1,7 +1,7 @@
 
 import { kanbanApi } from "../api/kanbanApi";
 import Swal from "sweetalert2";
-import { BoardNamesListResponse,BoardName,BoardListResponse, BoardInput} from "../types/types";
+import { BoardNamesListResponse,BoardName,BoardListResponse, BoardInput,Status} from "../types/types";
 import { v4 as uuidv4 } from 'uuid';
 
 export const isValidForm = (fields:any):boolean =>{
@@ -72,6 +72,16 @@ export const mappedBoardInputs = (inputList:string []):BoardInput [] =>{
   
 }
 
+export const mappedListOfStatus = (list: string []):Status [] =>{
+  
+  return list.map((listItem)=>{
+     return{
+      id:uuidv4(),
+      status:listItem
+     }
+  })
+}
+
 export const notifyErrorAlert = (errorMessage:string) =>{
   Swal.fire({
     icon: 'error',
@@ -102,5 +112,21 @@ export const activeBoardItems = [
   item:'Delete Board',
   action:'delete'
  }
+
+]
+
+export const listOfStatus = [
+  {
+    id:uuidv4(),
+    status:'Todo'
+  },
+  {
+    id:uuidv4(),
+    status:'Doing'
+  },
+  {
+    id:uuidv4(),
+    status:'Done'
+  },
 
 ]
