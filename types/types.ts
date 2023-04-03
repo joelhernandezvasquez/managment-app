@@ -65,6 +65,16 @@ export interface StatusList {
      status:string
  }
 
+ export interface BoardTask{
+  name:string,
+  description:string,
+  substasks: SubsTask [],
+  status:string
+ }
+ export interface SubsTask{
+  name:string,
+  complete:boolean
+ }
 
 
 

@@ -8,6 +8,7 @@ import { isValidForm, mappedListOfStatus } from "../../helpers";
 import layout from "../../styles/layouts.module.css";
 import styles from '../../styles/share.module.css';
 import button from '../../styles/buttons/buttons.module.css';
+import { useTask } from "../../hooks/useTask";
 
 interface TaskProps{
     taskTitle:string,
@@ -19,12 +20,13 @@ const taskForm:TaskProps = {
 }
 
 export const AddNewTask = () => {
-    const {taskTitle,taskDescription,formSubmitted,setFormSubmitted,handleChange} = UseForm<TaskProps>(taskForm);
+    const {taskTitle,taskDescription,formSubmitted,setFormSubmitted,handleChange,resetForm} = UseForm<TaskProps>(taskForm);
     const {board_columns,isLoading} = useFetchBoard();
-    const {areInputListItemsValid,updateIsCurrentInputEmpty} = useInputList();
+    const {areInputListItemsValid,updateIsCurrentInputEmpty,listInput,resetInputList} = useInputList();
     const taskTitleID = useId();
     const taskDescriptionID = useId();
     const taskStatusRef = useRef<string>();
+    const {mappedSubstask,createTaskMutation} = useTask();
 
     if(isLoading) return;
     
@@ -39,6 +41,16 @@ export const AddNewTask = () => {
       if(isValidForm({taskTitle,taskDescription}) && taskStatusRef.current!==undefined && areInputListItemsValid()){
         console.log('form can be sent');
         setFormSubmitted(false);
+        createTaskMutation.mutate({
+         name:taskTitle,
+         description:taskDescription,
+         substasks:mappedSubstask(listInput),
+         status:taskStatusRef.current
+        })
+          resetForm();
+          resetInputList();
+          taskStatusRef.current = undefined;
+         
         return;
        }
        console.log('form cannot be sent');
