@@ -10,6 +10,9 @@ export function UseForm<T> (initialState:T){
      const {name,value}  = target;
       setFormValues({...formValues,[name]:value});
   }
+  const resetForm = () =>{
+   setFormValues(initialState);
+  }
 
   return{
      ...formValues,
@@ -17,6 +20,7 @@ export function UseForm<T> (initialState:T){
      formSubmitted,
 
      handleChange,
-     setFormSubmitted
+     setFormSubmitted,
+     resetForm
   }
 }
