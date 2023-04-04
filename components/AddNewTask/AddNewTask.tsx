@@ -27,6 +27,7 @@ export const AddNewTask = () => {
     const taskDescriptionID = useId();
     const taskStatusRef = useRef<string>();
     const {mappedSubstask,createTaskMutation} = useTask();
+    
 
     if(isLoading) return;
     
@@ -39,7 +40,6 @@ export const AddNewTask = () => {
       setFormSubmitted(true);
        
       if(isValidForm({taskTitle,taskDescription}) && taskStatusRef.current!==undefined && areInputListItemsValid()){
-        console.log('form can be sent');
         setFormSubmitted(false);
         createTaskMutation.mutate({
          name:taskTitle,
@@ -53,8 +53,8 @@ export const AddNewTask = () => {
          
         return;
        }
-       console.log('form cannot be sent');
        updateIsCurrentInputEmpty(true);
+     
     }
 
     return (

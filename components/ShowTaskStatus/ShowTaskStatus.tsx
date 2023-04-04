@@ -3,6 +3,7 @@ import { useModal } from '../../hooks';
 import { Status } from '../../types/types';
 import dashboard from '../../styles/dashboard.module.css';
 
+
 interface StatusProps {
  listOfStatus: Status [],
  setTaskStatus:(status:string) => void
@@ -10,14 +11,17 @@ interface StatusProps {
 
 export const ShowTaskStatus:FC<StatusProps> = ({listOfStatus,setTaskStatus}) => {
   
-    const [currentStatus,setCurrentStatus] = useState(listOfStatus.at(0));
+    const [currentStatus,setCurrentStatus] = useState({id:'0',status:'Select a Status'});
     const {isModalOpen,toggleModal} = useModal();
+  
 
      const selectStatusItem = ({id,status}:Status) =>{
        setCurrentStatus({id,status});
        setTaskStatus(status);
        toggleModal();
      }
+
+   
     return (
    
    <section>
