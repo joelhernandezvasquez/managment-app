@@ -16,14 +16,30 @@ const FormFieldRequired:FC<RequiredInputArgs> = ({fieldState,isFormSubmitted,lab
         {labelName}
     </label>
 
-    <input className={`${styles.primary_input} ${isTextArea && styles.text_area_input} ${inputFieldValidator === 'invalid_field' ? styles.invalid_field:''} `} 
-      type={type}
-      id={id}
-      name={name} 
-      placeholder = {placeholderText}
-      value={fieldState} 
-      onChange = {onChangeHandler}
-   />
+    
+    {!isTextArea 
+    ?
+     <input className={`${styles.primary_input}  ${inputFieldValidator === 'invalid_field' ? styles.invalid_field:''} `} 
+     type={type}
+     id={id}
+     name={name} 
+     placeholder = {placeholderText}
+     value={fieldState} 
+     onChange = {onChangeHandler}
+  />
+  :
+  <textarea className={`${styles.primary_input} ${styles.text_area_input}`}
+  id={id}
+  name={name} 
+  placeholder = {placeholderText}
+  value={fieldState} 
+  onChange = {onChangeHandler}
+  >
+
+  </textarea>
+  }
+    
+   
     
     </div>
   )

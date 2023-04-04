@@ -72,13 +72,13 @@ export const AddNewTask = () => {
         isFormSubmitted = {formSubmitted}
     />
 
+ 
     <FormFieldRequired
         labelName ={'Description'}
         type = "text"
         isTextArea = {true}
         id={taskDescriptionID}
         name="taskDescription"
-        //placeholderText = "e.g. It’s always good to take a break. This 15 minute break will  recharge the batteries a little."
         fieldState={taskDescription} 
         onChangeHandler = {handleChange}
         isFormSubmitted = {formSubmitted}
@@ -101,6 +101,9 @@ export const AddNewTask = () => {
     <button className={`${button.btn_primary} ${button.auth_submit_btn}`} type="submit">
      Create Task
     </button>
+    
+
+  
    </form>
   )
 }

@@ -15,7 +15,7 @@ export interface FormData {
     isTextArea?:boolean
     id:string,
     name:string,
-    onChangeHandler:({target}:ChangeEvent<HTMLInputElement>) => void
+    onChangeHandler:({target}:ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement> ) => void
     fieldState:string,
     placeholderText?:string,
     isFormSubmitted:boolean
