@@ -1,24 +1,23 @@
-import {useUIStates } from '../../hooks';
+import {useModal} from '../../hooks';
 import { ModalFormLayout } from '../Layout/ModalFormLayout';
 import { AddNewTask } from '../AddNewTask/AddNewTask';
 import button from '../../styles/buttons/buttons.module.css';
 
 export const OpenNewTask = () => {
+  const {isModalOpen,toggleModal} = useModal()
 
-  const {isBoardMenuCurrentlyOpen,onToogleBoardMenu} = useUIStates();
-  
   return (
     <>
     <button 
     className={`${button.btn_primary} ${button.add_task_btn}`}
-    onClick={onToogleBoardMenu}
+    onClick={toggleModal}
     >
        <span>+</span>
     </button>
 
-      {isBoardMenuCurrentlyOpen() && (
+      {isModalOpen && (
         <ModalFormLayout formTitle='Add New Task'>
-           <AddNewTask/>
+           <AddNewTask closeWindow = {toggleModal}/>
         </ModalFormLayout>
       )}
   </>
