@@ -1,10 +1,10 @@
-import { useModal } from '../../hooks';
+import {useModal} from '../../hooks';
 import { ModalFormLayout } from '../Layout/ModalFormLayout';
 import { AddNewTask } from '../AddNewTask/AddNewTask';
 import button from '../../styles/buttons/buttons.module.css';
 
 export const OpenNewTask = () => {
-  const {isModalOpen,toggleModal} = useModal();
+  const {isModalOpen,toggleModal} = useModal()
 
   return (
     <>
@@ -17,7 +17,7 @@ export const OpenNewTask = () => {
 
       {isModalOpen && (
         <ModalFormLayout formTitle='Add New Task'>
-           <AddNewTask/>
+           <AddNewTask closeWindow = {toggleModal}/>
         </ModalFormLayout>
       )}
   </>

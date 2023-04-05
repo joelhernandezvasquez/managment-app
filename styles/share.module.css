@@ -2,6 +2,7 @@
 .form_field{
     display:flex;
     flex-direction: column;
+   
 }
 .capitalize{
     text-transform: capitalize;
@@ -93,9 +94,10 @@
  }
 
  .text_area_input{
+  margin-top:8px;
   min-height: 112px;
-
-  /* padding:0 16px; */
+ 
+  
  }
  .errorMessage{
     color: var(--clr-red);

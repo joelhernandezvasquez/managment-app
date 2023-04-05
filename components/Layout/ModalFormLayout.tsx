@@ -13,8 +13,9 @@ export const ModalFormLayout:FC<Props> = ({children,formTitle,formTitleColor}) =
 
   const closeWindow = (event:FormEvent) =>{
     event.stopPropagation();
+    
      if(event.target === sidebarRef.current){
-        isSideBarOpen ? closeSideBar() : closeBoardMenu()
+      isSideBarOpen ? closeSideBar() : closeBoardMenu()
      }
   }
 

@@ -6,7 +6,7 @@ export function UseForm<T> (initialState:T){
   const [formSubmitted,setFormSubmitted] = useState(false);
 
 
-  const handleChange = ({target}:ChangeEvent<HTMLInputElement>):void => {
+  const handleChange = ({target}:ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>):void => {
      const {name,value}  = target;
       setFormValues({...formValues,[name]:value});
   }
