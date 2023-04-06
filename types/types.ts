@@ -76,6 +76,11 @@ export interface StatusList {
   complete:boolean
  }
 
+ export interface Task{
+  taskTitle:string,
+  taskDescription:string
+}
+
 
 
 

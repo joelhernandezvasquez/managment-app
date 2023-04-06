@@ -72,7 +72,7 @@ export const mappedBoardInputs = (inputList:string []):BoardInput [] =>{
   
 }
 
-export const mappedListOfStatus = (list: string []):Status [] =>{
+export const mappedListOfStatus = (list: string [] | []):Status [] =>{
   
   return list.map((listItem)=>{
      return{
