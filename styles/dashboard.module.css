@@ -1,4 +1,5 @@
 
+
 .wrapper{
     display:grid;
     grid-template-columns: 1fr;
@@ -21,10 +22,10 @@
 }
 
 .empty_board{
-    justify-self: center;
-    align-self: center;
-    padding-left:var(--padding-left-space);
-    padding-right:var(--padding-right-space);
+   position:relative;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
 
 }
 .empty_board p{
@@ -164,3 +165,54 @@
     margin-bottom: 0;
   }
 
+  .render_main{
+    background:var(--clr-body);
+  }
+.grid_board_columns{
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+  grid-gap:24px;
+  
+}
+  .board_column{
+    min-height:150px;
+   margin-bottom: 50px;
+   padding:16px;
+   border-radius: 8px;
+   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+  .board_column_name{
+    text-transform: uppercase;
+    font-weight: 700;
+    color:var(--clr-medium-gray);
+    font-size: var(--heading-s);
+    margin-bottom: 16px;
+    letter-spacing: 2.4px;
+  }
+  .task_card{
+    background: #FFFFFF;
+   box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.101545);
+   border-radius: 8px;  
+   margin-bottom:20px; 
+   padding:20px 16px;
+   
+  }
+  .task_name{
+    color:var(--clr-black);
+    font-weight: 700;
+    font-size: var(--heading-M);
+  }
+  .task_substask_count{
+    font-weight: 700;
+    font-size:var(--heading-s);
+    color:var(--clr-medium-gray);
+  }
+
+
+  .status_task_indicator{
+    width:15px;
+    height: 15px;
+   border-radius: 50%;
+   margin-right: 12px;
+  
+  }

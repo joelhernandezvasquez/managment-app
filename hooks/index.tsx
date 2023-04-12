@@ -8,4 +8,5 @@ export * from './useModal';
 export * from './useInputList';
 export * from './useFetchBoard';
 export * from './useUpdateBoard';
+export * from './useTask';
 

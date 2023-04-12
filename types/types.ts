@@ -53,7 +53,8 @@ export interface Board{
 
 export interface BoardListResponse {
   board_name:string,
-  board_columns: string []
+  board_columns: string [],
+  board_tasks: BoardTask []
 }
 
 export interface StatusList {
@@ -69,12 +70,18 @@ export interface StatusList {
   name:string,
   description:string,
   substasks: SubsTask [],
-  status:string
+  status:string,
+  _id?:string 
  }
  export interface SubsTask{
   name:string,
   complete:boolean
  }
+
+ export interface Task{
+  taskTitle:string,
+  taskDescription:string
+}
 
 
 

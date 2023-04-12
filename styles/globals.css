@@ -101,11 +101,14 @@
     border:none;
   }
 
+
+
   .max_width_wrapper{
     padding-left:var(--padding-left-space);
     padding-right: var(--padding-right-space);
-    border:1px solid red;
+    /* border:1px solid red; */
   }
+
 
   
 
