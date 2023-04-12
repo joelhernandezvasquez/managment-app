@@ -42,7 +42,8 @@ export const fetchBoardById = async (id:string):Promise<BoardListResponse> =>{
      
      return{
        board_name:data.name,
-       board_columns:data.columns
+       board_columns:data.columns,
+       board_tasks:data.tasks
      }
   }
   catch(error){

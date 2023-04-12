@@ -86,6 +86,9 @@
   .d_flex_space_between{
      justify-content: space-between;
   }
+  .d_flex_center{
+    justify-content:center;
+  }
  .d_flex_grow{
   flex-grow:1;
  }

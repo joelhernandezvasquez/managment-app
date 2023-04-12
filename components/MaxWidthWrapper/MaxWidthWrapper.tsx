@@ -6,8 +6,8 @@ interface Props{
 
 export const MaxWidthWrapper:FC<Props> = ({children}) => {
   return (
-    <div className="max_width_wrapper">
+    <section className="max_width_wrapper">
     {children}
-    </div>
+    </section>
   )
 }
