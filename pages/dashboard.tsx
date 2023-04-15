@@ -3,9 +3,7 @@ import { MobileNavBar } from "../components/MobileNavBar";
 import { RenderMain } from '../components/RenderMain/RenderMain';
 import style from '../styles/dashboard.module.css';
 
-
 const dashboard = () => {
-
   return (
     <>
      <Head>

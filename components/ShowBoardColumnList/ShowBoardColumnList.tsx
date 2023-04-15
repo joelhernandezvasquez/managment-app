@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import style from '../../styles/dashboard.module.css';
 
 interface Props{
-  listOfBoardColumns: string [] | undefined,
+  listOfBoardColumns: string [],
   listOfTasks: BoardTask []
 }
 

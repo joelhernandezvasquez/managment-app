@@ -2,23 +2,24 @@
 import { ShowBoardColumnList } from "../ShowBoardColumnList/ShowBoardColumnList";
 import {MaxWidthWrapper} from "../MaxWidthWrapper/MaxWidthWrapper";
 import { EmptyBoard } from "../EmptyBoard/EmptyBoard"
-import { useFetchBoard } from "../../hooks"
-
+import { useBoardContext} from "../../hooks";
 
 export const RenderMain = () => {
-const {board_columns,board_tasks} = useFetchBoard();
- 
-  return (
+
+ const {getBoardById} = useBoardContext();
+  
+ return (
     <MaxWidthWrapper>
-      { 
-            board_tasks?.length !==undefined && board_tasks.length > 0 ? (
-            <ShowBoardColumnList listOfBoardColumns={board_columns} 
-             listOfTasks = {board_tasks}
+     {
+            getBoardById?.tasks?.length ?? 0 > 0 ? (
+            <ShowBoardColumnList
+             listOfBoardColumns={getBoardById?.columns ?? []} 
+             listOfTasks = {getBoardById?.tasks ?? []}
              />
              )
              :  
              <EmptyBoard/> 
-      }
+      }  
     </MaxWidthWrapper>
   )
 }

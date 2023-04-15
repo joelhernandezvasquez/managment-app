@@ -1,7 +1,7 @@
 
 import { kanbanApi } from "../api/kanbanApi";
 import Swal from "sweetalert2";
-import { BoardNamesListResponse,BoardName,BoardListResponse, BoardInput,Status} from "../types/types";
+import { BoardNamesListResponse,BoardName,BoardListResponse, BoardInput,Status, BoardResponse, Board} from "../types/types";
 import { v4 as uuidv4 } from 'uuid';
 
 export const isValidForm = (fields:any):boolean =>{
@@ -82,6 +82,8 @@ export const mappedListOfStatus = (list: string [] | []):Status [] =>{
      }
   })
 }
+
+
 
 export const notifyErrorAlert = (errorMessage:string) =>{
   Swal.fire({
