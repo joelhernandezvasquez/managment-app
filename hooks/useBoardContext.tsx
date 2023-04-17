@@ -8,6 +8,7 @@ export const useBoardContext = () => {
  const {getActiveBoard} = useUIStates()
  
  const getBoardById = useMemo(() =>{
+
    return boards.find((board)=> board._id === getActiveBoard()._id); 
  },[getActiveBoard()._id,boards])
 
@@ -24,7 +25,6 @@ export const useBoardContext = () => {
   
    addTaskToBoard(newBoard);
  }
-
 
  return{
     ...boards,

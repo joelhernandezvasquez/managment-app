@@ -1,4 +1,4 @@
-import { useId,FormEvent,FC} from "react";
+import { useMemo,useId,FormEvent,FC} from "react";
 import { useFetchBoard, UseForm, useInputList,useTask} from "../../hooks";
 import { CreateInputList } from "../CreateInputsLists/CreateInputList";
 import FormFieldRequired from "../FormField/FormFieldRequired";
@@ -25,7 +25,12 @@ export const AddNewTask:FC<Props> = ({closeWindow}) => {
     const taskTitleID = useId();
     const taskDescriptionID = useId();
     const {taskStatusRef,setTaskStatus,submitAddTaskForm} = useTask();
-    
+   
+    const memoMappedListOfStatus = useMemo(()=>{
+      return mappedListOfStatus(board_columns ?? [])
+    },[board_columns])
+
+
     const onSubmitAddTaskForm = async (event:FormEvent) =>{
       event.preventDefault();
       setFormSubmitted(true);
@@ -77,7 +82,7 @@ export const AddNewTask:FC<Props> = ({closeWindow}) => {
       <label className={`${styles.capitalize} ${styles.label}`}> Status </label>
       
       <ShowTaskStatus 
-         listOfStatus={mappedListOfStatus(board_columns || [])}
+         listOfStatus={memoMappedListOfStatus}
          setTaskStatus = {setTaskStatus}
       />
     </div>

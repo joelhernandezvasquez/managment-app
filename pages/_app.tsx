@@ -7,7 +7,6 @@ import UseAuth from '../hooks/UseAuth';
 import { useSideBar, useUIStates } from '../hooks';
 import '../styles/globals.css'
 
-
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets:['latin'],
   weight:['400','500','700']
@@ -16,7 +15,6 @@ export default function App({ Component, pageProps }: AppProps) {
   const {checkAuthToken} = UseAuth();
   const {closeSideBar} = useSideBar();
   const {closeBoardMenu} = useUIStates();
-  //const queryClient = new QueryClient();
   const [queryClient] = useState(()=> new QueryClient);
 
   useEffect(()=>{

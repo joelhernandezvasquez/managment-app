@@ -1,4 +1,4 @@
-import {FC,useState} from 'react';
+import {FC,useState,memo} from 'react';
 import { useModal } from '../../hooks';
 import { Status } from '../../types/types';
 import dashboard from '../../styles/dashboard.module.css';
@@ -7,7 +7,7 @@ interface StatusProps {
  setTaskStatus:(status:string) => void
 }
 
-export const ShowTaskStatus:FC<StatusProps> = ({listOfStatus,setTaskStatus}) => {
+export const ShowTaskStatus:FC<StatusProps> = memo( ({listOfStatus,setTaskStatus}) => {
   
     const [currentStatus,setCurrentStatus] = useState({id:'0',status:'Select a Status'});
     const {isModalOpen,toggleModal} = useModal();
@@ -19,7 +19,6 @@ export const ShowTaskStatus:FC<StatusProps> = ({listOfStatus,setTaskStatus}) => 
      }
 
     return (
-  
    <section>
        <div className={dashboard.header_status_list} onClick={toggleModal}>
           <span className={dashboard.status_list_item}>{currentStatus?.status}</span>
@@ -37,4 +36,6 @@ export const ShowTaskStatus:FC<StatusProps> = ({listOfStatus,setTaskStatus}) => 
        </div>   
    </section>
   )
-}
+})
+
+ShowTaskStatus.displayName = 'ShowTaskStatus';

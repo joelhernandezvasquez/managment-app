@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import {useMutation} from '@tanstack/react-query';
 import { useAuthStore} from '../store/store';
 import { useUIStates,useInputList, useBoardContext } from '../hooks';
@@ -57,9 +57,9 @@ export const useTask = () => {
 
   }
 
-  const setTaskStatus = (status:string) =>{
+  const setTaskStatus = useCallback((status:string) =>{
     taskStatusRef.current = status;
-}
+},[])
 
 const resetTaskStatus = () =>{
   taskStatusRef.current = undefined;
