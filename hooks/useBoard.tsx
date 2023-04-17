@@ -1,5 +1,5 @@
 import { useQuery,useMutation} from '@tanstack/react-query';
-import { useAuthStore, } from '../store/store';
+import { useAuthStore,BoardStore } from '../store';
 import { useUIStates } from './useUIStates';
 import {kanbanApi} from '../api/kanbanApi';
 import { fetchNamesOfBoards,notifySuccessAlert,notifyErrorAlert} from '../helpers';
@@ -15,10 +15,15 @@ export const useBoard = () => {
 const {user} = useAuthStore();
 const {data,isLoading,isError,error} =  useQuery({queryKey:['boardNames'],queryFn:()=> fetchNamesOfBoards(user.uid),retry: 1});
 const {resetBoardSelected} = useUIStates();
+const {addBoardToStore} = BoardStore();
 
 const createBoardMutation = useMutation({
   mutationFn:(board:Board) => {
     return createBoard(board)
+  },
+  onSuccess:(data) =>{
+    const {_id,name,columns,tasks,user} = data.board;
+    addBoardToStore({ _id,name,columns,tasks,user});
   }
 })
 

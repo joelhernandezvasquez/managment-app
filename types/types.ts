@@ -57,6 +57,14 @@ export interface BoardListResponse {
   board_tasks: BoardTask []
 }
 
+export interface BoardResponse {
+  _id:string,
+  name:string,
+  columns: string [],
+  tasks: BoardTask [],
+  user:string
+}
+
 export interface StatusList {
   listOfStatus: Status []
  }

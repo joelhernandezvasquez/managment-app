@@ -1,17 +1,17 @@
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import {useMutation} from '@tanstack/react-query';
 import { useAuthStore} from '../store/store';
-import { useUIStates,useInputList } from '../hooks';
+import { useUIStates,useInputList, useBoardContext } from '../hooks';
 import { kanbanApi } from '../api/kanbanApi';
-import { notifySuccessAlert,notifyErrorAlert, isValidForm } from '../helpers';
+import { notifySuccessAlert,notifyErrorAlert, isValidForm} from '../helpers';
 import { BoardInput, BoardTask, SubsTask,Task} from '../types/types';
 
 export const useTask = () => {
-  
   const {user} = useAuthStore();
   const {getActiveBoard} = useUIStates();
   const {areInputListItemsValid,listInput,resetInputList} = useInputList();
   const taskStatusRef = useRef<string>();
+  const {addTaskToBoardContext} = useBoardContext();
 
   const createTaskMutation = useMutation({
     mutationFn:(task:BoardTask) => {
@@ -30,7 +30,9 @@ export const useTask = () => {
         substasks:task.substasks, 
         status:task.status
       })
+      addTaskToBoardContext(task);
       notifySuccessAlert('Task has been created.');
+      
       return response.data;
     }
     catch(error:any){
@@ -55,9 +57,9 @@ export const useTask = () => {
 
   }
 
-  const setTaskStatus = (status:string) =>{
+  const setTaskStatus = useCallback((status:string) =>{
     taskStatusRef.current = status;
-}
+},[])
 
 const resetTaskStatus = () =>{
   taskStatusRef.current = undefined;
