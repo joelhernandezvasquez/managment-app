@@ -22,13 +22,12 @@
 }
 
 .empty_board{
-   position:relative;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
+   display:grid;
+   align-content: center;
+   height: 100%;
 
 }
-.empty_board p{
+.empty_board_message{
   text-align: center;
   font-size:var(--heading-L);
   color:var(--clr-medium-gray);
