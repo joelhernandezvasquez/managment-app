@@ -1,22 +1,49 @@
 import { useCallback, useRef } from 'react';
-import {useMutation} from '@tanstack/react-query';
+import {useMutation,useQueryClient} from '@tanstack/react-query';
 import { useAuthStore} from '../store/store';
-import { useUIStates,useInputList, useBoardContext } from '../hooks';
+import { useUIStates,useInputList} from '../hooks';
 import { kanbanApi } from '../api/kanbanApi';
 import { notifySuccessAlert,notifyErrorAlert, isValidForm} from '../helpers';
-import { BoardInput, BoardTask, SubsTask,Task} from '../types/types';
+import { BoardInput, BoardListResponse, BoardTask, SubsTask,Task} from '../types/types';
 
 export const useTask = () => {
   const {user} = useAuthStore();
   const {getActiveBoard} = useUIStates();
   const {areInputListItemsValid,listInput,resetInputList} = useInputList();
   const taskStatusRef = useRef<string>();
-  const {addTaskToBoardContext} = useBoardContext();
+  const queryClient = useQueryClient();
 
   const createTaskMutation = useMutation({
     mutationFn:(task:BoardTask) => {
       return createTask(task)
-    }
+    },
+    onMutate: async (newTask) => {
+     await queryClient.cancelQueries(["getBoard",getActiveBoard()._id]);
+     
+     const previousData = queryClient.getQueryData<BoardListResponse>(["getBoard",getActiveBoard()._id]);
+
+      if(previousData){
+        queryClient.setQueryData(["getBoard",getActiveBoard()._id],{
+          ...previousData,
+          board_tasks:[
+            ...previousData.board_tasks,
+            newTask
+
+          ],
+        })
+
+        return { previousData }
+      }
+    },
+    onError: (error, variables, context) => {
+      if (context?.previousData) {
+        queryClient.setQueryData(["getBoard",getActiveBoard()._id], context.previousData)
+      }
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey:["getBoard",getActiveBoard()._id] })
+    },
+
   })
 
   const createTask = async (task:BoardTask) =>{
@@ -30,7 +57,6 @@ export const useTask = () => {
         substasks:task.substasks, 
         status:task.status
       })
-      addTaskToBoardContext(task);
       notifySuccessAlert('Task has been created.');
       
       return response.data;
