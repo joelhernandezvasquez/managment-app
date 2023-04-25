@@ -4,18 +4,22 @@ import { TaskCard } from '../TaskCard/TaskCard';
 import { StatusTaskIndicator } from '../StatusTaskIndicator/StatusTaskIndicator';
 import style from '../../styles/dashboard.module.css';
 import share from '../../styles/share.module.css';
+import { BoardTask } from '../../types/types';
 
 interface Props{
     columnName:string,
+    tasks:BoardTask []
 }
 
-export const RenderBoardColumn:FC <Props> = ({columnName}) => {
-  const {getBoardById} = useBoardContext();
+export const RenderBoardColumn:FC <Props> = ({columnName,tasks}) => {
+  //const {getBoardById} = useBoardContext();
 
-  const listOfTasksByStatus = useMemo(()=> {
-   return getBoardById?.tasks.filter((task)=> task.status === columnName)
- },[getBoardById?.tasks,columnName])
-
+//   const listOfTasksByStatus = useMemo(()=> {
+//    return getBoardById?.tasks.filter((task)=> task.status === columnName)
+//  },[getBoardById?.tasks,columnName])
+const listOfTasksByStatus = useMemo(()=> {
+  return tasks.filter((task)=> task.status === columnName)
+},[tasks,columnName])
 
  return (
     <li className={style.board_column}>
