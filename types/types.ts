@@ -91,6 +91,10 @@ export interface StatusList {
   taskDescription:string
 }
 
+export interface TaskProp{
+  task:BoardTask 
+}
+
 
 
 

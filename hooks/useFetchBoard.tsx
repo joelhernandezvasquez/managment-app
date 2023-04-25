@@ -6,11 +6,17 @@ import {fetchBoardById } from '../helpers';
 export const useFetchBoard = () => {
 
 const {getActiveBoard} = useUIStates();
-const {data,isLoading,isSuccess} = useQuery({queryKey:['getBoard', getActiveBoard()._id],queryFn:() => fetchBoardById(getActiveBoard()._id),retry:1});
-
+const {data:board,isLoading,isSuccess} = 
+useQuery(
+  {
+   queryKey:['getBoard', getActiveBoard()._id],
+   queryFn:() => fetchBoardById(getActiveBoard()._id)
+  }
+  );
+ 
   return {
-   ...data,
-    data,
+   ...board,
+    board,
     isLoading,
     isSuccess
   }
