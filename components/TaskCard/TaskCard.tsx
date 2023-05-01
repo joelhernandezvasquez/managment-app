@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { ShowTotalSubstaskCompleted } from "../ShowTotalSubstasksCompleted/ShowTotalSubstaskCompleted";
 import { useModal } from "../../hooks";
 import ViewTask from "../ViewTask/ViewTask";
 import {TaskProp } from "../../types/types";
@@ -11,9 +12,10 @@ export const TaskCard:FC <TaskProp>= ({task}) => {
   return (
     <li className={style.task_card} onClick={toggleModal}>
       <p className={style.task_name}>{task.name}</p>
-      <span className={style.task_substask_count}>0 of {task.substasks.length} substasks</span>
+      
+      <ShowTotalSubstaskCompleted substasks={task.substasks}/>
      
-     {isModalOpen && <ViewTask task={task}/>}
+     {isModalOpen && <ViewTask task={task} closeModal = {toggleModal}/>}
      
     </li>
   )

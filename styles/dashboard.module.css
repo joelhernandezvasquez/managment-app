@@ -201,6 +201,7 @@
     color:var(--clr-black);
     font-weight: 700;
     font-size: var(--heading-M);
+    margin-bottom:12px;
   }
   .task_substask_count{
     font-weight: 700;
@@ -226,6 +227,7 @@
     font-size: var(--body-L);
     font-weight: 500;
     margin-top:1.5rem;
+    line-height: 1.7;
   }
 
   .view_substasks{
@@ -307,10 +309,12 @@
     
   }
 
-  /* .custom_checkbox:focus {
-    outline: max(2px, 0.15em) solid currentColor;
-    outline-offset: max(2px, 0.15em);
-  } */
+ .completed_substask_status{
+  text-decoration: line-through;
+  color:#7b7c87; 
+ }
+
+
 
   
 

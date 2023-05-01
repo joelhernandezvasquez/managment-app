@@ -2,7 +2,6 @@
 .btn_primary{
     --background-btn:var(--clr-main-purple);
     cursor: pointer;
- 
 }
 
 .auth_submit_btn{
@@ -49,4 +48,18 @@
    font-weight: 700;
     font-size:0.82rem;
     margin-top:20px;
+}
+
+.close_button{
+ width:100%;
+ display:flex;
+ justify-content: flex-end;
+ padding:unset;
+ background:none;
+}
+.close_button svg{
+    width:25px;
+    height:25px;
+  fill:var(--clr-medium-gray);
+
 }

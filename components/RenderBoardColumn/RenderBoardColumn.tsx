@@ -12,11 +12,7 @@ interface Props{
 }
 
 export const RenderBoardColumn:FC <Props> = ({columnName,tasks}) => {
-  //const {getBoardById} = useBoardContext();
-
-//   const listOfTasksByStatus = useMemo(()=> {
-//    return getBoardById?.tasks.filter((task)=> task.status === columnName)
-//  },[getBoardById?.tasks,columnName])
+ 
 const listOfTasksByStatus = useMemo(()=> {
   return tasks.filter((task)=> task.status === columnName)
 },[tasks,columnName])

@@ -1,11 +1,11 @@
 import { ShowBoardColumnList } from "../ShowBoardColumnList/ShowBoardColumnList";
 import {MaxWidthWrapper} from "../MaxWidthWrapper/MaxWidthWrapper";
 import { EmptyBoard } from "../EmptyBoard/EmptyBoard"
-import { useBoardContext, useFetchBoard} from "../../hooks";
+import {useFetchBoard} from "../../hooks";
 
 export const RenderMain = () => {
 
- const {board,board_tasks,board_columns,isLoading} = useFetchBoard();
+ const {board,board_tasks,isLoading} = useFetchBoard();
 
  if(isLoading) return <p>Loading...</p>
 

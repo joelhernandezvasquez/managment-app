@@ -74,6 +74,10 @@
    
   }
 
+  .d_position_relative{
+    position:relative;
+  }
+
   .d_flex{
     display:flex;
   }

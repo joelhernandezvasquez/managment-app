@@ -3,8 +3,8 @@ import {useMutation,useQueryClient} from '@tanstack/react-query';
 import { useAuthStore} from '../store/store';
 import { useUIStates,useInputList} from '../hooks';
 import { kanbanApi } from '../api/kanbanApi';
-import { notifySuccessAlert,notifyErrorAlert, isValidForm} from '../helpers';
-import { BoardInput, BoardListResponse, BoardTask, SubsTask,Task} from '../types/types';
+import { notifySuccessAlert,notifyErrorAlert, isValidForm,updateSubstasks} from '../helpers';
+import { BoardInput, BoardListResponse, BoardTask, SubsTask,Task,TaskSubstaskUpdate} from '../types/types';
 
 export const useTask = () => {
   const {user} = useAuthStore();
@@ -46,6 +46,13 @@ export const useTask = () => {
 
   })
 
+  const updateSubstaskMutation = useMutation({
+
+    mutationFn:(updatedTaskSubtask:TaskSubstaskUpdate) => {
+      return updateSubstasks(updatedTaskSubtask,getActiveBoard()._id);
+    }
+  })
+
   const createTask = async (task:BoardTask) =>{
   
     try{
@@ -66,9 +73,9 @@ export const useTask = () => {
       const {response} = error;
       notifyErrorAlert(response.data.message);
     }
-
   }
-
+  
+  
   const isTaskStatusValid = ():boolean =>{
     return taskStatusRef.current!==undefined
   }
@@ -118,13 +125,27 @@ const resetTaskStatus = () =>{
 
 }
 
+const getTotalOfSubstasksCompleted = (substasks:SubsTask []):number =>{
+  
+  const completedSubstasks = substasks.reduce((accumulator:number,substask:SubsTask)=>{ 
+    if(substask.complete){
+      accumulator++;
+     }
+     return accumulator
+  },0)
+  
+  return completedSubstasks;
+}
+
   return {
     taskStatusRef,
     setTaskStatus,
     resetTaskStatus,
     isTaskStatusValid,
     mappedSubstask,
-    submitAddTaskForm
+    submitAddTaskForm,
+    getTotalOfSubstasksCompleted,
+    updateSubstaskMutation
 }
 }
 
