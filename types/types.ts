@@ -82,6 +82,7 @@ export interface StatusList {
   _id?:string 
  }
  export interface SubsTask{
+  _id:string,
   name:string,
   complete:boolean
  }
@@ -93,6 +94,12 @@ export interface StatusList {
 
 export interface TaskProp{
   task:BoardTask 
+}
+
+export interface TaskSubstaskUpdate  
+{
+  taskId:string,
+ substask:SubsTask
 }
 
 
