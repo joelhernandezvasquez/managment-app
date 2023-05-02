@@ -1,9 +1,8 @@
 import { FC } from "react";
 import { RenderBoardColumn } from "../RenderBoardColumn/RenderBoardColumn";
+import { BoardListResponse} from "../../types/types";
 import { v4 as uuidv4 } from 'uuid';
 import style from '../../styles/dashboard.module.css';
-import { BoardListResponse, BoardTask } from "../../types/types";
-
 interface Props{
   board:BoardListResponse
 }

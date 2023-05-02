@@ -1,7 +1,7 @@
 
 import { kanbanApi } from "../api/kanbanApi";
 import Swal from "sweetalert2";
-import { BoardNamesListResponse,BoardName,BoardListResponse, BoardInput,Status, TaskSubstaskUpdate} from "../types/types";
+import { BoardNamesListResponse,BoardName,BoardListResponse, BoardInput,Status, TaskSubstaskUpdate,StatusIndicator} from "../types/types";
 import { v4 as uuidv4 } from 'uuid';
 
 export const isValidForm = (fields:any):boolean =>{
@@ -153,3 +153,10 @@ export const listOfStatus = [
   },
 
 ]
+
+export const statusIndicator:StatusIndicator= {
+  todo:'#49C4E5',
+  doing:'#8471F2',
+  done:'#67E2AE',
+  unknown:'#2E88C2'
+}

@@ -1,6 +1,6 @@
 import { useModal } from '../../hooks';
 import navigation from '../../styles/navigation.module.css';
-import dashboard from '../../styles/dashboard.module.css';
+import RenderViewTaskMenu from '../RenderViewTaskMenu/RenderViewTaskMenu';
 
 const ShowViewTaskMenu = () => {
  const {isModalOpen,toggleModal} = useModal();
@@ -13,13 +13,8 @@ const ShowViewTaskMenu = () => {
     <span className={navigation.show_board_menu_button}></span>
   
    {isModalOpen && 
-    <aside className={navigation.active_board_menu}>
-      <ul>
-        <li>Edit Task</li>
-        <li> Delete Task</li>
-      </ul>
-    </aside>
-}
+    <RenderViewTaskMenu/>
+   }
 </div>
   )
 }

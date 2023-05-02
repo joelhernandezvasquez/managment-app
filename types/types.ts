@@ -102,6 +102,15 @@ export interface TaskSubstaskUpdate
  substask:SubsTask
 }
 
+export type StatusIndicator = {
+  [key: string]: string;
+  todo: string,
+  doing: string,
+  done: string,
+  unknown: string
+};
+
+
 
 
 

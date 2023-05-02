@@ -125,6 +125,10 @@ const resetTaskStatus = () =>{
 
 }
 
+const getListOfTasksByStatus = useCallback( (listOfTasks: BoardTask [],status:string) =>{
+return listOfTasks.filter((task)=> task.status === status)
+},[])
+
 const getTotalOfSubstasksCompleted = (substasks:SubsTask []):number =>{
   
   const completedSubstasks = substasks.reduce((accumulator:number,substask:SubsTask)=>{ 
@@ -145,7 +149,8 @@ const getTotalOfSubstasksCompleted = (substasks:SubsTask []):number =>{
     mappedSubstask,
     submitAddTaskForm,
     getTotalOfSubstasksCompleted,
-    updateSubstaskMutation
+    updateSubstaskMutation,
+    getListOfTasksByStatus
 }
 }
 
