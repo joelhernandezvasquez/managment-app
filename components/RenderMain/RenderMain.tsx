@@ -7,15 +7,13 @@ export const RenderMain = () => {
 
  const {board,board_tasks,isLoading} = useFetchBoard();
 
- if(isLoading) return <p>Loading...</p>
+if(isLoading)  return <p>Loading...</p>
 
  return (
     <MaxWidthWrapper>
      {
-            board_tasks?.length ?? 0 > 0 ? (
-            <ShowBoardColumnList
-             board = {board}
-             />
+          board && (board_tasks?.length ?? 0) > 0 ? (
+            <ShowBoardColumnList board = {board }/>
              )
              :  
              <EmptyBoard/> 

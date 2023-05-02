@@ -1,15 +1,8 @@
 import {FC} from 'react';
+import { statusIndicator } from '../../helpers';
 import style from '../../styles/dashboard.module.css';
-
 interface Props{
     status:string
-}
-
-const statusIndicator:any= {
-  todo:'#49C4E5',
-  doing:'#8471F2',
-  done:'#67E2AE',
-  unknown:'#2E88C2'
 }
 
 const getStatusColorIndicator = (status:string):string =>{

@@ -8,7 +8,7 @@ import style from '../../styles/dashboard.module.css';
 export const TaskCard:FC <TaskProp>= ({task}) => {
 
   const {isModalOpen,toggleModal} = useModal();
-  
+
   return (
     <li className={style.task_card} onClick={toggleModal}>
       <p className={style.task_name}>{task.name}</p>

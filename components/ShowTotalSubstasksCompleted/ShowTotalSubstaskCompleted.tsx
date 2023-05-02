@@ -1,8 +1,7 @@
 import { FC } from 'react';
 import { useTask } from '../../hooks';
-import dashboard  from '../../styles/dashboard.module.css';
 import { SubsTask } from '../../types/types';
-
+import dashboard  from '../../styles/dashboard.module.css';
 interface Props{
     substasks: SubsTask []
 }
