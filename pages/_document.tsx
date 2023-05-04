@@ -6,7 +6,9 @@ export default function Document() {
       <Head />
       <body>
         <Main />
+        <section id="modal"></section>
         <NextScript />
+       
       </body>
     </Html>
   )

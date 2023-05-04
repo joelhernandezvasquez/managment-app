@@ -14,8 +14,8 @@ export const TaskCard:FC <TaskProp>= ({task}) => {
       <p className={style.task_name}>{task.name}</p>
       
       <ShowTotalSubstaskCompleted substasks={task.substasks}/>
-     
-     {isModalOpen && <ViewTask task={task} closeModal = {toggleModal}/>}
+
+      {isModalOpen && <ViewTask task={task} closeViewTask = {toggleModal}/>}
      
     </li>
   )

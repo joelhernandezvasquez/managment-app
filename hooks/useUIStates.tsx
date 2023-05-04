@@ -26,6 +26,8 @@ export const useUIStates = () => {
         },1000)
     }
 
+   
+
     return {
         getActiveBoard,
         isSideBarOpen,
@@ -35,6 +37,7 @@ export const useUIStates = () => {
         onToogleBoardMenu,
         closeBoardMenu,
         closeBoardMenuWindow,
-        resetBoardSelected
+        resetBoardSelected,
+      
     }
 }

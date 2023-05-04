@@ -4,6 +4,9 @@ import Swal from "sweetalert2";
 import { BoardNamesListResponse,BoardName,BoardListResponse, BoardInput,Status, TaskSubstaskUpdate,StatusIndicator} from "../types/types";
 import { v4 as uuidv4 } from 'uuid';
 
+
+
+
 export const isValidForm = (fields:any):boolean =>{
  
  const formFields = Object.values(fields);
@@ -138,6 +141,22 @@ export const activeBoardItems = [
 
 ]
 
+export const EDIT_TASK = 'update';
+export const DELETE_TASK = 'delete'
+
+export const taskMenu = [
+  {
+    id:uuidv4(),
+    item:'Edit Task',
+    action:EDIT_TASK
+  },
+  {
+    id:uuidv4(),
+    item:'Delete Task',
+    action:DELETE_TASK
+  }
+]
+
 export const listOfStatus = [
   {
     id:uuidv4(),
@@ -160,3 +179,5 @@ export const statusIndicator:StatusIndicator= {
   done:'#67E2AE',
   unknown:'#2E88C2'
 }
+
+
