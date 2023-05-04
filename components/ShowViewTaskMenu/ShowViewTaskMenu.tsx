@@ -1,19 +1,23 @@
+import { FC } from 'react';
 import { useModal } from '../../hooks';
 import navigation from '../../styles/navigation.module.css';
 import RenderViewTaskMenu from '../RenderViewTaskMenu/RenderViewTaskMenu';
-
-const ShowViewTaskMenu = () => {
- const {isModalOpen,toggleModal} = useModal();
+interface Props {
+  taskName:string
+}
+const ShowViewTaskMenu:FC<Props> = ({taskName}) => {
+ 
+  const {isModalOpen,toggleModal} = useModal();
  
   return (
-    <div className={navigation.show_board_menu} onClick={toggleModal}>
+    <div className={navigation.show_board_menu} onClick={() => toggleModal()}>
       
     <span className={navigation.show_board_menu_button}></span>
     <span className={navigation.show_board_menu_button}></span>
     <span className={navigation.show_board_menu_button}></span>
   
    {isModalOpen && 
-    <RenderViewTaskMenu/>
+    <RenderViewTaskMenu closeModal={toggleModal} taskName = {taskName}/>
    }
 </div>
   )

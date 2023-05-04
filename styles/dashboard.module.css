@@ -314,6 +314,13 @@
   color:#7b7c87; 
  }
 
+ .prompt2{
+  font-size:1rem;
+  color:var(--clr-medium-gray);
+  font-weight: 500;
+  margin-top:20px;
+ }
+
 
 
   

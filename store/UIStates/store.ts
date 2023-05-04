@@ -12,7 +12,7 @@ interface UIState{
     toggleBoardMenu:() => void,
     closeBoardMenu:() => void,
     restoreBoardSelected:() =>void,
-  
+
 }
 
 export const UIStore = create <UIState>()(
@@ -23,7 +23,7 @@ export const UIStore = create <UIState>()(
               isSideBarOpen:false,
              currentBoardSelected:{_id:'',name:''},
              isBoadMenuOpen:false,
-               
+
              toggleSideBar:() =>  set((state)=> ({
             isSideBarOpen:!state.isSideBarOpen
           })),
@@ -38,12 +38,13 @@ export const UIStore = create <UIState>()(
           toggleBoardMenu:() => set((state)=>({
             isBoadMenuOpen: !state.isBoadMenuOpen
           })),
+
           closeBoardMenu:() => set((state)=>({
             isBoadMenuOpen:false
           })),
           restoreBoardSelected:() => set((state)=>({
             currentBoardSelected:{_id:'',name:''},
-          }))
+          })),
 
         }),
        
