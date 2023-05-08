@@ -3,7 +3,7 @@ import {useMutation,useQueryClient} from '@tanstack/react-query';
 import { useAuthStore} from '../store/store';
 import { useUIStates,useInputList} from '../hooks';
 import { kanbanApi } from '../api/kanbanApi';
-import { notifySuccessAlert,notifyErrorAlert, isValidForm,updateSubstasks} from '../helpers';
+import { notifySuccessAlert,notifyErrorAlert, isValidForm,updateSubstasks, deleteTask} from '../helpers';
 import { BoardInput, BoardListResponse, BoardTask, SubsTask,Task,TaskSubstaskUpdate} from '../types/types';
 
 export const useTask = () => {
@@ -51,6 +51,40 @@ export const useTask = () => {
     mutationFn:(updatedTaskSubtask:TaskSubstaskUpdate) => {
       return updateSubstasks(updatedTaskSubtask,getActiveBoard()._id);
     }
+  })
+
+  const deleteTaskMutation = useMutation({
+    mutationFn:(taskId:string) =>{
+      return deleteTask(getActiveBoard()._id,taskId);
+    },
+    onMutate:async (taskId) =>{
+
+      await queryClient.cancelQueries(["getBoard",getActiveBoard()._id]);
+      const previousData = queryClient.getQueryData<BoardListResponse>(["getBoard",getActiveBoard()._id]);
+     
+      if(previousData){
+        const updatedTasks = previousData.board_tasks.filter((task)=> task._id !== taskId)
+        queryClient.setQueryData(["getBoard",getActiveBoard()._id],{
+          ...previousData,
+          board_tasks:[
+           ...updatedTasks
+          ],
+        })
+
+        return { previousData }
+      }
+    },
+    onError: (error, variables, context) => {
+      if (context?.previousData) {
+        notifyErrorAlert('an error occured task was not deleted');
+        queryClient.setQueryData(["getBoard",getActiveBoard()._id], context.previousData)
+      }
+    },
+    onSettled: () => {
+      notifySuccessAlert('task has been deleted');
+      queryClient.invalidateQueries({ queryKey:["getBoard",getActiveBoard()._id] })
+    },
+
   })
 
   const createTask = async (task:BoardTask) =>{
@@ -141,6 +175,7 @@ const getTotalOfSubstasksCompleted = (substasks:SubsTask []):number =>{
   return completedSubstasks;
 }
 
+
   return {
     taskStatusRef,
     setTaskStatus,
@@ -150,7 +185,8 @@ const getTotalOfSubstasksCompleted = (substasks:SubsTask []):number =>{
     submitAddTaskForm,
     getTotalOfSubstasksCompleted,
     updateSubstaskMutation,
-    getListOfTasksByStatus
+    getListOfTasksByStatus,
+    deleteTaskMutation
 }
 }
 
