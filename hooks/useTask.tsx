@@ -5,13 +5,17 @@ import { useUIStates,useInputList} from '../hooks';
 import { kanbanApi } from '../api/kanbanApi';
 import { notifySuccessAlert,notifyErrorAlert, isValidForm,updateSubstasks, deleteTask} from '../helpers';
 import { BoardInput, BoardListResponse, BoardTask, SubsTask,Task,TaskSubstaskUpdate} from '../types/types';
+import { TaskStore } from '../store/TaskStore/store';
 
 export const useTask = () => {
+  
   const {user} = useAuthStore();
   const {getActiveBoard} = useUIStates();
   const {areInputListItemsValid,listInput,resetInputList} = useInputList();
   const taskStatusRef = useRef<string>();
   const queryClient = useQueryClient();
+  const {activeTask,setActiveTask,resetActiveTask} = TaskStore();
+
 
   const createTaskMutation = useMutation({
     mutationFn:(task:BoardTask) => {
@@ -78,11 +82,13 @@ export const useTask = () => {
       if (context?.previousData) {
         notifyErrorAlert('an error occured task was not deleted');
         queryClient.setQueryData(["getBoard",getActiveBoard()._id], context.previousData)
+        clearActiveTask();
       }
     },
     onSettled: () => {
       notifySuccessAlert('task has been deleted');
       queryClient.invalidateQueries({ queryKey:["getBoard",getActiveBoard()._id] })
+      clearActiveTask();
     },
 
   })
@@ -175,6 +181,18 @@ const getTotalOfSubstasksCompleted = (substasks:SubsTask []):number =>{
   return completedSubstasks;
 }
 
+const getActiveTask = () =>{
+ return activeTask;
+}
+
+const setCurrentTask = (task:BoardTask) =>{
+  setActiveTask(task);
+}
+
+const clearActiveTask = () =>{
+  resetActiveTask();
+}
+
 
   return {
     taskStatusRef,
@@ -186,7 +204,10 @@ const getTotalOfSubstasksCompleted = (substasks:SubsTask []):number =>{
     getTotalOfSubstasksCompleted,
     updateSubstaskMutation,
     getListOfTasksByStatus,
-    deleteTaskMutation
+    deleteTaskMutation,
+    getActiveTask,
+    setCurrentTask,
+    clearActiveTask
 }
 }
 

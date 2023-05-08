@@ -1,25 +1,22 @@
-
 import {FC} from 'react';
 import { useTask } from '../../hooks';
 import dashboard from '../../styles/dashboard.module.css';
 import button from '../../styles/buttons/buttons.module.css';
-import { BoardTask } from '../../types/types';
 
 interface Props{
   closeWindow: () => void;
-  task:BoardTask
 }
 
-export const DeleteTask:FC<Props> = ({closeWindow,task}) => {
- const {deleteTaskMutation} = useTask();
+export const DeleteTask:FC<Props> = ({closeWindow}) => {
+ const {deleteTaskMutation,getActiveTask} = useTask();
 
  const onDeleteTask = () =>{
-  deleteTaskMutation.mutate(task._id!);
+  deleteTaskMutation.mutate(getActiveTask()._id!);
  }
 
   return (
     <section>
-    <p className={dashboard.prompt2}>{`Are you sure you want to delete the ‘${task.name}’  task and its substasks? 
+    <p className={dashboard.prompt2}>{`Are you sure you want to delete the ‘${getActiveTask().name}’  task and its substasks? 
       This action cannot be reversed.`}
    </p>
    <button className={button.delete_button} onClick={onDeleteTask}>Delete</button>

@@ -4,13 +4,12 @@ import { EditTask } from '../EditTask/EditTask';
 import { Modal } from '../Modal/Modal';
 import { taskMenu,DELETE_TASK} from '../../helpers';
 import navigation from '../../styles/navigation.module.css';
-import { BoardTask } from '../../types/types';
+
 interface Props{
   closeModal:()=> void;
-  task:BoardTask
 }
 
-const RenderViewTaskMenu:FC<Props> = ({closeModal,task}) => {
+const RenderViewTaskMenu:FC<Props> = ({closeModal}) => {
 
   const [openModal,setOpenModal] = useState(false);
   const [action,setAction] = useState('');
@@ -31,7 +30,7 @@ const RenderViewTaskMenu:FC<Props> = ({closeModal,task}) => {
     </ul>
     {openModal && (
        <Modal> 
-      { action === DELETE_TASK ? <DeleteTask closeWindow={closeModal} task={task}/> : <EditTask/>} 
+      { action === DELETE_TASK ? <DeleteTask closeWindow={closeModal}/> : <EditTask/>} 
        </Modal>)
     }
   </aside>
