@@ -32,7 +32,7 @@ const ViewTask:FC <Props> = ({task,closeViewTask}) => {
             
           <div style={{width:'100%'}} className={`${share.d_flex} ${share.d_align_flex_center} ${share.d_flex_space_between} ${share.d_position_relative}`}>
              <h2 className={dashboard.view_task_heading}>{task.name}</h2>
-              <ShowViewTaskMenu taskName = {task.name} />
+              <ShowViewTaskMenu task = {task} />
           </div>
 
           <p className={dashboard.view_task_description}>{task.description}</p>

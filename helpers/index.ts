@@ -1,10 +1,8 @@
 
 import { kanbanApi } from "../api/kanbanApi";
 import Swal from "sweetalert2";
-import { BoardNamesListResponse,BoardName,BoardListResponse, BoardInput,Status, TaskSubstaskUpdate,StatusIndicator} from "../types/types";
+import { BoardNamesListResponse,BoardName,BoardListResponse, BoardInput,Status, TaskSubstaskUpdate,StatusIndicator,TaskDeleteResponse} from "../types/types";
 import { v4 as uuidv4 } from 'uuid';
-
-
 
 
 export const isValidForm = (fields:any):boolean =>{
@@ -81,6 +79,22 @@ export const updateSubstasks = async (updatedTaskSubtask:TaskSubstaskUpdate,boar
   
 }
 
+export const deleteTask = async(boardId:string,taskId:string):Promise<TaskDeleteResponse> =>{
+  try{
+    const {data}= await kanbanApi.delete(`/board/task/${boardId}?taskId=${taskId}`);
+    return data;
+  }
+  catch(error){
+    console.error(error)
+    let message
+    if (error instanceof Error) 
+     message = error.message
+    else message = String(error)
+
+    return Promise.reject(new Error(message))
+  }
+}
+
 const mapNamesOfBoards = (data:BoardNamesListResponse) =>{
   return data.board_names.map((board:BoardName)=> board)
 }
@@ -122,7 +136,7 @@ export const notifySuccessAlert = (message:string) =>{
     title: 'Success',
     text:message,
     showConfirmButton: false,
-    timer: 1500
+    timer: 2000
   })
 }
 

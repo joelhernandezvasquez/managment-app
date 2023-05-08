@@ -110,6 +110,11 @@ export type StatusIndicator = {
   unknown: string
 };
 
+export type TaskDeleteResponse =  {
+  success:boolean,
+  message:string
+}
+
 
 
 
