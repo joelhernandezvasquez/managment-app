@@ -11,7 +11,7 @@ export const TaskCard:FC <TaskProp>= ({task}) => {
   const {setCurrentTask} = useTask();
 
   const onToggleModal = () =>{
-    setCurrentTask(task)
+    setCurrentTask(task);
     toggleModal();
   }
 

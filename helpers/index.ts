@@ -1,15 +1,18 @@
 
 import { kanbanApi } from "../api/kanbanApi";
 import Swal from "sweetalert2";
-import { BoardNamesListResponse,BoardName,BoardListResponse, BoardInput,Status, TaskSubstaskUpdate,StatusIndicator,TaskDeleteResponse} from "../types/types";
+import { BoardNamesListResponse,BoardName,BoardListResponse, BoardInput,Status, TaskSubstaskUpdate,StatusIndicator,TaskDeleteResponse,SubsTask} from "../types/types";
 import { v4 as uuidv4 } from 'uuid';
 
 
 export const isValidForm = (fields:any):boolean =>{
- 
  const formFields = Object.values(fields);
  return formFields.every((field:any)=> field.length > 0)
     
+}
+
+export const formIsValid = (fields:string []):boolean =>{
+ return fields.every((field)=> field.length > 0);
 }
 
 export const fetchNamesOfBoards = async (userId:string):Promise<BoardNamesListResponse>=>{
@@ -108,6 +111,16 @@ export const mappedBoardInputs = (inputList:string []):BoardInput [] =>{
     }
   })
   
+}
+
+export const mapSubtasksToBoardInputs= (substaskList:SubsTask []): BoardInput [] =>{
+  
+  return substaskList.map((substask)=> {
+   return{
+    id:uuidv4(),
+    column:substask.name
+  }
+ })
 }
 
 export const mappedListOfStatus = (list: string [] | []):Status [] =>{

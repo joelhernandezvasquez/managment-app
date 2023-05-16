@@ -32,7 +32,6 @@
     opacity: 0.25;
   }
  
-
   .padding_top{
     padding-top:var(--padding_top);
   }
@@ -104,7 +103,6 @@
   margin-top:8px;
   min-height: 112px;
  
-  
  }
  .errorMessage{
     color: var(--clr-red);

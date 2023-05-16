@@ -2,7 +2,6 @@ import {FC,MouseEvent} from 'react';
 import { useTask } from '../../hooks';
 import ShowViewTaskMenu from '../ShowViewTaskMenu/ShowViewTaskMenu';
 import ShowCompletedSubstasks from '../ShowCompletedSubtasks/ShowCompletedSubstasks';
-import { TaskProp } from '../../types/types';
 import dashboard  from '../../styles/dashboard.module.css';
 import layouts from '../../styles/layouts.module.css';
 import share from '../../styles/share.module.css';

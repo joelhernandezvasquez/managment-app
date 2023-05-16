@@ -193,6 +193,16 @@ const clearActiveTask = () =>{
   resetActiveTask();
 }
 
+const areSubtasksValid = (substaskList:BoardInput[]):boolean =>{
+ 
+ if(substaskList.length === 0) return false;
+ 
+  return substaskList.map((subtask)=> subtask.column)
+        .every((substask)=> substask.length > 0);
+}
+
+
+
 
   return {
     taskStatusRef,
@@ -205,9 +215,10 @@ const clearActiveTask = () =>{
     updateSubstaskMutation,
     getListOfTasksByStatus,
     deleteTaskMutation,
+    areSubtasksValid,
     getActiveTask,
     setCurrentTask,
-    clearActiveTask
+    clearActiveTask,
 }
 }
 

@@ -16,7 +16,7 @@ export const DeleteTask:FC<Props> = ({closeWindow}) => {
 
   return (
     <section>
-    <p className={dashboard.prompt2}>{`Are you sure you want to delete the ‘${getActiveTask().name}’  task and its substasks? 
+    <p className={dashboard.prompt}>{`Are you sure you want to delete the ‘${getActiveTask().name}’  task and its substasks? 
       This action cannot be reversed.`}
    </p>
    <button className={button.delete_button} onClick={onDeleteTask}>Delete</button>
