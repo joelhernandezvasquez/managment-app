@@ -1,17 +1,20 @@
 import {FC,MouseEvent} from 'react';
+import { useTask } from '../../hooks';
 import ShowViewTaskMenu from '../ShowViewTaskMenu/ShowViewTaskMenu';
 import ShowCompletedSubstasks from '../ShowCompletedSubtasks/ShowCompletedSubstasks';
-import { TaskProp } from '../../types/types';
 import dashboard  from '../../styles/dashboard.module.css';
 import layouts from '../../styles/layouts.module.css';
 import share from '../../styles/share.module.css';
 import button from '../../styles/buttons/buttons.module.css';
 
-interface Props extends TaskProp{
+interface Props{
   closeViewTask:() => void
 }
 
-const ViewTask:FC <Props> = ({task,closeViewTask}) => {
+const ViewTask:FC <Props> = ({closeViewTask}) => {
+
+  const {getActiveTask} = useTask();
+  const {name,description} = getActiveTask(); 
 
   const handleClick = (event:MouseEvent) =>{
    event.stopPropagation();
@@ -31,12 +34,12 @@ const ViewTask:FC <Props> = ({task,closeViewTask}) => {
         </button>
             
           <div style={{width:'100%'}} className={`${share.d_flex} ${share.d_align_flex_center} ${share.d_flex_space_between} ${share.d_position_relative}`}>
-             <h2 className={dashboard.view_task_heading}>{task.name}</h2>
-              <ShowViewTaskMenu task = {task} />
+             <h2 className={dashboard.view_task_heading}>{name}</h2>
+              <ShowViewTaskMenu/>
           </div>
 
-          <p className={dashboard.view_task_description}>{task.description}</p>
-          <ShowCompletedSubstasks task = {task}/>
+          <p className={dashboard.view_task_description}>{description}</p>
+          <ShowCompletedSubstasks/>
        </div>
     </section>
   )

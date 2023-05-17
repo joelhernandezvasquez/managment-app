@@ -3,15 +3,19 @@ import {useMutation,useQueryClient} from '@tanstack/react-query';
 import { useAuthStore} from '../store/store';
 import { useUIStates,useInputList} from '../hooks';
 import { kanbanApi } from '../api/kanbanApi';
-import { notifySuccessAlert,notifyErrorAlert, isValidForm,updateSubstasks, deleteTask} from '../helpers';
+import { notifySuccessAlert,notifyErrorAlert, isValidForm,updateSubstasks, deleteTask,updateTask} from '../helpers';
 import { BoardInput, BoardListResponse, BoardTask, SubsTask,Task,TaskSubstaskUpdate} from '../types/types';
+import { TaskStore } from '../store/TaskStore/store';
 
 export const useTask = () => {
+  
   const {user} = useAuthStore();
   const {getActiveBoard} = useUIStates();
   const {areInputListItemsValid,listInput,resetInputList} = useInputList();
   const taskStatusRef = useRef<string>();
   const queryClient = useQueryClient();
+  const {activeTask,setActiveTask,resetActiveTask} = TaskStore();
+
 
   const createTaskMutation = useMutation({
     mutationFn:(task:BoardTask) => {
@@ -78,13 +82,56 @@ export const useTask = () => {
       if (context?.previousData) {
         notifyErrorAlert('an error occured task was not deleted');
         queryClient.setQueryData(["getBoard",getActiveBoard()._id], context.previousData)
+        clearActiveTask();
       }
     },
     onSettled: () => {
       notifySuccessAlert('task has been deleted');
       queryClient.invalidateQueries({ queryKey:["getBoard",getActiveBoard()._id] })
+      clearActiveTask();
     },
 
+  })
+
+  const updateTaskMutation = useMutation({
+    mutationFn:(task:BoardTask) =>{
+     return updateTask((getActiveBoard()._id),task);
+    },
+    onMutate: async (task) =>{
+      const {_id:taskId} = task;
+      await queryClient.cancelQueries(["getBoard",getActiveBoard()._id]);
+      const previousData = queryClient.getQueryData<BoardListResponse>(["getBoard",getActiveBoard()._id]);
+
+    
+      if(previousData){
+        const updatedTasks = previousData.board_tasks.map((taskElement)=>{
+          if(taskElement._id === taskId ){
+            return {...task}
+          }
+          return taskElement;
+        })
+        queryClient.setQueryData(["getBoard",getActiveBoard()._id],{
+          ...previousData,
+          board_tasks:[
+           ...updatedTasks
+          ],
+        })
+        return { previousData }
+      }
+       
+    },
+   onError(error, variables, context) {
+    if (context?.previousData) {
+      notifyErrorAlert('an error occured task was not updated');
+      queryClient.setQueryData(["getBoard",getActiveBoard()._id], context.previousData)
+      clearActiveTask();
+    }
+   },
+   onSettled(data, error, variables, context) {
+    notifySuccessAlert('task has been updated');
+    queryClient.invalidateQueries({ queryKey:["getBoard",getActiveBoard()._id] })
+    clearActiveTask();
+   },
   })
 
   const createTask = async (task:BoardTask) =>{
@@ -175,6 +222,26 @@ const getTotalOfSubstasksCompleted = (substasks:SubsTask []):number =>{
   return completedSubstasks;
 }
 
+const getActiveTask = () =>{
+ return activeTask;
+}
+
+const setCurrentTask = (task:BoardTask) =>{
+  setActiveTask(task);
+}
+
+const clearActiveTask = () =>{
+  resetActiveTask();
+}
+
+const areSubtasksValid = (substaskList:BoardInput[]):boolean =>{
+ 
+ if(substaskList.length === 0) return false;
+ 
+  return substaskList.map((subtask)=> subtask.column)
+        .every((substask)=> substask.length > 0);
+}
+
 
   return {
     taskStatusRef,
@@ -186,7 +253,13 @@ const getTotalOfSubstasksCompleted = (substasks:SubsTask []):number =>{
     getTotalOfSubstasksCompleted,
     updateSubstaskMutation,
     getListOfTasksByStatus,
-    deleteTaskMutation
+    deleteTaskMutation,
+    updateTaskMutation,
+    areSubtasksValid,
+    getActiveTask,
+    setCurrentTask,
+    clearActiveTask,
+
 }
 }
 
