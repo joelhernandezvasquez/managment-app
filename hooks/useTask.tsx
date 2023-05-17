@@ -3,7 +3,7 @@ import {useMutation,useQueryClient} from '@tanstack/react-query';
 import { useAuthStore} from '../store/store';
 import { useUIStates,useInputList} from '../hooks';
 import { kanbanApi } from '../api/kanbanApi';
-import { notifySuccessAlert,notifyErrorAlert, isValidForm,updateSubstasks, deleteTask} from '../helpers';
+import { notifySuccessAlert,notifyErrorAlert, isValidForm,updateSubstasks, deleteTask,updateTask} from '../helpers';
 import { BoardInput, BoardListResponse, BoardTask, SubsTask,Task,TaskSubstaskUpdate} from '../types/types';
 import { TaskStore } from '../store/TaskStore/store';
 
@@ -91,6 +91,47 @@ export const useTask = () => {
       clearActiveTask();
     },
 
+  })
+
+  const updateTaskMutation = useMutation({
+    mutationFn:(task:BoardTask) =>{
+     return updateTask((getActiveBoard()._id),task);
+    },
+    onMutate: async (task) =>{
+      const {_id:taskId} = task;
+      await queryClient.cancelQueries(["getBoard",getActiveBoard()._id]);
+      const previousData = queryClient.getQueryData<BoardListResponse>(["getBoard",getActiveBoard()._id]);
+
+    
+      if(previousData){
+        const updatedTasks = previousData.board_tasks.map((taskElement)=>{
+          if(taskElement._id === taskId ){
+            return {...task}
+          }
+          return taskElement;
+        })
+        queryClient.setQueryData(["getBoard",getActiveBoard()._id],{
+          ...previousData,
+          board_tasks:[
+           ...updatedTasks
+          ],
+        })
+        return { previousData }
+      }
+       
+    },
+   onError(error, variables, context) {
+    if (context?.previousData) {
+      notifyErrorAlert('an error occured task was not updated');
+      queryClient.setQueryData(["getBoard",getActiveBoard()._id], context.previousData)
+      clearActiveTask();
+    }
+   },
+   onSettled(data, error, variables, context) {
+    notifySuccessAlert('task has been updated');
+    queryClient.invalidateQueries({ queryKey:["getBoard",getActiveBoard()._id] })
+    clearActiveTask();
+   },
   })
 
   const createTask = async (task:BoardTask) =>{
@@ -202,8 +243,6 @@ const areSubtasksValid = (substaskList:BoardInput[]):boolean =>{
 }
 
 
-
-
   return {
     taskStatusRef,
     setTaskStatus,
@@ -215,10 +254,12 @@ const areSubtasksValid = (substaskList:BoardInput[]):boolean =>{
     updateSubstaskMutation,
     getListOfTasksByStatus,
     deleteTaskMutation,
+    updateTaskMutation,
     areSubtasksValid,
     getActiveTask,
     setCurrentTask,
     clearActiveTask,
+
 }
 }
 

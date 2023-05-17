@@ -1,7 +1,7 @@
 
 import { kanbanApi } from "../api/kanbanApi";
 import Swal from "sweetalert2";
-import { BoardNamesListResponse,BoardName,BoardListResponse, BoardInput,Status, TaskSubstaskUpdate,StatusIndicator,TaskDeleteResponse,SubsTask} from "../types/types";
+import { BoardNamesListResponse,BoardName,BoardListResponse, BoardInput,Status, TaskSubstaskUpdate,StatusIndicator,SuccessResponse,SubsTask, BoardTask} from "../types/types";
 import { v4 as uuidv4 } from 'uuid';
 
 
@@ -82,13 +82,30 @@ export const updateSubstasks = async (updatedTaskSubtask:TaskSubstaskUpdate,boar
   
 }
 
-export const deleteTask = async(boardId:string,taskId:string):Promise<TaskDeleteResponse> =>{
+export const deleteTask = async(boardId:string,taskId:string):Promise<SuccessResponse> =>{
   try{
     const {data}= await kanbanApi.delete(`/board/task/${boardId}?taskId=${taskId}`);
     return data;
   }
   catch(error){
     console.error(error)
+    let message
+    if (error instanceof Error) 
+     message = error.message
+    else message = String(error)
+
+    return Promise.reject(new Error(message))
+  }
+}
+
+export const updateTask = async(boardId:string,task:BoardTask):Promise<SuccessResponse> =>{
+
+  const {_id,name,description,substasks,status} = task;
+  try{
+    const {data} = await kanbanApi.put(`/board/update/task/${boardId}`,{_id:_id,name:name,description:description,substasks:substasks,status:status});
+    return data;
+  }
+  catch(error) {
     let message
     if (error instanceof Error) 
      message = error.message

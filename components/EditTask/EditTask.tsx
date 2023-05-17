@@ -14,7 +14,7 @@ interface Props{
 }
 
 export const EditTask:FC<Props> = ({closeWindow}) => {
-  const {getActiveTask,taskStatusRef,setTaskStatus,isTaskStatusValid,areSubtasksValid} = useTask();
+  const {getActiveTask,taskStatusRef,setTaskStatus,isTaskStatusValid,areSubtasksValid,updateTaskMutation} = useTask();
   const {board_columns} = useFetchBoard();
   const [substaskList,setSubstaskList] = useState(mapSubtasksToBoardInputs(getActiveTask().substasks));
   const [isFormSubmitted,setIsformSubmitted] = useState(false);
@@ -69,8 +69,15 @@ export const EditTask:FC<Props> = ({closeWindow}) => {
     setIsformSubmitted(true);
 
   if(formIsValid([taskInfo.taskName,taskInfo.taskDescription]) && isTaskStatusValid() && areSubtasksValid(substaskList)) {
-     console.log('valid');
-     
+     console.log('valid'); 
+   
+     updateTaskMutation.mutate({
+       _id:getActiveTask()._id,
+       name:taskInfo.taskName,
+       description:taskInfo.taskDescription,
+       substasks:getActiveTask().substasks,
+       status:taskStatusRef.current ?? ''
+     })
   }
   else
   {
