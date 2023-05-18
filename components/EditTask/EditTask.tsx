@@ -1,10 +1,10 @@
-import { useMemo,FC,FormEvent, useState,ChangeEvent} from "react";
-import { useTask,useFetchBoard} from "../../hooks";
+import { FC,FormEvent, useState,ChangeEvent} from "react";
+import { useTask,useHelper} from "../../hooks";
+import useSubstasks from "../../hooks/useSubstasks";
 import { ShowTaskStatus } from "../ShowTaskStatus/ShowTaskStatus";
 import { RenderInputList } from "../RenderInputList/RenderInputList";
 import { ErrorMessage } from "../ErrorMessage/ErrorMessage";
-import {formIsValid, mapSubtasksToBoardInputs, mappedListOfStatus } from "../../helpers";
-import { v4 as uuidv4 } from 'uuid';
+import {formIsValid} from "../../helpers";
 import layout from "../../styles/layouts.module.css";
 import share from '../../styles/share.module.css';
 import button from '../../styles/buttons/buttons.module.css';
@@ -15,49 +15,18 @@ interface Props{
 
 export const EditTask:FC<Props> = ({closeWindow}) => {
   const {getActiveTask,taskStatusRef,setTaskStatus,isTaskStatusValid,areSubtasksValid,updateTaskMutation} = useTask();
-  const {board_columns} = useFetchBoard();
-  const [substaskList,setSubstaskList] = useState(mapSubtasksToBoardInputs(getActiveTask().substasks));
-  const [isFormSubmitted,setIsformSubmitted] = useState(false);
+  const {totalTaskTitleCharacters,hasFormBeenSubmitted,modifyFormSubmissionState} = useHelper();
+  const {substaskList,addSubstaskToList,updateSubstaskToList,deleteSubstaskFromList} = useSubstasks();
 
   const [taskInfo,setTaskInfo] = useState({
     taskName:getActiveTask().name,
     taskDescription:getActiveTask().description
   })
 
-  const memoMappedListOfStatus = useMemo(()=>{
-    return mappedListOfStatus(board_columns ?? [])
-  },[board_columns])
-
-  const totalTitleCharacters = useMemo(()=>{
-    return getActiveTask().name.length;
-  },[])
-
-  const addSubstaskToList = () =>{ 
-    setSubstaskList([...substaskList,{id:uuidv4(),column:''}]);
-  }
-
   const hasTaskStatusNotBeenSelected = ():boolean =>{
-    return isFormSubmitted && !taskStatusRef.current
+    return hasFormBeenSubmitted && !taskStatusRef.current
   }
-  const updateSubstaskToList = (substaskId:string,text:string) =>{
-    const substasksEdit = substaskList.map((substask)=>{
-      if(substask.id === substaskId){
-        return {
-         id:substask.id,
-         column:text
-        }
-      }
-      return substask;
-    })
-
-    setSubstaskList(substasksEdit);
-  }
-
-  const deleteSubstaskFromList = (substaskId:string) =>{
-    const updatedSubstasks = substaskList.filter((substask)=> substask.id !== substaskId);
-    setSubstaskList(updatedSubstasks);
-  }
-
+  
   const onChangeTaskInfo = ({target}:ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) =>{
     const {name,value} = target;
     setTaskInfo({...taskInfo,[name]:value})
@@ -65,11 +34,9 @@ export const EditTask:FC<Props> = ({closeWindow}) => {
 
   const onSubmitEditTaskForm = (event:FormEvent<HTMLFormElement>) =>{
     event.preventDefault();
-    console.log('sending the form');
-    setIsformSubmitted(true);
+   modifyFormSubmissionState(true);
 
   if(formIsValid([taskInfo.taskName,taskInfo.taskDescription]) && isTaskStatusValid() && areSubtasksValid(substaskList)) {
-     console.log('valid'); 
    
      updateTaskMutation.mutate({
        _id:getActiveTask()._id,
@@ -79,11 +46,7 @@ export const EditTask:FC<Props> = ({closeWindow}) => {
        status:taskStatusRef.current ?? ''
      })
   }
-  else
-  {
-    console.log('not valid')
-  }
-   
+  
   }
 
   return (
@@ -92,7 +55,7 @@ export const EditTask:FC<Props> = ({closeWindow}) => {
        <div className={`${share.d_flex} ${share.d_flex_col} ${share.form_field} `}>
        <label className={share.label}>Title</label>
         
-        {totalTitleCharacters < 40
+        {totalTaskTitleCharacters < 40
         ?
         <input
         className={`${share.primary_input}  ${share.d_flex_grow} ${taskInfo.taskName ==='' && share.invalid_input} `}
@@ -136,14 +99,13 @@ export const EditTask:FC<Props> = ({closeWindow}) => {
        addInputToList={addSubstaskToList}
        updateInputToList={updateSubstaskToList}
        deleteInputFromList={deleteSubstaskFromList}
-       formSent = {isFormSubmitted}
+       formSent = {hasFormBeenSubmitted}
        />
   
        <div style={{marginTop:'24px', marginBottom:'8px'}}>
       <label className={`${share.capitalize} ${share.label}`}> Status </label>
       
       <ShowTaskStatus 
-         listOfStatus={memoMappedListOfStatus}
          setTaskStatus = {setTaskStatus}
       />
     </div>

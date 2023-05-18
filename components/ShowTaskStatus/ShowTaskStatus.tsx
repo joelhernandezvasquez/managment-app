@@ -1,16 +1,21 @@
-import {FC,useState,memo} from 'react';
-import { useModal } from '../../hooks';
+import {FC,useState,memo,useMemo} from 'react';
+import { useModal,useFetchBoard } from '../../hooks';
 import { Status } from '../../types/types';
 import dashboard from '../../styles/dashboard.module.css';
+import { mappedListOfStatus } from '../../helpers';
 interface StatusProps {
- listOfStatus: Status [],
  setTaskStatus:(status:string) => void
 }
 
-export const ShowTaskStatus:FC<StatusProps> = memo( ({listOfStatus,setTaskStatus}) => {
+export const ShowTaskStatus:FC<StatusProps> = memo( ({setTaskStatus}) => {
   
+    const {board_columns} = useFetchBoard();
     const [currentStatus,setCurrentStatus] = useState({id:'0',status:'Select a Status'});
     const {isModalOpen,toggleModal} = useModal();
+
+    const listOfStatus = useMemo(()=>{
+      return mappedListOfStatus(board_columns ?? [])
+    },[board_columns])
   
      const selectStatusItem = ({id,status}:Status) =>{
        setCurrentStatus({id,status});
