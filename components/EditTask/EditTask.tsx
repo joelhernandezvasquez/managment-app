@@ -1,4 +1,4 @@
-import { FC,FormEvent, useState,ChangeEvent} from "react";
+import { FC,FormEvent} from "react";
 import { useTask,useHelper} from "../../hooks";
 import useSubstasks from "../../hooks/useSubstasks";
 import { ShowTaskStatus } from "../ShowTaskStatus/ShowTaskStatus";
@@ -14,41 +14,29 @@ interface Props{
 }
 
 export const EditTask:FC<Props> = ({closeWindow}) => {
-  const {getActiveTask,taskStatusRef,setTaskStatus,isTaskStatusValid,areSubtasksValid,updateTaskMutation} = useTask();
+  const {task,getActiveTask,taskStatusRef,setTaskStatus,isTaskStatusValid,areSubtasksValid,updateTaskMutation,hasTaskStatusNotBeenSelected,onChangeTask} = useTask();
   const {totalTaskTitleCharacters,hasFormBeenSubmitted,modifyFormSubmissionState} = useHelper();
   const {substaskList,addSubstaskToList,updateSubstaskToList,deleteSubstaskFromList} = useSubstasks();
 
-  const [taskInfo,setTaskInfo] = useState({
-    taskName:getActiveTask().name,
-    taskDescription:getActiveTask().description
-  })
-
-  const hasTaskStatusNotBeenSelected = ():boolean =>{
-    return hasFormBeenSubmitted && !taskStatusRef.current
-  }
-  
-  const onChangeTaskInfo = ({target}:ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) =>{
-    const {name,value} = target;
-    setTaskInfo({...taskInfo,[name]:value})
-  }
+  const isEditTaskFormValid = () =>{
+    return formIsValid([task.name,task.description]) && isTaskStatusValid() && areSubtasksValid(substaskList);
+   }
 
   const onSubmitEditTaskForm = (event:FormEvent<HTMLFormElement>) =>{
     event.preventDefault();
    modifyFormSubmissionState(true);
 
-  if(formIsValid([taskInfo.taskName,taskInfo.taskDescription]) && isTaskStatusValid() && areSubtasksValid(substaskList)) {
-   
-     updateTaskMutation.mutate({
+  if(isEditTaskFormValid()) {
+    
+    updateTaskMutation.mutate({
        _id:getActiveTask()._id,
-       name:taskInfo.taskName,
-       description:taskInfo.taskDescription,
+       name:task.name,
+       description:task.description,
        substasks:getActiveTask().substasks,
        status:taskStatusRef.current ?? ''
      })
   }
-  
-  }
-
+}
   return (
     <form className={layout.modal_form} onSubmit={onSubmitEditTaskForm}>
 
@@ -58,38 +46,36 @@ export const EditTask:FC<Props> = ({closeWindow}) => {
         {totalTaskTitleCharacters < 40
         ?
         <input
-        className={`${share.primary_input}  ${share.d_flex_grow} ${taskInfo.taskName ==='' && share.invalid_input} `}
-        type = "text"
-        id="title_task"
-        name="taskName"
-        value={taskInfo.taskName}
-         onChange = {onChangeTaskInfo}  
-         placeholder = {taskInfo.taskName ==='' ? "cannot be empty":"e.g. Web Design"}
+         className={`${share.primary_input}  ${share.d_flex_grow} ${task.name ==='' && share.invalid_input} `}
+         type = "text"
+         id="title_task"
+         name="name"
+         value={task.name}
+         onChange = {onChangeTask}  
+         placeholder = {task.name ==='' ? "cannot be empty":"e.g. Web Design"}
         />
         :
-        <textarea className={`${share.primary_input} ${share.text_area_input} ${taskInfo.taskName ==='' && share.invalid_input}`}
+        <textarea className={`${share.primary_input} ${share.text_area_input} ${task.name ==='' && share.invalid_input}`}
         id="title_task"
-        name="taskName"
-        value={taskInfo.taskName}
-        onChange = {onChangeTaskInfo}  
-        placeholder = {taskInfo.taskName ==='' ? "cannot be empty":"e.g. Web Design"}
+        name="name"
+        value={task.name}
+        onChange = {onChangeTask}  
+        placeholder = {task.name ==='' ? "cannot be empty":"e.g. Web Design"}
        >
-        </textarea>
-        }
-       
+       </textarea>
+      }
        </div>
 
        <div className={`${share.d_flex} ${share.d_flex_col} ${share.form_field} ${share.padding_top} `}>
        <label className={share.label}>Description</label>
-       <textarea className={`${share.primary_input} ${share.text_area_input} ${taskInfo.taskDescription ==='' && share.invalid_input} `}
+       <textarea className={`${share.primary_input} ${share.text_area_input} ${task.description ==='' && share.invalid_input} `}
         id="title_description"
-        name="taskDescription"
-        value={taskInfo.taskDescription}
-        onChange = {onChangeTaskInfo}  
-        placeholder = {taskInfo.taskDescription ==='' ? "cannot be empty":"e.g. Web Design"}
+        name="description"
+        value={task.description }
+        onChange = {onChangeTask}  
+        placeholder = {task.description  ==='' ? "cannot be empty":"e.g. Web Design"}
        >
         </textarea>
-
        </div>
        
        <RenderInputList 
@@ -102,15 +88,14 @@ export const EditTask:FC<Props> = ({closeWindow}) => {
        formSent = {hasFormBeenSubmitted}
        />
   
-       <div style={{marginTop:'24px', marginBottom:'8px'}}>
+      <div style={{marginTop:'24px', marginBottom:'8px'}}>
       <label className={`${share.capitalize} ${share.label}`}> Status </label>
-      
       <ShowTaskStatus 
          setTaskStatus = {setTaskStatus}
       />
     </div>
    
-    {hasTaskStatusNotBeenSelected() &&  <ErrorMessage>Please select the status</ErrorMessage>}
+    {hasFormBeenSubmitted && hasTaskStatusNotBeenSelected() ? <ErrorMessage>Please select the status</ErrorMessage>:''}
 
     <div>
     <button className={`${button.btn_primary} ${button.auth_submit_btn}`} type="submit">
@@ -123,7 +108,6 @@ export const EditTask:FC<Props> = ({closeWindow}) => {
      Cancel
     </button>
     </div>
-
     </form>
   )
 }
