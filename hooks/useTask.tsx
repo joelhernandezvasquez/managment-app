@@ -26,6 +26,10 @@ export const useTask = () => {
     setTask({...task,[name]:value})
   }
 
+  const resetTaskValues = () =>{
+    setTask({name:'',description:''});
+  }
+
   
   const createTaskMutation = useMutation({
     mutationFn:(task:BoardTask) => {
@@ -276,7 +280,8 @@ const hasTaskStatusNotBeenSelected = ():boolean =>{
     getActiveTask,
     setCurrentTask,
     clearActiveTask,
-    hasTaskStatusNotBeenSelected
+    hasTaskStatusNotBeenSelected,
+    resetTaskValues
 
 }
 }
