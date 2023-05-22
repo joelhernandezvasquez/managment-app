@@ -30,7 +30,6 @@ export const useTask = () => {
     setTask({name:'',description:''});
   }
 
-  
   const createTaskMutation = useMutation({
     mutationFn:(task:BoardTask) => {
       return createTask(task)
@@ -193,8 +192,6 @@ const resetTaskStatus = () =>{
   taskStatusRef.current = undefined;
 }
 
-
-
   const submitAddTaskForm = async ({taskTitle,taskDescription}:Task) =>{
      
     try{
@@ -282,7 +279,6 @@ const hasTaskStatusNotBeenSelected = ():boolean =>{
     clearActiveTask,
     hasTaskStatusNotBeenSelected,
     resetTaskValues
-
 }
 }
 
