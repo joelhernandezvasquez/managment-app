@@ -68,6 +68,7 @@ export const fetchBoardById = async (id:string):Promise<BoardListResponse> =>{
      }
   }
   catch(error){
+    console.log('hi')
     console.error(error)
     let message
     if (error instanceof Error) 

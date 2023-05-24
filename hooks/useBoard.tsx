@@ -1,5 +1,5 @@
 import { useQuery,useMutation,useQueryClient} from '@tanstack/react-query';
-import { useAuthStore,BoardStore } from '../store';
+import { useAuthStore} from '../store';
 import { useUIStates } from './useUIStates';
 import {kanbanApi} from '../api/kanbanApi';
 import {notifySuccessAlert,notifyErrorAlert, fetchAllBoards} from '../helpers';
@@ -13,10 +13,8 @@ interface UpdatedBoard{
 export const useBoard = () => {
     
 const {user} = useAuthStore();
-//const {data,isLoading,isError,error} =  useQuery({queryKey:['boardNames'],queryFn:()=> fetchNamesOfBoards(user.uid),retry: 1});
 const {data,isLoading,isError,error} = useQuery({queryKey:['boards'],queryFn:()=> fetchAllBoards()})
-const {resetBoardSelected} = useUIStates();
-const {addBoardToStore} = BoardStore();
+const {setActiveBoard} = useUIStates();
 const queryClient = useQueryClient();
 
 const createBoardMutation = useMutation({
@@ -71,7 +69,6 @@ const createBoard = async (board:Board) =>{
   try{
        const response = await kanbanApi.post('/board/create',{name:board.boardName,columns:mappedBoardColumns(board),user:user.uid});
        notifySuccessAlert('Board has been saved');
-       console.log(response.data);
        return response.data;
     }
      catch(error:any){
@@ -98,13 +95,22 @@ const createBoard = async (board:Board) =>{
        const {response} = error;
        notifyErrorAlert(response.data.msg);
      }
+ } 
+
+ const switchToBackupBoard = () =>{
+  const boardsCache = queryClient.getQueryData<BoardNamesListResponse>(["boards"]);
+  const boardToSwitch = boardsCache?.boards[0];
+  return {
+    _id:boardToSwitch._id,
+    name:boardToSwitch.name
+  }
  }
 
  const removeBoard = async(boardId:string) =>{
     
   try{
    await kanbanApi.delete(`/board/${boardId}`);
-   resetBoardSelected();
+   setActiveBoard(switchToBackupBoard())
    notifySuccessAlert('Board has been deleted');
   }
     catch(error){
