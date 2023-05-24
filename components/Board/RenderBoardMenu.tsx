@@ -19,12 +19,13 @@ export const RenderBoardMenu = () => {
   return (
     <div className={dashboard.board_menu}>
   
-    <h2 className={dashboard.board_menu_headline}>all boards ({boards.length})</h2>
+    <h2 className={dashboard.board_menu_headline}>all boards ({boards?.length})</h2>
    
     <ul className={dashboard.board_items}>
-      {boards.map((board:BoardResponse)=>{
+      { boards?.map((board:BoardResponse)=> {
         return <BoardItem  key={board._id} board={board}/>
-        })}
+        })
+      }
     </ul>
    </div>
   )

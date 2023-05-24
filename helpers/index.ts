@@ -1,9 +1,9 @@
 
 import { kanbanApi } from "../api/kanbanApi";
 import Swal from "sweetalert2";
-import { BoardNamesListResponse,BoardName,BoardListResponse, BoardInput,Status, TaskSubstaskUpdate,StatusIndicator,SuccessResponse,SubsTask, BoardTask} from "../types/types";
+import { BoardNamesListResponse,BoardName,BoardListResponse, BoardInput,Status, TaskSubstaskUpdate,StatusIndicator,SuccessResponse,SubsTask, BoardTask,BoardListServerResponse} from "../types/types";
 import { v4 as uuidv4 } from 'uuid';
-import { BoardResponse } from "../types/types";
+
 
 
 export const isValidForm = (fields:any):boolean =>{
@@ -16,7 +16,7 @@ export const formIsValid = (fields:string []):boolean =>{
  return fields.every((field)=> field.length > 0);
 }
 
-export const fetchAllBoards = async ():Promise<BoardResponse []> =>{
+export const fetchAllBoards = async ():Promise<BoardListServerResponse> =>{
  try{
     const {data} = await kanbanApi.get('/board/getBoards');
     return data;
