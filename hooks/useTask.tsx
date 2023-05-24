@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef,useState,ChangeEvent} from 'react';
 import {useMutation,useQueryClient} from '@tanstack/react-query';
 import { useAuthStore} from '../store/store';
 import { useUIStates,useInputList} from '../hooks';
@@ -15,7 +15,20 @@ export const useTask = () => {
   const taskStatusRef = useRef<string>();
   const queryClient = useQueryClient();
   const {activeTask,setActiveTask,resetActiveTask} = TaskStore();
+ 
+  const [task,setTask] = useState({
+    name:activeTask.name,
+    description:activeTask.description
+  })
 
+  const onChangeTask = ({target}:ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) =>{
+    const {name,value} = target;
+    setTask({...task,[name]:value})
+  }
+
+  const resetTaskValues = () =>{
+    setTask({name:'',description:''});
+  }
 
   const createTaskMutation = useMutation({
     mutationFn:(task:BoardTask) => {
@@ -242,8 +255,13 @@ const areSubtasksValid = (substaskList:BoardInput[]):boolean =>{
         .every((substask)=> substask.length > 0);
 }
 
+const hasTaskStatusNotBeenSelected = ():boolean =>{
+  return !taskStatusRef.current
+}
 
   return {
+    task,
+    onChangeTask,
     taskStatusRef,
     setTaskStatus,
     resetTaskStatus,
@@ -259,7 +277,8 @@ const areSubtasksValid = (substaskList:BoardInput[]):boolean =>{
     getActiveTask,
     setCurrentTask,
     clearActiveTask,
-
+    hasTaskStatusNotBeenSelected,
+    resetTaskValues
 }
 }
 

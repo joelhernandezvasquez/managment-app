@@ -1,9 +1,9 @@
-import { useQuery,useMutation} from '@tanstack/react-query';
-import { useAuthStore,BoardStore } from '../store';
+import { useQuery,useMutation,useQueryClient} from '@tanstack/react-query';
+import { useAuthStore} from '../store';
 import { useUIStates } from './useUIStates';
 import {kanbanApi} from '../api/kanbanApi';
-import { fetchNamesOfBoards,notifySuccessAlert,notifyErrorAlert} from '../helpers';
-import { Board } from '../types/types';
+import {notifySuccessAlert,notifyErrorAlert, fetchAllBoards} from '../helpers';
+import { Board,BoardNamesListResponse} from '../types/types';
 
 interface UpdatedBoard{
   board:Board, 
@@ -13,18 +13,48 @@ interface UpdatedBoard{
 export const useBoard = () => {
     
 const {user} = useAuthStore();
-const {data,isLoading,isError,error} =  useQuery({queryKey:['boardNames'],queryFn:()=> fetchNamesOfBoards(user.uid),retry: 1});
-const {resetBoardSelected} = useUIStates();
-const {addBoardToStore} = BoardStore();
+const {data,isLoading,isError,error} = useQuery({queryKey:['boards'],queryFn:()=> fetchAllBoards()})
+const {setActiveBoard} = useUIStates();
+const queryClient = useQueryClient();
 
 const createBoardMutation = useMutation({
   mutationFn:(board:Board) => {
     return createBoard(board)
   },
-  onSuccess:(data) =>{
-    const {_id,name,columns,tasks,user} = data.board;
-    addBoardToStore({ _id,name,columns,tasks,user});
+  onMutate: async (newBoard) => {
+    const{boardName,boardColumns} = newBoard;
+    await queryClient.cancelQueries(["boards"]);
+    
+    const previousData = queryClient.getQueryData<BoardNamesListResponse>(["boards"]);
+
+    if(previousData){
+     queryClient.setQueryData(["boards"],{
+      ...previousData,
+    boards:[
+     ...previousData.boards,
+      {
+        _id:'',
+        name:boardName,
+        columns:[...boardColumns],
+        tasks:[],
+        user:user.uid
+      }
+     ],
+        })
+
+    return { previousData }
   }
+    },
+   
+   onError: (error, variables, context) => {
+    if (context?.previousData) {
+      queryClient.setQueryData(["boards"], context.previousData)
+    }
+  },
+  onSettled: () => {
+    queryClient.invalidateQueries({ queryKey:["boards"] })
+  },
+  
 })
 
 const updateBoardMutation = useMutation({
@@ -65,13 +95,22 @@ const createBoard = async (board:Board) =>{
        const {response} = error;
        notifyErrorAlert(response.data.msg);
      }
+ } 
+
+ const switchToBackupBoard = () =>{
+  const boardsCache = queryClient.getQueryData<BoardNamesListResponse>(["boards"]);
+  const boardToSwitch = boardsCache?.boards[0];
+  return {
+    _id:boardToSwitch._id,
+    name:boardToSwitch.name
+  }
  }
 
  const removeBoard = async(boardId:string) =>{
     
   try{
    await kanbanApi.delete(`/board/${boardId}`);
-   resetBoardSelected();
+   setActiveBoard(switchToBackupBoard())
    notifySuccessAlert('Board has been deleted');
   }
     catch(error){

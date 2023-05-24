@@ -3,6 +3,7 @@ import { kanbanApi } from "../api/kanbanApi";
 import Swal from "sweetalert2";
 import { BoardNamesListResponse,BoardName,BoardListResponse, BoardInput,Status, TaskSubstaskUpdate,StatusIndicator,SuccessResponse,SubsTask, BoardTask} from "../types/types";
 import { v4 as uuidv4 } from 'uuid';
+import { BoardResponse } from "../types/types";
 
 
 export const isValidForm = (fields:any):boolean =>{
@@ -13,6 +14,22 @@ export const isValidForm = (fields:any):boolean =>{
 
 export const formIsValid = (fields:string []):boolean =>{
  return fields.every((field)=> field.length > 0);
+}
+
+export const fetchAllBoards = async ():Promise<BoardResponse []> =>{
+ try{
+    const {data} = await kanbanApi.get('/board/getBoards');
+    return data;
+ }
+ catch(error){
+  console.log(error)
+  let message
+  if (error instanceof Error) 
+   message = error.message
+  else message = String(error)
+
+  return Promise.reject(new Error(message))
+ }
 }
 
 export const fetchNamesOfBoards = async (userId:string):Promise<BoardNamesListResponse>=>{
@@ -51,6 +68,7 @@ export const fetchBoardById = async (id:string):Promise<BoardListResponse> =>{
      }
   }
   catch(error){
+    console.log('hi')
     console.error(error)
     let message
     if (error instanceof Error) 

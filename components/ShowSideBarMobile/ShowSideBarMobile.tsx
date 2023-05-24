@@ -11,7 +11,7 @@ export const ShowSideBarMobile = () => {
    const hasMounted = useHasMounted();
   
    if(!hasMounted){
-    return false;
+    return <></>;
    }
     
   return (
