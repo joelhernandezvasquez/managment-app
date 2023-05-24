@@ -65,6 +65,12 @@ export interface BoardResponse {
   user:string
 }
 
+export interface BoardListServerResponse{
+  success:boolean,
+  boards:BoardResponse []
+}
+
+
 export interface StatusList {
   listOfStatus: Status []
  }

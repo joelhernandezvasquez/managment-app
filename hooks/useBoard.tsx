@@ -3,7 +3,7 @@ import { useAuthStore} from '../store';
 import { useUIStates } from './useUIStates';
 import {kanbanApi} from '../api/kanbanApi';
 import {notifySuccessAlert,notifyErrorAlert, fetchAllBoards} from '../helpers';
-import { Board,BoardNamesListResponse} from '../types/types';
+import { Board,BoardListServerResponse,BoardName} from '../types/types';
 
 interface UpdatedBoard{
   board:Board, 
@@ -25,7 +25,7 @@ const createBoardMutation = useMutation({
     const{boardName,boardColumns} = newBoard;
     await queryClient.cancelQueries(["boards"]);
     
-    const previousData = queryClient.getQueryData<BoardNamesListResponse>(["boards"]);
+    const previousData = queryClient.getQueryData<BoardListServerResponse>(["boards"]);
 
     if(previousData){
      queryClient.setQueryData(["boards"],{
@@ -97,12 +97,12 @@ const createBoard = async (board:Board) =>{
      }
  } 
 
- const switchToBackupBoard = () =>{
-  const boardsCache = queryClient.getQueryData<BoardNamesListResponse>(["boards"]);
+ const switchToBackupBoard = ():BoardName =>{
+  const boardsCache = queryClient.getQueryData<BoardListServerResponse>(["boards"]);
   const boardToSwitch = boardsCache?.boards[0];
   return {
-    _id:boardToSwitch._id,
-    name:boardToSwitch.name
+    _id:boardToSwitch?._id ?? '',
+    name:boardToSwitch?.name ?? ''
   }
  }
 
@@ -125,7 +125,7 @@ const createBoard = async (board:Board) =>{
 
 return{
     ...data,
-      data,
+     data,
       error,
       isLoading,
       isError,
