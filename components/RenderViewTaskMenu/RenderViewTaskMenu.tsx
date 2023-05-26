@@ -29,7 +29,7 @@ const RenderViewTaskMenu:FC<Props> = ({closeModal}) => {
       }
     </ul>
     {openModal && (
-       <Modal taskAction= {action}> 
+       <Modal taskAction= {action} closeModal={closeModal} > 
       { action === DELETE_TASK ? <DeleteTask closeWindow={closeModal}/> : <EditTask closeWindow = {closeModal}/>} 
        </Modal>)
     }

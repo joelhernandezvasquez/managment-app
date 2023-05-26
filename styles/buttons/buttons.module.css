@@ -51,15 +51,25 @@
 }
 
 .close_button{
+ padding:unset;
+ background:none;
+}
+
+.close_button_view_task{
  width:100%;
  display:flex;
  justify-content: flex-end;
  padding:unset;
  background:none;
+ position: relative;
+ top:-10px;
+ right:-10px;
+
 }
-.close_button svg{
-    width:25px;
-    height:25px;
-  fill:var(--clr-medium-gray);
+
+.close_button svg, .close_button_view_task svg{
+    width:24px;
+    height:24px;
+   fill:var(--clr-main-purple);
 
 }

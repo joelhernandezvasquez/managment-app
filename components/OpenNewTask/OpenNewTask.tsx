@@ -16,7 +16,7 @@ export const OpenNewTask = () => {
     </button>
 
       {isModalOpen && (
-        <ModalFormLayout formTitle='Add New Task'>
+        <ModalFormLayout formTitle='Add New Task' closeModal={toggleModal}>
            <AddNewTask closeWindow = {toggleModal}/>
         </ModalFormLayout>
       )}

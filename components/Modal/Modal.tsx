@@ -11,14 +11,16 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   })
 interface Props{
     children:ReactNode,
-    taskAction:string
+    taskAction:string,
+    closeModal:() => void
+  
 }
 
-export const Modal:FC<Props>= ({children,taskAction}) => {
+export const Modal:FC<Props>= ({children,taskAction,closeModal}) => {
 
     return ReactDom.createPortal (
         <aside className={plusJakartaSans.className}>
-            <ModalFormLayout formTitle={`${taskAction === EDIT_TASK ? 'Edit Task': 'Delete this Task?'}`} formTitleColor={taskAction === DELETE_TASK ? "#EA5555" : ""}>
+            <ModalFormLayout closeModal={closeModal}  formTitle={`${taskAction === EDIT_TASK ? 'Edit Task': 'Delete this Task?'}`} formTitleColor={taskAction === DELETE_TASK ? "#EA5555" : ""}>
                 {children}
             </ModalFormLayout>
         </aside>,
