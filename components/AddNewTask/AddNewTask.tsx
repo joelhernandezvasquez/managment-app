@@ -86,5 +86,5 @@ export const AddNewTask:FC<Props> = ({closeWindow}) => {
     </div>
 
    </form>
-  )
+  ) 
 }

@@ -3,11 +3,13 @@ import { useAuthStore } from "../store/store";
 import { notifyErrorAlert } from '../helpers';
 import {kanbanApi} from '../api/kanbanApi';
 import { user } from "../types/types";
+import { useUIStates } from './useUIStates';
 
 const UseAuth= () => {
   const router = useRouter();
 
   const {onChecking,onLogin,onLogOut,clearErrorMessage,status} = useAuthStore();
+  const{resetBoardSelected,closeBoardMenuWindow,closeMenuSideBar} = useUIStates();
 
   const startAuthentication = async({email,password}:user) =>{
     onChecking();
@@ -74,12 +76,22 @@ const UseAuth= () => {
   },1000)
   }
 
+  const logOutUser = () =>{
+     localStorage.clear();
+     onLogOut('');
+     resetBoardSelected();
+     closeBoardMenuWindow();
+     closeMenuSideBar();
+   
+    router.push("/login");
+  }
+
     return {
       status,
       startAuthentication,
       createUser,
-      checkAuthToken
-      
+      checkAuthToken,
+      logOutUser  
     }
 }
 
