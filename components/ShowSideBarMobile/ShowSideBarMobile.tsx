@@ -25,6 +25,7 @@ export const ShowSideBarMobile = () => {
      >
     <path d="M1 1L5 5L9 1" stroke="#635FC7" strokeWidth="2"/>
     </svg>
+    
      
     {isSideBarOpen && 
     <ModalSideBarMobile> 

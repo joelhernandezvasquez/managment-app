@@ -109,6 +109,32 @@
    fill:var(--clr-main-purple);
 }
 
+.logout_btn{
+  display:flex;
+  align-items: center;
+  border:none;
+  background:none;
+  width:100%;
+  padding:14px;
+}
+.logout_btn svg{
+  width:20px;
+  height:20px;
+}
+
+.logout_btn span{
+  display:inline-block;
+  margin-left:12px;
+  text-transform: capitalize;
+  color:var(--clr-red);
+  font-weight: 700;
+}
+.logout_btn path{
+ fill:var(--clr-red);
+}
+
+
+
 .not_board_create_message_error{
     font-size: 1rem;
     padding:20px 10px;
@@ -263,6 +289,7 @@
     align-items: center;
     gap: 1rem;
   }
+
   .custom_checkbox{
     position:relative;
   -webkit-appearance: none;

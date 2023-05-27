@@ -12,7 +12,6 @@ interface UIState{
     toggleBoardMenu:() => void,
     closeBoardMenu:() => void,
     restoreBoardSelected:() =>void,
-
 }
 
 export const UIStore = create <UIState>()(
@@ -49,8 +48,7 @@ export const UIStore = create <UIState>()(
         }),
        
 
-        {
-          
+        { 
           name: 'ui-storage', 
           serialize: (state) => btoa(JSON.stringify(state)),
           deserialize: (storedState) => JSON.parse(atob(storedState))

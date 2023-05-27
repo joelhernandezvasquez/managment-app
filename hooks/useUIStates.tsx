@@ -3,7 +3,7 @@ import {UIStore} from '../store/UIStates/store';
 
 export const useUIStates = () => {
   
-    const {setActiveBoard,currentBoardSelected,isBoadMenuOpen,toggleBoardMenu,closeBoardMenu,restoreBoardSelected,isSideBarOpen,toggleSideBar} = UIStore();
+    const {setActiveBoard,currentBoardSelected,isBoadMenuOpen,toggleBoardMenu,closeBoardMenu,restoreBoardSelected,isSideBarOpen,toggleSideBar,closeSideBar} = UIStore();
 
     const getActiveBoard = () =>{
         return currentBoardSelected;
@@ -21,13 +21,14 @@ export const useUIStates = () => {
         restoreBoardSelected();
     }
     const closeBoardMenuWindow = () =>{
-        setTimeout(()=>{
-         closeBoardMenu();
-        },1000)
+       closeBoardMenu();
+    }
+
+    const closeMenuSideBar = () =>{
+        closeSideBar();
     }
 
    
-
     return {
         getActiveBoard,
         isSideBarOpen,
@@ -37,6 +38,7 @@ export const useUIStates = () => {
         onToogleBoardMenu,
         closeBoardMenu,
         closeBoardMenuWindow,
+        closeMenuSideBar,
         resetBoardSelected,
       
     }
