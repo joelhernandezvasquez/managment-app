@@ -10,9 +10,8 @@ export const UpdateBoard = () => {
    const {updateBoardMutation} = useBoard();
    const {getActiveBoard,closeBoardMenuWindow} = useUIStates();
    const {listInput,areInputListItemsValid,updateIsCurrentInputEmpty,resetInputList} = useInputList();
-   const {boardNameInput,updateBoardNameInput,isUpdateBoardFormSubmitted,handleUpdateBoardFormSubmitted,isBoardDataLoading} = useUpdateBoard();
+   const {boardNameInput,updateBoardNameInput,isUpdateBoardFormSubmitted,handleUpdateBoardFormSubmitted} = useUpdateBoard();
    
-  if(isBoardDataLoading) return;
 
   const onSubmitUpdateBoardForm = (event:FormEvent<HTMLFormElement>) =>{
     event.preventDefault();

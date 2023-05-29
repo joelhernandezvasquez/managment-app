@@ -1,4 +1,4 @@
-.mobile_nav_bar{
+ .mobile_nav_bar{
   display:flex;
   align-items: center;
   min-height:64px;
@@ -25,6 +25,10 @@
 
 .SideBar_mobile_chevron_up{
   transform:rotate(180deg);
+  transition:100ms ease-in-out;
+}
+.SideBar_mobile_chevron_down_animation{
+  transform:rotate(0deg);
   transition:100ms ease-in-out;
 }
 
@@ -79,3 +83,4 @@
  .active_board_menu ul > li:hover{
    color:var(--clr-red);
  }
+ 

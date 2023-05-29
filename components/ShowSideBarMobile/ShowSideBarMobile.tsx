@@ -19,7 +19,7 @@ export const ShowSideBarMobile = () => {
     <h1 className={navigation.SideBar_mobile_headline}>
       {getActiveBoard()?.name ? getActiveBoard().name : 'No board selected' }
     </h1>
-    <svg className={`${navigation.SideBar_mobile_chevron_down} ${isSideBarOpen && navigation.SideBar_mobile_chevron_up}`} 
+    <svg className={`${navigation.SideBar_mobile_chevron_down} ${isSideBarOpen ? navigation.SideBar_mobile_chevron_up:navigation.SideBar_mobile_chevron_down_animation}`} 
       width="9" height="7" viewBox="0 0 9 7" 
        fill="none"
      >
