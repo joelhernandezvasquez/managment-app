@@ -1,5 +1,5 @@
 import {useId,FormEvent,FC} from "react";
-import { useFetchBoard, useInputList,useTask,useHelper} from "../../hooks";
+import { useInputList,useTask,useHelper} from "../../hooks";
 import { CreateInputList } from "../CreateInputsLists/CreateInputList";
 import FormFieldRequired from "../FormField/FormFieldRequired";
 import { ShowTaskStatus } from "../ShowTaskStatus/ShowTaskStatus";
@@ -15,7 +15,6 @@ export const AddNewTask:FC<Props> = ({closeWindow}) => {
    
     const {task,setTaskStatus,submitAddTaskForm,onChangeTask,hasTaskStatusNotBeenSelected,resetTaskValues} = useTask();
     const {hasFormBeenSubmitted,modifyFormSubmissionState} = useHelper();
-    const {isLoading} = useFetchBoard();
     const {updateIsCurrentInputEmpty} = useInputList();
     const taskTitleID = useId();
     const taskDescriptionID = useId();
@@ -34,8 +33,7 @@ export const AddNewTask:FC<Props> = ({closeWindow}) => {
       updateIsCurrentInputEmpty(true);
     }
 
-    if(isLoading) return <></>;
-
+    
     return (
      <form className={layout.modal_form} onSubmit={onSubmitAddTaskForm}>
    

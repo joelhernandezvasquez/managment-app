@@ -1,19 +1,25 @@
 import {useState,useEffect,ChangeEvent} from 'react';
-import { useFetchBoard,useInputList } from './index'
+import { useUIStates } from './index';
+import {useQueryClient} from '@tanstack/react-query';
+import { BoardListResponse } from '../types/types';
+import { useInputList } from './index';
 
 export const useUpdateBoard = () => {
     
+    const queryClient = useQueryClient();
+    const {getActiveBoard} = useUIStates();
+    const cacheBoardData = queryClient.getQueryData<BoardListResponse>(["getBoard",getActiveBoard()._id]);
     const [boardNameInput,setBoardNameInput] = useState('');
     const [isUpdateBoardFormSubmitted,setIsUpdateBoardFormSubmitted] = useState(false);
-    const {board_columns,board_name,isLoading,isSuccess} = useFetchBoard();
     const {insertEntireInputList} = useInputList();
+ 
 
     useEffect(()=>{
-        if(isSuccess){
-         insertEntireInputList(board_columns);
-         handleUpdateNameinput(board_name);
+        if( cacheBoardData){
+        insertEntireInputList( cacheBoardData?.board_columns);
+        handleUpdateNameinput( cacheBoardData?.board_name);
         }
-       },[isSuccess])
+       },[ cacheBoardData?.board_name, cacheBoardData?.board_columns])
 
 
    const handleUpdateNameinput = (inputValue:string)=>{
@@ -31,7 +37,6 @@ export const useUpdateBoard = () => {
       return{
         boardNameInput,
         isUpdateBoardFormSubmitted,
-        isBoardDataLoading:isLoading,
         updateBoardNameInput,
         handleUpdateNameinput,
         handleUpdateBoardFormSubmitted
