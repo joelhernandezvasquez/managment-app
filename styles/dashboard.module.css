@@ -247,6 +247,7 @@
     font-size: var(--heading-L);
     font-weight: 700;
     color:var(--clr-black);
+    position:relative;
   }
   .view_task_description{
     color:var(--clr-medium-gray);

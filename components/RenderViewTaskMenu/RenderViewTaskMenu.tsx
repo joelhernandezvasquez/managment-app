@@ -20,7 +20,7 @@ const RenderViewTaskMenu:FC<Props> = ({closeModal}) => {
   }
 
   return (
-    <aside className={navigation.active_board_menu} onClick={(e) => e.stopPropagation()}>
+    <aside className={navigation.active_task_menu} onClick={(e) => e.stopPropagation()}>
     <ul>
       {
         taskMenu.map(({id,item,action})=>{
