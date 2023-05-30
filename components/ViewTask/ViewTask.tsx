@@ -6,6 +6,7 @@ import dashboard  from '../../styles/dashboard.module.css';
 import layouts from '../../styles/layouts.module.css';
 import share from '../../styles/share.module.css';
 import button from '../../styles/buttons/buttons.module.css';
+import navigation from '../../styles/navigation.module.css';
 
 interface Props{
   closeViewTask:() => void
@@ -38,7 +39,7 @@ const ViewTask:FC <Props> = ({closeViewTask}) => {
        </svg>
         </button>
             
-          <div style={{width:'100%'}} className={`${share.d_flex} ${share.d_align_flex_center} ${share.d_flex_space_between} ${share.d_position_relative}`}>
+          <div style={{width:'100%'}} className={`${share.d_flex} ${share.d_align_flex_center} ${share.d_flex_space_between} ${share.d_position_relative} ${navigation.active_task_menu_header}`}>
              <h2 className={dashboard.view_task_heading}>{name}</h2>
               <ShowViewTaskMenu/>
           </div>

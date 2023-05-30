@@ -1,5 +1,5 @@
 import {FC,ReactNode,MouseEvent, FormEvent} from 'react'
-import { useSideBar, useUIStates } from '../../hooks';
+import { useInputList, useSideBar, useUIStates } from '../../hooks';
 import layouts from '../../styles/layouts.module.css';
 import button from '../../styles/buttons/buttons.module.css';
 interface Props{
@@ -12,6 +12,7 @@ export const ModalFormLayout:FC<Props> = ({children,closeModal,formTitle,formTit
 
   const {sidebarRef,closeSideBar} = useSideBar();
   const {closeBoardMenu,isSideBarOpen,isBoardMenuCurrentlyOpen} = useUIStates();
+  const {listInput,resetInputList} = useInputList()
 
   const closeWindow = (event:FormEvent) =>{
     event.stopPropagation();
@@ -28,6 +29,10 @@ export const ModalFormLayout:FC<Props> = ({children,closeModal,formTitle,formTit
     }
    if(isBoardMenuCurrentlyOpen()){
     closeBoardMenu();
+    if(listInput.length > 0) {
+      resetInputList();
+    }
+
     return;
    }
    
