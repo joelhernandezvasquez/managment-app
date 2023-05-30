@@ -2,7 +2,8 @@ import { useQuery,useMutation,useQueryClient} from '@tanstack/react-query';
 import { useAuthStore} from '../store';
 import { useUIStates } from './useUIStates';
 import {kanbanApi} from '../api/kanbanApi';
-import {notifySuccessAlert,notifyErrorAlert, fetchAllBoards} from '../helpers';
+import {fetchAllBoards} from '../services';
+import {notifySuccessAlert,notifyErrorAlert} from '../helpers';
 import { Board,BoardListServerResponse,BoardName} from '../types/types';
 
 interface UpdatedBoard{

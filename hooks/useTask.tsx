@@ -3,7 +3,8 @@ import {useMutation,useQueryClient} from '@tanstack/react-query';
 import { useAuthStore} from '../store/store';
 import { useUIStates,useInputList} from '../hooks';
 import { kanbanApi } from '../api/kanbanApi';
-import { notifySuccessAlert,notifyErrorAlert, isValidForm,updateSubstasks, deleteTask,updateTask} from '../helpers';
+import {updateSubstasks, deleteTask,updateTask} from '../services';
+import { notifySuccessAlert,notifyErrorAlert, isValidForm} from '../helpers';
 import { BoardInput, BoardListResponse, BoardTask, SubsTask,Task,TaskSubstaskUpdate} from '../types/types';
 import { TaskStore } from '../store/TaskStore/store';
 

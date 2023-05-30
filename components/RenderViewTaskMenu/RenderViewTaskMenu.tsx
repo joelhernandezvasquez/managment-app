@@ -2,7 +2,7 @@ import { FC, useState} from 'react';
 import {DeleteTask} from '../DeleteTask/DeleteTask';
 import { EditTask } from '../EditTask/EditTask';
 import { Modal } from '../Modal/Modal';
-import { taskMenu,DELETE_TASK} from '../../helpers';
+import { taskMenu,DELETE_TASK} from '../../constants';
 import navigation from '../../styles/navigation.module.css';
 
 interface Props{
