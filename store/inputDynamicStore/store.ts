@@ -43,12 +43,11 @@ export const InputListStore = create <InputListProps>()(
           })),
           
           resetListItem:() => set((state)=>({
-            inputList:[{id:uuidv4(),column:'example'}]
+            inputList:[{id:uuidv4(),column:''}]
           }))
 
         }),
        
-      
     )
   )
 
