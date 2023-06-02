@@ -1,6 +1,5 @@
 
 import Head from "next/head";
-import { useHasMounted } from "../../hooks/useHasMounted";
 import auth from '../../styles/auth.module.css';
 <<<<<<< HEAD
 import {ReactNode } from 'react';

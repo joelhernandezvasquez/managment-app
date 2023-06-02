@@ -6,7 +6,6 @@ export * from './useSideBar';
 export * from './useUIStates';
 export * from './useHasMounted';
 export * from './useModal';
-export * from './useInputList';
 export * from './useFetchBoard';
 export * from './useUpdateBoard';
 export * from './useTask';

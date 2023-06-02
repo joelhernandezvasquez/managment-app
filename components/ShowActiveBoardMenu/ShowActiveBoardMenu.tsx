@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { RenderActiveBoardMenuItem } from '../RenderActiveBoardMenuItem/RenderActiveBoardMenuItem';
 import { SelectBoardAction } from '../SelectBoardAction/SelectBoardAction';
-import { activeBoardItems } from '../../helpers';
+import { activeBoardItems } from '../../constants';
 import navigation from '../../styles/navigation.module.css';
 
 export const ShowActiveBoardMenu = () => {

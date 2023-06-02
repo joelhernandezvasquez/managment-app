@@ -1,9 +1,12 @@
 import {useId,FormEvent,FC} from "react";
-import { useInputList,useTask,useHelper} from "../../hooks";
-import { CreateInputList } from "../CreateInputsLists/CreateInputList";
+import {useTask,useHelper} from "../../hooks";
+import useSubstasks from "../../hooks/useSubstasks";
+import { RenderInputList } from "../RenderInputList/RenderInputList";
 import FormFieldRequired from "../FormField/FormFieldRequired";
+import {mappedBoardInputToSubstasks} from "../../helpers";
 import { ShowTaskStatus } from "../ShowTaskStatus/ShowTaskStatus";
 import { ErrorMessage } from "../ErrorMessage/ErrorMessage";
+import { v4 as uuidv4 } from 'uuid';
 import layout from "../../styles/layouts.module.css";
 import styles from '../../styles/share.module.css';
 import button from '../../styles/buttons/buttons.module.css';
@@ -13,9 +16,9 @@ interface Props{
 
 export const AddNewTask:FC<Props> = ({closeWindow}) => {
    
-    const {task,setTaskStatus,submitAddTaskForm,onChangeTask,hasTaskStatusNotBeenSelected,resetTaskValues} = useTask();
+    const {getActiveTask,task,setTaskStatus,submitAddTaskForm,onChangeTask,hasTaskStatusNotBeenSelected,resetTaskValues} = useTask();
     const {hasFormBeenSubmitted,modifyFormSubmissionState} = useHelper();
-    const {updateIsCurrentInputEmpty} = useInputList();
+    const {substaskList,addSubstaskToList,updateSubstaskToList,deleteSubstaskFromList,resetSubstasks} = useSubstasks([{id:uuidv4(),column:''}]);
     const taskTitleID = useId();
     const taskDescriptionID = useId();
    
@@ -23,17 +26,15 @@ export const AddNewTask:FC<Props> = ({closeWindow}) => {
       event.preventDefault();
      modifyFormSubmissionState(true);
        
-     const response = await submitAddTaskForm({taskTitle:task.name,taskDescription:task.description});
+     const response = await submitAddTaskForm({taskTitle:task.name,taskDescription:task.description},mappedBoardInputToSubstasks(getActiveTask().substasks,substaskList));
       
       if(response?.submitted){
        modifyFormSubmissionState(false);
        resetTaskValues();
+        resetSubstasks();
         return;
       }
-      updateIsCurrentInputEmpty(true);
     }
-
-    
     return (
      <form className={layout.modal_form} onSubmit={onSubmitAddTaskForm}>
    
@@ -59,7 +60,15 @@ export const AddNewTask:FC<Props> = ({closeWindow}) => {
         isFormSubmitted = {hasFormBeenSubmitted}
     />
 
-    <CreateInputList listName={'Subtasks'} buttonName={"Add New Subtask"} />
+    <RenderInputList 
+       listName={'Subtasks'} 
+       buttonName={"Add New Subtask"}
+       listOfInputs={substaskList}
+       addInputToList={addSubstaskToList}
+       updateInputToList={updateSubstaskToList}
+       deleteInputFromList={deleteSubstaskFromList}
+       formSent = {hasFormBeenSubmitted}
+       />
 
     <div style={{marginTop:'24px', marginBottom:'8px'}}>
       <label className={`${styles.capitalize} ${styles.label}`}> Status </label>

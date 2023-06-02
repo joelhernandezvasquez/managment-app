@@ -2,7 +2,8 @@ import { useQuery,useMutation,useQueryClient} from '@tanstack/react-query';
 import { useAuthStore} from '../store';
 import { useUIStates } from './useUIStates';
 import {kanbanApi} from '../api/kanbanApi';
-import {notifySuccessAlert,notifyErrorAlert, fetchAllBoards} from '../helpers';
+import {fetchAllBoards} from '../services';
+import {notifySuccessAlert,notifyErrorAlert} from '../helpers';
 import { Board,BoardListServerResponse,BoardName} from '../types/types';
 
 interface UpdatedBoard{
@@ -14,7 +15,7 @@ export const useBoard = () => {
     
 const {user} = useAuthStore();
 const {data,isLoading,isError,error} = useQuery({queryKey:['boards'],queryFn:()=> fetchAllBoards()})
-const {setActiveBoard} = useUIStates();
+const {setActiveBoard,getActiveBoard} = useUIStates();
 const queryClient = useQueryClient();
 
 const createBoardMutation = useMutation({
@@ -60,7 +61,10 @@ const createBoardMutation = useMutation({
 const updateBoardMutation = useMutation({
   mutationFn:({board,boardId}:UpdatedBoard )=>{
     return updateBoard({board,boardId})
-  }
+  },
+  onSuccess() {
+    queryClient.invalidateQueries(["getBoard",getActiveBoard()._id]);
+  },
 })
 
 

@@ -1,9 +1,10 @@
 import { useCallback, useRef,useState,ChangeEvent} from 'react';
 import {useMutation,useQueryClient} from '@tanstack/react-query';
 import { useAuthStore} from '../store/store';
-import { useUIStates,useInputList} from '../hooks';
+import { useUIStates} from '../hooks';
 import { kanbanApi } from '../api/kanbanApi';
-import { notifySuccessAlert,notifyErrorAlert, isValidForm,updateSubstasks, deleteTask,updateTask} from '../helpers';
+import {updateSubstasks, deleteTask,updateTask} from '../services';
+import { notifySuccessAlert,notifyErrorAlert, isValidForm,isSubtaskListItemsValid} from '../helpers';
 import { BoardInput, BoardListResponse, BoardTask, SubsTask,Task,TaskSubstaskUpdate} from '../types/types';
 import { TaskStore } from '../store/TaskStore/store';
 
@@ -11,7 +12,6 @@ export const useTask = () => {
   
   const {user} = useAuthStore();
   const {getActiveBoard} = useUIStates();
-  const {areInputListItemsValid,listInput,resetInputList} = useInputList();
   const taskStatusRef = useRef<string>();
   const queryClient = useQueryClient();
   const {activeTask,setActiveTask,resetActiveTask} = TaskStore();
@@ -192,18 +192,17 @@ const resetTaskStatus = () =>{
   taskStatusRef.current = undefined;
 }
 
-  const submitAddTaskForm = async ({taskTitle,taskDescription}:Task) =>{
-     
+  const submitAddTaskForm = async ({taskTitle,taskDescription}:Task,listOfSubstasks:SubsTask []) =>{
+    
     try{
-      if(isValidForm({taskTitle,taskDescription}) && isTaskStatusValid() && areInputListItemsValid() ){
+      if(isValidForm({taskTitle,taskDescription}) && isTaskStatusValid() &&  isSubtaskListItemsValid(listOfSubstasks)){
         createTaskMutation.mutate({
           name:taskTitle,
           description:taskDescription,
-          substasks:mappedSubstask(listInput),
+          substasks:listOfSubstasks,
           status:taskStatusRef.current || " "
       })
-      resetInputList();
-      resetTaskStatus();
+     
 
        return{
         submitted:true

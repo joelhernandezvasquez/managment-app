@@ -2,7 +2,7 @@ import {useState,useEffect,ChangeEvent} from 'react';
 import { useUIStates } from './index';
 import {useQueryClient} from '@tanstack/react-query';
 import { BoardListResponse } from '../types/types';
-import { useInputList } from './index';
+
 
 export const useUpdateBoard = () => {
     
@@ -11,15 +11,13 @@ export const useUpdateBoard = () => {
     const cacheBoardData = queryClient.getQueryData<BoardListResponse>(["getBoard",getActiveBoard()._id]);
     const [boardNameInput,setBoardNameInput] = useState('');
     const [isUpdateBoardFormSubmitted,setIsUpdateBoardFormSubmitted] = useState(false);
-    const {insertEntireInputList} = useInputList();
  
 
     useEffect(()=>{
-        if( cacheBoardData){
-        insertEntireInputList( cacheBoardData?.board_columns);
+        if(cacheBoardData){
         handleUpdateNameinput( cacheBoardData?.board_name);
         }
-       },[ cacheBoardData?.board_name, cacheBoardData?.board_columns])
+       },[ cacheBoardData?.board_name])
 
 
    const handleUpdateNameinput = (inputValue:string)=>{
@@ -39,7 +37,8 @@ export const useUpdateBoard = () => {
         isUpdateBoardFormSubmitted,
         updateBoardNameInput,
         handleUpdateNameinput,
-        handleUpdateBoardFormSubmitted
+        handleUpdateBoardFormSubmitted,
+        cacheBoardData
       }
 
     
