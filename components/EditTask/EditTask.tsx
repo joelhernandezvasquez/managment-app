@@ -1,10 +1,10 @@
-import { FC,FormEvent} from "react";
+import { FC,FormEvent,useMemo} from "react";
 import { useTask,useHelper} from "../../hooks";
 import useSubstasks from "../../hooks/useSubstasks";
 import { ShowTaskStatus } from "../ShowTaskStatus/ShowTaskStatus";
 import { RenderInputList } from "../RenderInputList/RenderInputList";
 import { ErrorMessage } from "../ErrorMessage/ErrorMessage";
-import {formIsValid} from "../../helpers";
+import {formIsValid,mappedBoardInputToSubstasks,mapSubtasksToBoardInputs} from "../../helpers";
 import layout from "../../styles/layouts.module.css";
 import share from '../../styles/share.module.css';
 import button from '../../styles/buttons/buttons.module.css';
@@ -16,7 +16,8 @@ interface Props{
 export const EditTask:FC<Props> = ({closeWindow}) => {
   const {task,getActiveTask,taskStatusRef,setTaskStatus,isTaskStatusValid,areSubtasksValid,updateTaskMutation,hasTaskStatusNotBeenSelected,onChangeTask} = useTask();
   const {totalTaskTitleCharacters,hasFormBeenSubmitted,modifyFormSubmissionState} = useHelper();
-  const {substaskList,addSubstaskToList,updateSubstaskToList,deleteSubstaskFromList} = useSubstasks();
+  const listOfSubstasks = useMemo(()=>mapSubtasksToBoardInputs(getActiveTask().substasks),[]);
+  const {substaskList,addSubstaskToList,updateSubstaskToList,deleteSubstaskFromList} = useSubstasks(listOfSubstasks);
 
   const isEditTaskFormValid = () =>{
     return formIsValid([task.name,task.description]) && isTaskStatusValid() && areSubtasksValid(substaskList);
@@ -32,11 +33,13 @@ export const EditTask:FC<Props> = ({closeWindow}) => {
        _id:getActiveTask()._id,
        name:task.name,
        description:task.description,
-       substasks:getActiveTask().substasks,
+       substasks:mappedBoardInputToSubstasks(getActiveTask().substasks,substaskList),
        status:taskStatusRef.current ?? ''
      })
   }
 }
+
+
   return (
     <form className={layout.modal_form} onSubmit={onSubmitEditTaskForm}>
 

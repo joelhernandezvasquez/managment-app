@@ -12,7 +12,6 @@ useQuery(
   {
    queryKey:['getBoard', getActiveBoard()._id],
    queryFn:() => fetchBoardById(getActiveBoard()._id),
-   staleTime:10000
   }
   );
  

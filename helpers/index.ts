@@ -30,13 +30,18 @@ export const mappedBoardInputs = (inputList:string []):BoardInput [] =>{
 }
 
 export const mapSubtasksToBoardInputs= (substaskList:SubsTask []): BoardInput [] =>{
-  
-  return substaskList.map((substask)=> {
-   return{
-    id:uuidv4(),
-    column:substask.name
-  }
- })
+
+   if(substaskList.length > 0) {
+    return substaskList.map((substask)=> {
+      return{
+       id:uuidv4(),
+       column:substask.name
+     }
+    })
+   }
+ 
+   return [{id:uuidv4(), column:''}];
+
 }
 
 export const mappedListOfStatus = (list: string [] | []):Status [] =>{
@@ -47,6 +52,31 @@ export const mappedListOfStatus = (list: string [] | []):Status [] =>{
       status:listItem
      }
   })
+}
+
+export const mappedBoardInputToSubstasks = (tasks:SubsTask [],substaskList:BoardInput []): SubsTask [] =>{
+  
+ const updatedSubstasks = substaskList.map((substask,index)=>{
+  if(tasks[index]?.name && tasks[index].name === substask.column){
+    return{
+     name:substask.column,
+     complete:tasks[index].complete
+    }
+  }
+  return{
+   name:substask.column,
+   complete:false
+  }
+ })
+
+ return updatedSubstasks;
+}
+
+export const isSubtaskListItemsValid = (substaskList:SubsTask []):boolean =>{
+  
+  if(substaskList.length < 1) return false;
+  
+  return substaskList.every((substask)=> substask.name!=='');
 }
 
 

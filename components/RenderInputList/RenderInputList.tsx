@@ -18,7 +18,7 @@ interface InputListProps{
 
 export const RenderInputList:FC<InputListProps> = ({listName,buttonName,listOfInputs,addInputToList,updateInputToList,deleteInputFromList,formSent}) => {
   const{areSubtasksValid} = useTask();
-  
+
   return (
    <section className={style.container}>
    

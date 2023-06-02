@@ -15,7 +15,7 @@ export const useBoard = () => {
     
 const {user} = useAuthStore();
 const {data,isLoading,isError,error} = useQuery({queryKey:['boards'],queryFn:()=> fetchAllBoards()})
-const {setActiveBoard} = useUIStates();
+const {setActiveBoard,getActiveBoard} = useUIStates();
 const queryClient = useQueryClient();
 
 const createBoardMutation = useMutation({
@@ -61,7 +61,10 @@ const createBoardMutation = useMutation({
 const updateBoardMutation = useMutation({
   mutationFn:({board,boardId}:UpdatedBoard )=>{
     return updateBoard({board,boardId})
-  }
+  },
+  onSuccess() {
+    queryClient.invalidateQueries(["getBoard",getActiveBoard()._id]);
+  },
 })
 
 

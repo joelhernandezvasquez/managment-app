@@ -1,34 +1,37 @@
 import { FormEvent } from "react";
-import {useBoard, useInputList, useUIStates,useUpdateBoard} from "../../hooks";
-import { CreateInputList } from "../CreateInputsLists/CreateInputList";
+import {useBoard, useHelper, useTask, useUIStates,useUpdateBoard} from "../../hooks";
+import useSubstasks from '../../hooks/useSubstasks';
+import { RenderInputList } from "../RenderInputList/RenderInputList";
 import layout from "../../styles/layouts.module.css";
 import button from '../../styles/buttons/buttons.module.css';
 import share from '../../styles/share.module.css';
+import { mappedBoardInputs } from "../../helpers";
 
 export const UpdateBoard = () => {
 
    const {updateBoardMutation} = useBoard();
+   const {areSubtasksValid} = useTask();
    const {getActiveBoard,closeBoardMenuWindow} = useUIStates();
-   const {listInput,areInputListItemsValid,updateIsCurrentInputEmpty,resetInputList} = useInputList();
-   const {boardNameInput,updateBoardNameInput,isUpdateBoardFormSubmitted,handleUpdateBoardFormSubmitted} = useUpdateBoard();
+   const {cacheBoardData} = useUpdateBoard();
+   const {substaskList,addSubstaskToList,updateSubstaskToList,deleteSubstaskFromList} = useSubstasks(mappedBoardInputs(cacheBoardData?.board_columns ?? []));
+   const {boardNameInput,updateBoardNameInput} = useUpdateBoard();
+   const {hasFormBeenSubmitted,modifyFormSubmissionState} = useHelper();
    
-
   const onSubmitUpdateBoardForm = (event:FormEvent<HTMLFormElement>) =>{
     event.preventDefault();
+    modifyFormSubmissionState(true);
 
-    if(boardNameInput !=='' && areInputListItemsValid()){
-       handleUpdateBoardFormSubmitted(false);
-        updateBoardMutation.mutate(
+    if(boardNameInput !=='' && areSubtasksValid(substaskList)){
+       modifyFormSubmissionState(false);
+       updateBoardMutation.mutate(
           { 
-            board:{boardName:boardNameInput,boardColumns:listInput},
+            board:{boardName:boardNameInput,boardColumns:substaskList},
              boardId:getActiveBoard()._id
           })
-          resetInputList();
+        
           closeBoardMenuWindow();
       return;
     }
-    handleUpdateBoardFormSubmitted(true);
-    updateIsCurrentInputEmpty(true);
   }
 
   return (
@@ -37,7 +40,7 @@ export const UpdateBoard = () => {
     <label className={share.label}>
       Board Name</label>
       <input
-        className={`${share.primary_input} ${share.d_flex_grow} ${isUpdateBoardFormSubmitted && boardNameInput==='' && share.invalid_input}`}
+        className={`${share.primary_input} ${share.d_flex_grow} ${hasFormBeenSubmitted && boardNameInput==='' && share.invalid_input}`}
         type = "text"
         id="boardName"
         name="boardName"
@@ -47,11 +50,16 @@ export const UpdateBoard = () => {
      />
     </div>
     
-      <CreateInputList 
+       <RenderInputList 
        listName={'Board Columns'} 
        buttonName={"Add New Column"}
-     />
-    
+       listOfInputs={substaskList}
+       addInputToList={addSubstaskToList}
+       updateInputToList={updateSubstaskToList}
+       deleteInputFromList={deleteSubstaskFromList}
+       formSent = {hasFormBeenSubmitted}
+       />
+  
     <button className={`${button.btn_primary} ${button.auth_submit_btn}`} type="submit">
      Save Changes
     </button>
