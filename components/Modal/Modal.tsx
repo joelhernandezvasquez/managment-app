@@ -2,7 +2,7 @@ import {FC, ReactNode}from 'react';
 import ReactDom from 'react-dom';
 import { ModalFormLayout } from '../Layout/ModalFormLayout';
 import {Plus_Jakarta_Sans} from '@next/font/google';
-import { DELETE_TASK, EDIT_TASK } from '../../helpers';
+import { DELETE_TASK, EDIT_TASK } from '../../constants';
 
 
 const plusJakartaSans = Plus_Jakarta_Sans({

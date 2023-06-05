@@ -19,6 +19,7 @@ export const EditTask:FC<Props> = ({closeWindow}) => {
   const listOfSubstasks = useMemo(()=>mapSubtasksToBoardInputs(getActiveTask().substasks),[]);
   const {substaskList,addSubstaskToList,updateSubstaskToList,deleteSubstaskFromList} = useSubstasks(listOfSubstasks);
 
+
   const isEditTaskFormValid = () =>{
     return formIsValid([task.name,task.description]) && isTaskStatusValid() && areSubtasksValid(substaskList);
    }
@@ -38,7 +39,6 @@ export const EditTask:FC<Props> = ({closeWindow}) => {
      })
   }
 }
-
 
   return (
     <form className={layout.modal_form} onSubmit={onSubmitEditTaskForm}>
@@ -94,7 +94,8 @@ export const EditTask:FC<Props> = ({closeWindow}) => {
       <div style={{marginTop:'24px', marginBottom:'8px'}}>
       <label className={`${share.capitalize} ${share.label}`}> Status </label>
       <ShowTaskStatus 
-         setTaskStatus = {setTaskStatus}
+       statusSent={getActiveTask().status}
+      setTaskStatus = {setTaskStatus}
       />
     </div>
    
