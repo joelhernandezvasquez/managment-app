@@ -92,6 +92,7 @@ const createBoard = async (board:Board) =>{
   try{
        const response = await kanbanApi.put(`/board/${boardId}`,{name:board.boardName,columns:mappedBoardColumns(board)});
        notifySuccessAlert('Board has been updated');
+       setActiveBoard({_id:boardId,name:board.boardName});
        return response.data;
     }
      catch(error:any){
