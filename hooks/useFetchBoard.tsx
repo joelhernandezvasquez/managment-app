@@ -7,6 +7,7 @@ export const useFetchBoard = () => {
 
 const {getActiveBoard} = useUIStates();
 
+
 const {data:board,isLoading,isSuccess} = 
 useQuery(
   {

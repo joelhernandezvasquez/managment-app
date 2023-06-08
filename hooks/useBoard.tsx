@@ -105,19 +105,19 @@ const createBoard = async (board:Board) =>{
      }
  } 
 
- const switchToBackupBoard = async ()=>{
+ const switchToBackupBoard = async () =>{
   
   try{
     const {success,boards} = await fetchAllBoards();
     if(success && boards.length > 0){
       setActiveBoard({_id:boards[0]._id,name:boards[0].name});
+      return;
     }
 
     if(success && boards.length === 0){
-      console.log('entro a reset board selected');
       resetBoardSelected();
       queryClient.invalidateQueries({ queryKey:["boards"] });
-
+      return;
     }
   }
   catch(error){
