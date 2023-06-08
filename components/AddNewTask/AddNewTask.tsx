@@ -22,6 +22,7 @@ export const AddNewTask:FC<Props> = ({closeWindow}) => {
     const taskTitleID = useId();
     const taskDescriptionID = useId();
    
+   
     const onSubmitAddTaskForm = async (event:FormEvent) =>{
       event.preventDefault();
      modifyFormSubmissionState(true);
@@ -29,9 +30,10 @@ export const AddNewTask:FC<Props> = ({closeWindow}) => {
      const response = await submitAddTaskForm({taskTitle:task.name,taskDescription:task.description},mappedBoardInputToSubstasks(getActiveTask().substasks,substaskList));
       
       if(response?.submitted){
-       modifyFormSubmissionState(false);
-       resetTaskValues();
+        modifyFormSubmissionState(false);
+        resetTaskValues();
         resetSubstasks();
+       
         return;
       }
     }

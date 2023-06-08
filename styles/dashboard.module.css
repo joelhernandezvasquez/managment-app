@@ -25,8 +25,33 @@
    display:grid;
    align-content: center;
    height: 100%;
+}
+
+.default_screen{
+  margin-top:100px;
+  margin-left:auto;
+  margin-right:auto;
+  height:100vh;
+  padding:0 16px;
+ max-width: 500px;
+ 
+}
+.default_screen h1{
+  text-align: center;
+  font-size:1.5rem;
+  color:var(--clr-medium-gray);
+}
+.default_screen p{
+  font-size: var(--heading-l);
+  line-height: 1.7;
+  color:var(--clr-medium-gray);
+  font-weight: 700;
+  text-align: center;
+  margin:1rem 0 2rem 0;
 
 }
+
+
 .empty_board_message{
   text-align: center;
   font-size:var(--heading-L);
