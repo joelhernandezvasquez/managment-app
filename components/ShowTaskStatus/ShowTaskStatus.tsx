@@ -4,6 +4,7 @@ import { Status } from '../../types/types';
 import dashboard from '../../styles/dashboard.module.css';
 import { mappedListOfStatus } from '../../helpers';
 import { v4 as uuidv4 } from 'uuid';
+
 interface StatusProps {
  statusSent?:string,
  setTaskStatus:(status:string) => void

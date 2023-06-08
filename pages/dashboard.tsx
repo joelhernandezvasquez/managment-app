@@ -1,9 +1,17 @@
 import Head from "next/head";
+import { useBoard } from '../hooks/useBoard';
 import { MobileNavBar } from "../components/MobileNavBar";
 import { RenderMain } from '../components/RenderMain/RenderMain';
+import Loader from '../components/Loaders/Loader';
 import style from '../styles/dashboard.module.css';
+import DefaultScreen from "../components/DefaultScreen/DefaultScreen";
 
-const dashboard = () => {
+const Dashboard = () => {
+  const {boards,isLoading} = useBoard();
+  
+  if (isLoading) {
+    return  <Loader/>
+  }
   return (
     <>
      <Head>
@@ -14,18 +22,25 @@ const dashboard = () => {
     </Head>
 
    <div className={style.wrapper}>
-      <header>
+    {
+      boards?.length! > 0 ? (
+        <>
+        <header>
         <MobileNavBar/>
       </header>
       
       <main>
         <RenderMain/>
       </main>
-     
+      </>
+      )
+      :
+    <DefaultScreen/>
+    }
    </div>
 
     </>
   )
 }
 
-export default dashboard
+export default Dashboard

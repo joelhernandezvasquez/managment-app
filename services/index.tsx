@@ -45,6 +45,7 @@ export const fetchAllBoards = async ():Promise<BoardListServerResponse> =>{
   }
 
   export const fetchBoardById = async (id:string):Promise<BoardListResponse> =>{
+    console.log(id);
     try{
        const {data} = await kanbanApi.post('/board/getBoard',{id});
        

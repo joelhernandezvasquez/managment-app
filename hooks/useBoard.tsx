@@ -15,7 +15,7 @@ export const useBoard = () => {
     
 const {user} = useAuthStore();
 const {data,isLoading,isError,error} = useQuery({queryKey:['boards'],queryFn:()=> fetchAllBoards()})
-const {setActiveBoard,getActiveBoard} = useUIStates();
+const {setActiveBoard,getActiveBoard,resetBoardSelected} = useUIStates();
 const queryClient = useQueryClient();
 
 const createBoardMutation = useMutation({
@@ -23,6 +23,7 @@ const createBoardMutation = useMutation({
     return createBoard(board)
   },
   onMutate: async (newBoard) => {
+    
     const{boardName,boardColumns} = newBoard;
     await queryClient.cancelQueries(["boards"]);
     
@@ -52,7 +53,9 @@ const createBoardMutation = useMutation({
       queryClient.setQueryData(["boards"], context.previousData)
     }
   },
-  onSettled: () => {
+  onSettled: (data) => {
+    const {_id,name} = data.board;
+    setActiveBoard({_id,name});
     queryClient.invalidateQueries({ queryKey:["boards"] })
   },
   
@@ -102,21 +105,34 @@ const createBoard = async (board:Board) =>{
      }
  } 
 
- const switchToBackupBoard = ():BoardName =>{
-  const boardsCache = queryClient.getQueryData<BoardListServerResponse>(["boards"]);
-  const boardToSwitch = boardsCache?.boards[0];
-  return {
-    _id:boardToSwitch?._id ?? '',
-    name:boardToSwitch?.name ?? ''
+ const switchToBackupBoard = async ()=>{
+  
+  try{
+    const {success,boards} = await fetchAllBoards();
+    if(success && boards.length > 0){
+      setActiveBoard({_id:boards[0]._id,name:boards[0].name});
+    }
+
+    if(success && boards.length === 0){
+      console.log('entro a reset board selected');
+      resetBoardSelected();
+      queryClient.invalidateQueries({ queryKey:["boards"] });
+
+    }
   }
+  catch(error){
+    console.log(error);
+    throw new Error ('server failed');
+  }
+
  }
 
  const removeBoard = async(boardId:string) =>{
     
   try{
    await kanbanApi.delete(`/board/${boardId}`);
-   setActiveBoard(switchToBackupBoard())
    notifySuccessAlert('Board has been deleted');
+   switchToBackupBoard();
   }
     catch(error){
       console.log(error);
