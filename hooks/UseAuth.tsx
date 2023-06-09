@@ -4,12 +4,13 @@ import { notifyErrorAlert } from '../helpers';
 import {kanbanApi} from '../api/kanbanApi';
 import { user } from "../types/types";
 import { useUIStates } from './useUIStates';
+import { fetchAllBoards } from '../services';
 
 const UseAuth= () => {
   const router = useRouter();
 
   const {onChecking,onLogin,onLogOut,clearErrorMessage,status} = useAuthStore();
-  const{resetBoardSelected,closeBoardMenuWindow,closeMenuSideBar} = useUIStates();
+  const{resetBoardSelected,closeBoardMenuWindow,closeMenuSideBar,setActiveBoard} = useUIStates();
 
   const startAuthentication = async({email,password}:user) =>{
     onChecking();
@@ -19,6 +20,7 @@ const UseAuth= () => {
       localStorage.setItem('token',data.token);
       onLogin({name:data.name,uid:data.uid});
       router.push("/dashboard ");
+      setDefaultBoardView();
     }
     catch(error:any){
     console.log(error);
@@ -26,6 +28,20 @@ const UseAuth= () => {
     const errorMsg = response.data?.errors?.password?.msg || response.data.msg;
     onHandleRequestError(errorMsg);
     }
+  }
+
+  const setDefaultBoardView= async () =>{
+    try{
+      const {boards} = await fetchAllBoards();
+       if(boards.length > 0){
+         setActiveBoard({_id:boards[0]._id,name:boards[0].name});
+       }
+    }
+    catch(error){
+      console.log(error);
+      throw new Error('Error at fetching');
+    }
+   
   }
 
   const createUser = async ({name,email,password}:user) =>{
