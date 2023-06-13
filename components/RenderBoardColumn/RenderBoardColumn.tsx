@@ -1,17 +1,16 @@
 import {FC} from 'react'
 import { useTask } from '../../hooks';
 import { TaskCard } from '../TaskCard/TaskCard';
-import { StatusTaskIndicator } from '../StatusTaskIndicator/StatusTaskIndicator';
 import { BoardTask } from '../../types/types';
 import style from '../../styles/dashboard.module.css';
 import share from '../../styles/share.module.css';
 
-interface Props{
+interface PropsRenderBoard{
     columnName:string,
     tasks:BoardTask []
 }
 
-export const RenderBoardColumn:FC <Props> = ({columnName,tasks}) => {
+export const RenderBoardColumn:FC <PropsRenderBoard> = ({columnName,tasks}) => {
  
   const {getListOfTasksByStatus} = useTask();
   const listOfTasksByStatus = getListOfTasksByStatus(tasks,columnName);

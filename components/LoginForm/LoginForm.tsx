@@ -30,7 +30,7 @@ export const LoginForm = () => {
     <FormFieldRequired 
      labelName ={'email address'}
      type = "email"
-     id="emailLogin"
+     id="emailAddress"
      name="email"
      placeholderText ="demo@gmail.com"
      fieldState={email} 
@@ -41,7 +41,7 @@ export const LoginForm = () => {
     <FormFieldRequired
      labelName ={'password'}
      type = "password"
-     id="emailLogin"
+     id="emailPassword"
      name="password"
      fieldState={password} 
      onChangeHandler = {handleChange}

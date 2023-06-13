@@ -7,22 +7,24 @@ import button from '../../styles/buttons/buttons.module.css';
 import share from '../../styles/share.module.css';
 import { mappedBoardInputs } from "../../helpers";
 
+
 export const UpdateBoard = () => {
 
    const {updateBoardMutation} = useBoard();
    const {areSubtasksValid} = useTask();
    const {getActiveBoard,closeBoardMenuWindow} = useUIStates();
-   const {cacheBoardData} = useUpdateBoard();
+   const {cacheBoardData,boardNameInput,updateBoardNameInput} = useUpdateBoard();
    const {substaskList,addSubstaskToList,updateSubstaskToList,deleteSubstaskFromList} = useSubstasks(mappedBoardInputs(cacheBoardData?.board_columns ?? []));
-   const {boardNameInput,updateBoardNameInput} = useUpdateBoard();
    const {hasFormBeenSubmitted,modifyFormSubmissionState} = useHelper();
    
+  
   const onSubmitUpdateBoardForm = (event:FormEvent<HTMLFormElement>) =>{
     event.preventDefault();
     modifyFormSubmissionState(true);
 
     if(boardNameInput !=='' && areSubtasksValid(substaskList)){
        modifyFormSubmissionState(false);
+  
        updateBoardMutation.mutate(
           { 
             board:{boardName:boardNameInput,boardColumns:substaskList},
