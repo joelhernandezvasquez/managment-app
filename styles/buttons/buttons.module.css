@@ -73,3 +73,20 @@
    fill:var(--clr-main-purple);
 
 }
+.add_task_btn_text{
+    display:none;
+}
+
+
+@media(min-width:767px){
+
+    .add_task_btn{
+        gap:5px;
+        padding:13px 24px;
+        font-size: var(--heading-M);   
+    }
+    
+    .add_task_btn_text{
+        display:block;
+    }
+}

@@ -1,23 +1,16 @@
-import Image from 'next/image';
-import navigation from '../../styles/navigation.module.css';
-import mobileHeaderLogo from '../../assets/mobileNavLogo.svg';
+import Logo from '../Logo/Logo';
 import { ShowSideBarMobile } from '../ShowSideBarMobile/ShowSideBarMobile';
 import { OpenNewTask } from '../OpenNewTask/OpenNewTask';
 import { ShowBoardMenu } from '../ShowBoardMenu/ShowBoardMenu';
+import navigation from '../../styles/navigation.module.css';
 
 export const MobileNavBar = () => {
   return (
-    <section className={navigation.mobile_nav_bar}>
-     <Image
-     src = {mobileHeaderLogo}
-     width={24}
-     height={25}
-     alt="company logo"
-     />
-     
+    <nav className={navigation.mobile_nav_bar}>
+      <Logo/>
      <ShowSideBarMobile/>
      <OpenNewTask/>
      <ShowBoardMenu/>
-    </section>
+    </nav>
   )
 }
