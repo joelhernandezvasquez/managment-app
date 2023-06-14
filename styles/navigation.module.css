@@ -33,9 +33,8 @@
 }
 
 .show_board_menu{
-  margin-left:16px;
+  margin-left: clamp( 1rem, 3vw, 1.5rem );
   cursor: pointer;
-
 }
 .show_board_menu_button{
    display:block;
@@ -97,4 +96,29 @@
   .active_board_menu ul > li:hover, .active_task_menu ul > li:hover{
     color:var(--clr-red);
   }
+
+  .desktop_nav_bar{
+    display:none; 
+  }
  
+
+  @media(min-width:767px){
+    .mobile_nav_bar{
+     display:none; 
+  }
+
+  .desktop_nav_bar{
+    display:flex;
+    align-items: center;
+    padding:20px 24px;
+    position:relative;
+
+  }
+  .desktop_nav_bar .SideBar_mobile_headline{
+    margin-right: auto;
+  }
+
+  .active_board_menu{
+    top:70px;
+  }
+}

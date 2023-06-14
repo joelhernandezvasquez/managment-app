@@ -1,10 +1,14 @@
 import Head from "next/head";
 import { useBoard } from '../hooks/useBoard';
 import { MobileNavBar } from "../components/MobileNavBar";
+import { DesktopNavBar } from "../components/DesktopNavBar/DesktopNavBar";
 import { RenderMain } from '../components/RenderMain/RenderMain';
+import { DesktopSideBar } from "../components/DesktopSideBar/DesktopSideBar";
 import Loader from '../components/Loaders/Loader';
-import style from '../styles/dashboard.module.css';
 import DefaultScreen from "../components/DefaultScreen/DefaultScreen";
+import style from '../styles/dashboard.module.css';
+
+
 
 const Dashboard = () => {
   const {boards,isLoading} = useBoard();
@@ -27,7 +31,10 @@ const Dashboard = () => {
         <>
         <header>
         <MobileNavBar/>
+        <DesktopNavBar/>
       </header>
+
+      <DesktopSideBar/>
       
       <main>
         <RenderMain/>

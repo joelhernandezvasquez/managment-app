@@ -4,7 +4,7 @@ import { useUIStates } from './useUIStates';
 import {kanbanApi} from '../api/kanbanApi';
 import {fetchAllBoards} from '../services';
 import {notifySuccessAlert,notifyErrorAlert} from '../helpers';
-import { Board,BoardListServerResponse,BoardName} from '../types/types';
+import { Board,BoardListServerResponse} from '../types/types';
 
 interface UpdatedBoard{
   board:Board, 
