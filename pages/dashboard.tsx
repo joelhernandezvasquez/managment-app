@@ -9,13 +9,13 @@ import DefaultScreen from "../components/DefaultScreen/DefaultScreen";
 import style from '../styles/dashboard.module.css';
 
 
-
 const Dashboard = () => {
   const {boards,isLoading} = useBoard();
   
   if (isLoading) {
     return  <Loader/>
   }
+
   return (
     <>
      <Head>

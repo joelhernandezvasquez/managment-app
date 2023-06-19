@@ -121,6 +121,8 @@ export type SuccessResponse =  {
   message:string
 }
 
+export type DesktopSideBarStatus = 'display' | 'open' | 'close';
+
 
 
 
