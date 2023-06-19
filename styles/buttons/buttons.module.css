@@ -89,4 +89,33 @@
     .add_task_btn_text{
         display:block;
     }
+
+    .hide_desktop_side_bar_btn{
+        display:flex;
+        align-items: center;
+        gap:10px;
+        padding:unset;
+        margin-left:24px;
+        background:none;
+        font-size:1rem;
+        color:var(--clr-medium-gray);
+        font-weight: 700;
+        cursor: pointer;
+    }
+    .open_side_bar_btn{
+        position:absolute;
+        bottom:50px;
+        right:-75px;
+        padding:unset;
+        padding:18px 20px;
+        width: 56px;
+        height:48px;
+        background:var(--clr-main-purple);
+        border-radius: 0px 50px 50px 0px;
+        cursor: pointer;
+        transition: background 300ms ease-in-out;
+    }
+    .open_side_bar_btn:hover{
+        background-color: #A8A4FF;
+    }
 }

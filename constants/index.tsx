@@ -54,3 +54,5 @@ export const activeBoardItems = [
     done:'#67E2AE',
     unknown:'#2E88C2'
   }
+
+  export const TABLET_VIEWPORT = 767;

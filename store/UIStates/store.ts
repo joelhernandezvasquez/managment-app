@@ -1,12 +1,15 @@
 
 import { create } from 'zustand';
 import { devtools,persist} from 'zustand/middleware'
-import {BoardName} from '../../types/types';
+import {BoardName,DesktopSideBarStatus} from '../../types/types';
 interface UIState{
     isSideBarOpen:boolean,
+    desktopSideBarStatus:DesktopSideBarStatus,
     currentBoardSelected:BoardName,
     isBoadMenuOpen:boolean,
+
     toggleSideBar:() => void,
+    setDesktopSideBar:(status:DesktopSideBarStatus) => void,
     closeSideBar:() => void,
     setActiveBoard:(boardName:BoardName) => void, 
     toggleBoardMenu:() => void,
@@ -22,15 +25,23 @@ export const UIStore = create <UIState>()(
               isSideBarOpen:false,
              currentBoardSelected:{_id:'',name:''},
              isBoadMenuOpen:false,
+             desktopSideBarStatus:'display',
+
 
              toggleSideBar:() =>  set((state)=> ({
             isSideBarOpen:!state.isSideBarOpen
           })),
 
+          setDesktopSideBar:(status) => set((state)=> ({
+            desktopSideBarStatus:status
+          })),
+
+
           closeSideBar:() => set((state)=>({
             isSideBarOpen:false
           })),
 
+        
           setActiveBoard:(boardName) => set((state)=>({
             currentBoardSelected:boardName
           })),

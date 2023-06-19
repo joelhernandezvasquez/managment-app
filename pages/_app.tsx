@@ -14,7 +14,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export default function App({ Component, pageProps }: AppProps) {
   const {checkAuthToken} = UseAuth();
   const {closeSideBar} = useSideBar();
-  const {closeBoardMenu} = useUIStates();
+  const {closeBoardMenu,setDesktopSideBar} = useUIStates();
   const [queryClient] = useState(()=> new QueryClient);
 
   useEffect(()=>{
@@ -23,6 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
    addEventListener('beforeunload',() => { 
     closeSideBar();
     closeBoardMenu();
+   setDesktopSideBar('display');
   });
 },[])
 

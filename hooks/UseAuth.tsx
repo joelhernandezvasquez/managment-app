@@ -10,7 +10,7 @@ const UseAuth= () => {
   const router = useRouter();
 
   const {onChecking,onLogin,onLogOut,clearErrorMessage,status} = useAuthStore();
-  const{resetBoardSelected,closeBoardMenuWindow,closeMenuSideBar,setActiveBoard} = useUIStates();
+  const{resetBoardSelected,closeBoardMenuWindow,closeMenuSideBar,setActiveBoard,setDesktopSideBar} = useUIStates();
 
   const startAuthentication = async({email,password}:user) =>{
     onChecking();
@@ -21,6 +21,7 @@ const UseAuth= () => {
       onLogin({name:data.name,uid:data.uid});
       router.push("/dashboard ");
       setDefaultBoardView();
+      setDesktopSideBar('display');
     }
     catch(error:any){
     console.log(error);
