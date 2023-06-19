@@ -24,7 +24,6 @@
 .desktop_side_bar{
   display:none;
   grid-area:sidebar;
-  /* height:500px; */
 }
 
 
@@ -167,8 +166,6 @@
 .logout_btn path{
  fill:var(--clr-red);
 }
-
-
 
 .not_board_create_message_error{
     font-size: 1rem;
@@ -379,12 +376,14 @@
 
  @media(min-width:767px){
   .wrapper{
-   
     grid-template-columns: 260px repeat(2,1fr);
     grid-template-areas: 
     "sidebar header header"
-    "sidebar main main"  
+    "sidebar main main"  ;
+    transition: all ease-in-out 1s;
+     
 }
+
 .desktop_side_bar{
   display:flex;
   flex-direction: column;
@@ -420,14 +419,24 @@
 }
 
 .hide_side_bar{
-  animation: slide-out 700ms ease-in-out;
+  animation: slide-out 100ms ease-in-out;
   animation-fill-mode: forwards;
+  position:fixed;
 }
 
 .show_side_bar{
- animation:slide-in 700ms ease-in-out;
+ animation:slide-in 300ms ease-in-out;
  animation-fill-mode: forwards;
 }
+.wrapper.shrink{
+   grid-template-columns:repeat(2,1fr);
+    grid-template-areas: 
+    "header header"
+    "main main" ;
+    
+}
+
+
 
  }
 
@@ -438,7 +447,7 @@
   }
   to {
     transform: translateX(-100%);
-  
+   
   }
 }
 

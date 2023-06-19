@@ -112,6 +112,7 @@
     align-items: center;
     padding:20px 24px;
     position:relative;
+    border-bottom:1px solid  #E4EBFA;
 
   }
   .desktop_nav_bar .SideBar_mobile_headline{

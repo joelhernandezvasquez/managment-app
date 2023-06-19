@@ -12,7 +12,6 @@ export const DesktopSideBar = () => {
    const {desktopSideBarStatus,setDesktopSideBar} = useUIStates();
    const {currentScreenSize} = useResize();
 
-
    const getSidebarClassName = () =>{
 
     if(currentScreenSize < TABLET_VIEWPORT && desktopSideBarStatus!=='display'){

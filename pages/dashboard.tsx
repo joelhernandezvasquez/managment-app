@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useBoard } from '../hooks/useBoard';
+import { useUIStates } from "../hooks";
 import { MobileNavBar } from "../components/MobileNavBar";
 import { DesktopNavBar } from "../components/DesktopNavBar/DesktopNavBar";
 import { RenderMain } from '../components/RenderMain/RenderMain';
@@ -8,9 +9,9 @@ import Loader from '../components/Loaders/Loader';
 import DefaultScreen from "../components/DefaultScreen/DefaultScreen";
 import style from '../styles/dashboard.module.css';
 
-
 const Dashboard = () => {
   const {boards,isLoading} = useBoard();
+  const {desktopSideBarStatus} = useUIStates()
   
   if (isLoading) {
     return  <Loader/>
@@ -25,7 +26,7 @@ const Dashboard = () => {
       <meta name="keywords" content="kanban,tasks,managment,manage tasks,organize tasks"/>
     </Head>
 
-   <div className={style.wrapper}>
+   <div className={`${style.wrapper} ${desktopSideBarStatus === 'close' && style.shrink}`}>
     {
       boards?.length! > 0 ? (
         <>
