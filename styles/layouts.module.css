@@ -29,6 +29,8 @@
     margin-right: 16px;
     padding:24px;
     overflow-y: auto;
+    max-width: 480px;
+   
 }
 .modal_header{
     width:100%;
@@ -52,4 +54,11 @@
 }
 .modal_form > div label{
     text-align: left;
+}
+
+@media(min-width:1200px){
+    .modal_inner_form{
+    top:40px;
+    min-width:480px;
+}
 }

@@ -35,6 +35,8 @@
 .show_board_menu{
   margin-left: clamp( 1rem, 3vw, 1.5rem );
   cursor: pointer;
+  padding:10px;
+  
 }
 .show_board_menu_button{
    display:block;
@@ -112,6 +114,7 @@
     align-items: center;
     padding:20px 24px;
     position:relative;
+    border-bottom:1px solid  #E4EBFA;
 
   }
   .desktop_nav_bar .SideBar_mobile_headline{

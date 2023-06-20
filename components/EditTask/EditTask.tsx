@@ -103,7 +103,7 @@ export const EditTask:FC<Props> = ({closeWindow}) => {
 
     <div>
     <button className={`${button.btn_primary} ${button.auth_submit_btn}`} type="submit">
-     Update Task
+     Save Changes
     </button>
 
     <button className={`${button.btn_primary} ${button.auth_submit_btn}`}

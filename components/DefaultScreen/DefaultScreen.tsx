@@ -1,8 +1,9 @@
 import { useModal } from '../../hooks';
 import { ModalFormLayout } from '../Layout/ModalFormLayout';
+import { AddNewBoard } from '../AddNewBoard/AddNewBoard';
 import style from '../../styles/dashboard.module.css';
 import button from '../../styles/buttons/buttons.module.css';
-import { AddNewBoard } from '../AddNewBoard/AddNewBoard';
+
 
 const DefaultScreen = () => {
 
