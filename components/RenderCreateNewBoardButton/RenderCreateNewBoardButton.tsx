@@ -1,8 +1,8 @@
 import {memo,FC} from 'react';
 import { useModal } from '../../hooks';
-import dashboard from '../../styles/dashboard.module.css';
 import { AddNewBoard } from '../AddNewBoard/AddNewBoard';
 import { ModalFormLayout } from '../Layout/ModalFormLayout';
+import dashboard from '../../styles/dashboard.module.css';
 
 export const RenderCreateNewBoardButton:FC = memo(() => {
   

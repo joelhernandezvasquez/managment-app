@@ -40,7 +40,7 @@
   margin-right:auto;
   height:100vh;
   padding:0 16px;
- max-width: 500px;
+  max-width: 500px;
  
 }
 .default_screen h1{
@@ -105,7 +105,9 @@
    color:var(--clr-medium-gray);
    font-size: var(--heading-M);
    font-weight: 700;
+   cursor: pointer;
 }
+
 .board_items li svg{
     margin-right:12px;
     fill:var(--clr-medium-gray);
@@ -130,6 +132,7 @@
     background:none;
     width:100%;
     padding:14px;
+    cursor: pointer;
 }
 
 .create_board_btn span{
@@ -150,6 +153,7 @@
   background:none;
   width:100%;
   padding:14px;
+  cursor: pointer;
 }
 .logout_btn svg{
   width:20px;
@@ -228,6 +232,7 @@
 .grid_board_columns{
   display:grid;
   grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+  align-items: start;
   grid-gap:24px;
   
 }
@@ -253,6 +258,7 @@
    border-radius: 8px;  
    margin-bottom:20px; 
    padding:20px 16px;
+   cursor: pointer;
    
   }
   .task_name{
@@ -283,14 +289,16 @@
   }
   .view_task_description{
     color:var(--clr-medium-gray);
-    font-size: var(--body-L);
+    font-size: clamp(var(--body-L), 2vw,0.9rem);
     font-weight: 500;
     margin-top:1.5rem;
     line-height: 1.7;
   }
 
   .view_substasks{
+    width:100%;
     margin-top:1.5rem;
+   
   }
   .view_substasks_text{
     color:var(--clr-medium-gray);
@@ -305,6 +313,7 @@
     border-radius: 4px;
     padding:12px;
     margin-bottom: 8px;
+    overflow: auto;   
   }
   .view_substasks_item:first-of-type {
     margin-top: 16px;
@@ -314,13 +323,14 @@
   }
 
   .custom_checkbox_container{
-    font-size: var(--body-L);
+    font-size: clamp(var(--body-L), 2vw ,0.95rem);
     color:var(--clr-black);
     font-weight: 700;
     display: grid;
     grid-template-columns: 1em auto;
     align-items: center;
     gap: 1rem;
+ 
   }
 
   .custom_checkbox{
@@ -432,11 +442,12 @@
    grid-template-columns:repeat(2,1fr);
     grid-template-areas: 
     "header header"
-    "main main" ;
-    
+    "main main" ;  
 }
 
-
+.default_screen{
+   grid-column: span 3;
+}
 
  }
 

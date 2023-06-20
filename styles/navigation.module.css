@@ -35,6 +35,8 @@
 .show_board_menu{
   margin-left: clamp( 1rem, 3vw, 1.5rem );
   cursor: pointer;
+  padding:10px;
+  
 }
 .show_board_menu_button{
    display:block;
