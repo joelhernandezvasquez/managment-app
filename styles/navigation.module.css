@@ -5,6 +5,7 @@
   padding-left:16px;
   padding-right:16px;
   position: relative;
+  background:var(--white-bg);
 }
 
 .SideBar_mobile{
@@ -36,6 +37,7 @@
   margin-left: clamp( 1rem, 3vw, 1.5rem );
   cursor: pointer;
   padding:10px;
+
   
 }
 .show_board_menu_button{
@@ -66,9 +68,9 @@
   width:190px;
   height:94px;
   z-index:2;
-  box-shadow: 0px 10px 20px rgba(54, 78, 126, 0.25);
+  box-shadow: var(--dark-shadow);
   border-radius: 8px;
-  background:white;
+  background:var(--dark-black-bg);
   
 }
 
@@ -79,9 +81,9 @@
    right:0px;
   width:190px;
   height:94px;
-  box-shadow: 0px 10px 20px rgba(54, 78, 126, 0.25);
+  box-shadow: var(--dark-shadow);
   border-radius: 8px;
-  background:white;
+  background:var(--dark-black-bg);
   
  }
 
@@ -114,7 +116,8 @@
     align-items: center;
     padding:20px 24px;
     position:relative;
-    border-bottom:1px solid  #E4EBFA;
+    background:var(--white-bg);
+    border-bottom:1px solid var(--clr-divider-line); 
 
   }
   .desktop_nav_bar .SideBar_mobile_headline{

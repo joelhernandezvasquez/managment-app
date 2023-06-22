@@ -123,6 +123,8 @@ export type SuccessResponse =  {
 
 export type DesktopSideBarStatus = 'display' | 'open' | 'close';
 
+export type ThemeColor = 'light' | 'dark';
+
 
 
 

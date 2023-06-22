@@ -40,7 +40,7 @@
 
 .input_list_btn{
     border-radius: 20px;
-    background:rgba(99, 95, 199, 0.1);
+    background:var(--clr-body-opaque);
     color:var(--clr-main-purple);
     font-weight: 700;
     font-size:0.82rem;
@@ -81,7 +81,7 @@
 .close_button svg, .close_button_view_task svg{
     width:24px;
     height:24px;
-   fill:var(--clr-main-purple);
+   fill:var(--close-modal-btn-clr);
 
 }
 .add_task_btn_text{

@@ -12,6 +12,6 @@ export const ShowTotalSubstaskCompleted:FC <Props> = ({substasks}) => {
     const totalOfSubstasksCompleted = getTotalOfSubstasksCompleted(substasks);
 
     return (
-    <p className={dashboard.view_substasks_text}>Subtasks ({totalOfSubstasksCompleted} of {substasks.length})</p> 
+    <p className={dashboard.view_substasks_text}>{totalOfSubstasksCompleted} of {substasks.length} Subtasks </p> 
   )
 }

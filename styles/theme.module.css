@@ -18,11 +18,17 @@
     background-color: var( --clr-main-purple);
     border-radius: 12px;
     padding:0 5px;
+
 }
 .toggle_btn{
     width:14px;
     height:14px;
     border-radius: 50%;
     background:white;
+    transition: transform 400ms ease-in-out;
+}
+
+.toggle_btn.darkMode{
+ transform: translateX(16px);
 }
 

@@ -11,7 +11,7 @@ import style from '../styles/dashboard.module.css';
 
 const Dashboard = () => {
   const {boards,isLoading} = useBoard();
-  const {desktopSideBarStatus} = useUIStates()
+  const {desktopSideBarStatus,theme} = useUIStates()
   
   if (isLoading) {
     return  <Loader/>
@@ -26,7 +26,7 @@ const Dashboard = () => {
       <meta name="keywords" content="kanban,tasks,managment,manage tasks,organize tasks"/>
     </Head>
 
-   <div className={`${style.wrapper} ${desktopSideBarStatus === 'close' && style.shrink}`}>
+   <div className={`${style.wrapper} ${desktopSideBarStatus === 'close' && style.shrink} ${theme ==='dark' && 'dark'}`}>
     {
       boards?.length! > 0 ? (
         <>
