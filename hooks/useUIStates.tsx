@@ -3,7 +3,7 @@ import {UIStore} from '../store/UIStates/store';
 
 export const useUIStates = () => {
   
-    const {setActiveBoard,currentBoardSelected,isBoadMenuOpen,toggleBoardMenu,closeBoardMenu,restoreBoardSelected,isSideBarOpen,toggleSideBar,closeSideBar,desktopSideBarStatus,setDesktopSideBar} = UIStore();
+    const {setActiveBoard,currentBoardSelected,isBoadMenuOpen,toggleBoardMenu,closeBoardMenu,restoreBoardSelected,isSideBarOpen,toggleSideBar,closeSideBar,desktopSideBarStatus,setDesktopSideBar,theme,setThemeColor} = UIStore();
 
     const getActiveBoard = () =>{
         return currentBoardSelected;
@@ -28,6 +28,7 @@ export const useUIStates = () => {
         closeSideBar();
     }
 
+
    
     return {
         getActiveBoard,
@@ -41,6 +42,8 @@ export const useUIStates = () => {
         closeMenuSideBar,
         resetBoardSelected,
         desktopSideBarStatus,
-        setDesktopSideBar  
+        setDesktopSideBar ,
+        theme,
+        setThemeColor
     }
 }

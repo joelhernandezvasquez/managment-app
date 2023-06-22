@@ -1,13 +1,14 @@
 
 import { create } from 'zustand';
 import { devtools,persist} from 'zustand/middleware'
-import {BoardName,DesktopSideBarStatus} from '../../types/types';
+import {BoardName,DesktopSideBarStatus,ThemeColor} from '../../types/types';
 interface UIState{
     isSideBarOpen:boolean,
     desktopSideBarStatus:DesktopSideBarStatus,
     currentBoardSelected:BoardName,
     isBoadMenuOpen:boolean,
-
+    theme:ThemeColor,
+    
     toggleSideBar:() => void,
     setDesktopSideBar:(status:DesktopSideBarStatus) => void,
     closeSideBar:() => void,
@@ -15,6 +16,7 @@ interface UIState{
     toggleBoardMenu:() => void,
     closeBoardMenu:() => void,
     restoreBoardSelected:() =>void,
+    setThemeColor:(theme:ThemeColor) => void
 }
 
 export const UIStore = create <UIState>()(
@@ -26,6 +28,7 @@ export const UIStore = create <UIState>()(
              currentBoardSelected:{_id:'',name:''},
              isBoadMenuOpen:false,
              desktopSideBarStatus:'display',
+             theme:'light',
 
 
              toggleSideBar:() =>  set((state)=> ({
@@ -55,6 +58,12 @@ export const UIStore = create <UIState>()(
           restoreBoardSelected:() => set((state)=>({
             currentBoardSelected:{_id:'',name:''},
           })),
+
+          setThemeColor:(theme) => set((state)=>({
+           theme:theme,
+          })),
+
+          
 
         }),
        
