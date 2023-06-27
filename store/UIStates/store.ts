@@ -16,7 +16,7 @@ interface UIState{
     toggleBoardMenu:() => void,
     closeBoardMenu:() => void,
     restoreBoardSelected:() =>void,
-    setThemeColor:(theme:ThemeColor) => void
+    setThemeColor:(theme:ThemeColor) => void,
 }
 
 export const UIStore = create <UIState>()(
@@ -29,8 +29,7 @@ export const UIStore = create <UIState>()(
              isBoadMenuOpen:false,
              desktopSideBarStatus:'display',
              theme:'light',
-
-
+             
              toggleSideBar:() =>  set((state)=> ({
             isSideBarOpen:!state.isSideBarOpen
           })),

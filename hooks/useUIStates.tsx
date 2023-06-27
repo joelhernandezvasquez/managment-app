@@ -44,6 +44,6 @@ export const useUIStates = () => {
         desktopSideBarStatus,
         setDesktopSideBar ,
         theme,
-        setThemeColor
+        setThemeColor,
     }
 }

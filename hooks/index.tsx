@@ -12,5 +12,6 @@ export * from './useTask';
 export * from './useHelper';
 export * from './useSubstasks';
 export * from './useResize';
+export * from './useDragAndDrop';
 
 
