@@ -79,7 +79,7 @@
      --clr-black:#000112;
      --clr-medium-gray:#828FA3;
      --clr-red:#EA5555;
-     --clr-body:#F4F7FD;
+     --clr-body:#f4f7fd;
      --clr-main-purple-hover:#A8A4FF;
      --white-bg:#FFFFFF;
      --clr-divider-line: #E4EBFA;
@@ -88,8 +88,10 @@
      --very-dark-grey-clr:#828FA3;
      --close-modal-btn-clr:#635FC7;
     --clr-body-opaque:rgba(99, 95, 199, 0.1);
-    --dark-black-bg:#FFFFFF;
+    --dark-black-bg:#ffffff;
     --dark-shadow:0px 10px 20px rgba(54, 78, 126, 0.25);
+    --dark-opaque:rgba(228, 235, 250,0.5);
+    --dragging-border:#828FA3;
 
     /* BreakPoints */
     --tablet-breakpoint:550px;
@@ -114,6 +116,8 @@
     --clr-body-opaque:#FFFFFF;
     --dark-black-bg:#20212C;
     --dark-shadow:0px 10px 20px 0px rgba(54, 78, 126, 0.25);
+    --dark-opaque:rgba(255,255,255,0.2);
+    --dragging-border:white;
   }
 
 
