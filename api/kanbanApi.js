@@ -2,8 +2,13 @@ import axios from "axios";
 
 //import {AxiosRequestConfig,AxiosRequestHeaders} from "axios";
 
+
+const baseURL = process.env.NODE_ENV ==='development' ? 'http://localhost:4000/api': 'https://task-managment-back-end-production.up.railway.app'
+
 export const kanbanApi = axios.create({
-    baseURL:'http://localhost:4000/api'
+   
+    baseURL:baseURL
+    
 })
 
 
