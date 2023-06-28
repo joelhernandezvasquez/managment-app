@@ -88,7 +88,7 @@ export interface StatusList {
   _id?:string 
  }
  export interface SubsTask{
-   _id:string,
+   _id?:string,
   name:string,
   complete:boolean
  }
