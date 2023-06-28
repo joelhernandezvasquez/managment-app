@@ -13,7 +13,6 @@ export const DeleteTask:FC<Props> = ({closeWindow}) => {
  const onDeleteTask = () =>{
   deleteTaskMutation.mutate(getActiveTask()._id!);
  }
-
   return (
     <section>
     <p className={dashboard.prompt}>{`Are you sure you want to delete the ‘${getActiveTask().name}’  task and its substasks? 
