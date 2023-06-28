@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import { statusIndicator } from '../../helpers';
+import {statusIndicator}  from '../../constants';
 import style from '../../styles/dashboard.module.css';
 interface Props{
     status:string
